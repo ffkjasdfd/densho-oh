@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -188,7 +188,7 @@
       font-size: 14px;
     }
 
-    /* 大会一覧 */
+/* 大会一覧 */
 .tournament-list {
   display: flex;
   flex-direction: column;
@@ -203,7 +203,8 @@
   align-items: stretch;
   gap: 0;
   width: 100%;
-  padding: 24px 20px;
+  box-sizing: border-box;
+  padding: 24px 12px;
   border: 1px solid var(--line);
   background: #fff;
   color: var(--text);
@@ -220,31 +221,29 @@
 .tournament-logo {
   flex: 0 0 20%;
   min-width: 0;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  padding: 0;
   background: transparent;
-  color: #999;
-  font-size: 12px;
-  text-align: center;
 }
 
-/* ロゴ画像を枠内の中央に収める */
+/* ロゴを枠内で大きく中央配置 */
 .tournament-logo img {
   display: block;
-  max-width: 100%;
+  width: 90%;
+  max-width: 180px;
   max-height: 140px;
-  width: auto;
   height: auto;
   object-fit: contain;
 }
 
-/* 右側80%：説明枠 */
+/* 右側：説明枠 */
 .tournament-info {
   flex: 1;
   min-width: 0;
-  padding-left: 24px;
+  padding-left: 16px;
   border-left: 1px solid var(--line);
 }
 
@@ -293,20 +292,21 @@
 @media (max-width: 600px) {
   .tournament-card {
     gap: 0;
-    padding: 18px 10px;
+    padding: 18px 8px;
   }
 
   .tournament-logo {
     flex-basis: 20%;
-    padding: 4px;
+    padding: 0;
   }
 
   .tournament-logo img {
+    width: 100%;
     max-height: 100px;
   }
 
   .tournament-info {
-    padding-left: 12px;
+    padding-left: 10px;
   }
 
   .tournament-info h3 {
