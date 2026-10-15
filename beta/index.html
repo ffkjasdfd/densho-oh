@@ -3,22 +3,27 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="/logo.png">
+<link rel="icon" type="image/png" href="/beta-logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1020">
-<title>伝承王</title>
+<meta name="theme-color" content="#080808">
+<title>伝承王-β-</title>
+
 <style>
 :root {
   color-scheme: dark;
-  --bg: #0b1020;
-  --panel: #141d31;
-  --panel2: #1b2740;
-  --line: #2b3955;
-  --text: #edf2ff;
-  --muted: #a2afc9;
-  --accent: #86b7ff;
+  --bg: #080808;
+  --panel: #111111;
+  --panel2: #1a1a1a;
+  --line: #303030;
+  --text: #f2f2f2;
+  --muted: #999999;
+  --accent: #d8d8d8;
 }
-* { box-sizing: border-box; }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -27,69 +32,54 @@ body {
 }
 
 header {
-  height: 100px;
-  padding: 0 32px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  color: #171717;
+  background: #080808;
+  border-bottom: 1px solid #292929;
 }
 
 .header-inner {
-  width: min(1200px, 100%);
-  height: 100%;
+  width: min(1200px, calc(100% - 40px));
+  min-height: 120px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header-brand {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: var(--text);
 }
 
 .header-logo {
-  justify-self: start;
-  display: flex;
-  align-items: center;
-  width: 130px;
-  height: 60px;
-  text-decoration: none;
-}
-
-.header-logo img {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 76px;
+  height: 76px;
+  flex: 0 0 auto;
   object-fit: contain;
 }
 
 .header-title {
-  text-align: center;
-}
-
-.header-title h1 {
   margin: 0;
   font-family: "Noto Serif JP", "Yu Mincho", serif;
-  font-size: 36px;
+  font-size: clamp(38px, 5.5vw, 66px);
   font-weight: 700;
-  letter-spacing: 0.12em;
-  line-height: 1.3;
-}
-
-.header-title .subtitle {
-  margin-top: 2px;
-  color: #666666;
-  font-family: Georgia, serif;
-  font-size: 11px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  white-space: nowrap;
 }
 
 .header-x {
-  justify-self: end;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  color: #000000;
+  color: #eeeeee;
   text-decoration: none;
 }
 
@@ -99,24 +89,185 @@ header {
   fill: currentColor;
 }
 
+.wrap {
+  width: min(1000px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+main {
+  padding: 30px 0 56px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid #292929;
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 18px;
+}
+
+.tab {
+  border: 1px solid #363636;
+  background: var(--panel2);
+  color: #bcbcbc;
+  border-radius: 7px;
+  padding: 11px 17px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.tab:hover {
+  border-color: #777777;
+  color: #ffffff;
+}
+
+.tab.active {
+  background: #eeeeee;
+  border-color: #eeeeee;
+  color: #111111;
+  font-weight: 700;
+}
+
+/* 予選・本選 */
+.stage-tabs {
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.stage-tabs .tab {
+  min-width: 100px;
+  font-size: 15px;
+}
+
+/* ブロック */
+#blockTabs {
+  gap: 8px;
+}
+
+/* 階層 */
+#categoryTabs {
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+#categoryTabs .tab {
+  padding: 9px 13px;
+  font-size: 13px;
+}
+
+/* ランキング表 */
+.table-wrap {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+/* 順位：固有番号：残りタイム = 2：4：4 */
+col.rank-col {
+  width: 20%;
+}
+
+col.id-col {
+  width: 40%;
+}
+
+col.time-col {
+  width: 40%;
+}
+
+th,
+td {
+  padding: 15px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+th {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+td {
+  font-size: 14px;
+}
+
+td:first-child {
+  font-weight: 700;
+}
+
+td:last-child {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+tbody tr:nth-child(-n+3) td:first-child {
+  color: var(--accent);
+}
+
+tbody tr:hover {
+  background: #191919;
+}
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 36px 10px;
+  overflow-wrap: normal;
+}
+
+#updated {
+  max-width: 680px;
+  margin: 20px auto 0;
+  color: #777777;
+  font-size: 11px;
+  text-align: right;
+}
+
+footer {
+  color: #666666;
+  font-size: 11px;
+  text-align: center;
+  padding: 22px 16px;
+  border-top: 1px solid #202020;
+}
+
+/* スマートフォン */
 @media (max-width: 600px) {
-  header {
-    height: 78px;
-    padding: 0 14px;
+  .header-inner {
+    width: calc(100% - 24px);
+    min-height: 92px;
+    gap: 10px;
+  }
+
+  .header-brand {
+    gap: 10px;
   }
 
   .header-logo {
-  width: 80px;
-  height: 44px;
- }
-
-  .header-title h1 {
-    font-size: 25px;
+    width: 48px;
+    height: 48px;
   }
 
-  .header-title .subtitle {
-    font-size: 8px;
-    letter-spacing: 0.04em;
+  .header-title {
+    font-size: clamp(29px, 7.5vw, 42px);
+    letter-spacing: 0.01em;
   }
 
   .header-x {
@@ -128,74 +279,120 @@ header {
     width: 21px;
     height: 21px;
   }
+
+  .wrap {
+    width: calc(100% - 20px);
+  }
+
+  main {
+    padding: 18px 0 38px;
+  }
+
+  .card {
+    padding: 16px 10px;
+    border-radius: 10px;
+  }
+
+  .stage-tabs {
+    gap: 8px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+  }
+
+  .stage-tabs .tab {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+  }
+
+  #blockTabs {
+    gap: 5px;
+    margin-bottom: 14px;
+  }
+
+  #blockTabs .tab {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 4px;
+    font-size: 12px;
+  }
+
+  #categoryTabs {
+    gap: 5px;
+    margin-bottom: 18px;
+  }
+
+  #categoryTabs .tab {
+    flex: 1 1 calc(50% - 5px);
+    min-width: 0;
+    padding: 9px 5px;
+    font-size: 12px;
+  }
+
+  .table-wrap {
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 13px 3px;
+  }
+
+  th {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+
+  td {
+    font-size: 13px;
+  }
+
+  #updated {
+    margin-top: 16px;
+    font-size: 10px;
+  }
 }
 
-.wrap { width: min(960px, 100% - 28px); margin: auto; }
-.brand { color: var(--accent); font-size: 13px; letter-spacing: .2em; }
-h1 { margin: 8px 0 4px; font-size: clamp(28px, 6vw, 42px); }
-.subtitle { color: var(--muted); font-size: 14px; }
-main { padding: 24px 0 50px; }
-.card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 18px;
-}
-h2 { margin: 0 0 6px; font-size: 23px; }
-.description { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
-.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
-.tab {
-  border: 1px solid var(--line);
-  background: var(--panel2);
-  color: var(--text);
-  border-radius: 9px;
-  padding: 10px 15px;
-  font-size: 14px;
-  cursor: pointer;
-}
-.tab.active {
-  background: #29446b;
-  border-color: var(--accent);
-  color: white;
-}
-.status { color: var(--muted); font-size: 13px; margin: 12px 0; }
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; min-width: 300px; }
-th, td {
-  padding: 13px 12px;
-  border-bottom: 1px solid var(--line);
-  text-align: left;
-}
-th { color: var(--muted); font-size: 12px; font-weight: 600; }
-td { font-size: 14px; }
-td:first-child { width: 72px; font-weight: 700; }
-td:last-child, th:last-child {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-tbody tr:nth-child(-n+3) td:first-child { color: var(--accent); }
-.empty { color: var(--muted); text-align: center !important; padding: 30px 10px; }
-footer { color: var(--muted); font-size: 12px; text-align: center; padding: 20px; }
-@media (max-width: 480px) {
-  .card { padding: 14px; }
-  .tab { padding: 9px 12px; }
-  th, td { padding: 12px 8px; }
+@media (max-width: 360px) {
+  .header-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .header-title {
+    font-size: 27px;
+  }
+
+  .header-brand {
+    gap: 7px;
+  }
+
+  .card {
+    padding-right: 7px;
+    padding-left: 7px;
+  }
+
+  th,
+  td {
+    padding-right: 2px;
+    padding-left: 2px;
+  }
+
+  td {
+    font-size: 12px;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <header>
   <div class="header-inner">
-    <a class="header-logo" href="https://densho-oh.pages.dev/">
-  <img src="/logo.png" alt="伝承王">
-</a>
-
-    <div class="header-title">
-      <h1>伝承王</h1>
-      <div class="subtitle">Legend of GARDENER</div>
-    </div>
+    <a class="header-brand" href="https://densho-oh.pages.dev/">
+      <img class="header-logo" src="/beta-logo.png" alt="">
+      <h1 class="header-title">伝承王-β-</h1>
+    </a>
 
     <a
       class="header-x"
@@ -205,36 +402,43 @@ footer { color: var(--muted); font-size: 12px; text-align: center; padding: 20px
       aria-label="伝承王の運営アカウントをXで開く"
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"/>
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231 4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"/>
       </svg>
     </a>
   </div>
 </header>
 
-
 <main class="wrap">
   <section class="card">
-    <h2>伝承王β</h2>
-    <div class="description">本戦ランキング</div>
 
-    <div class="tabs" id="blockTabs" aria-label="ブロック選択">
-      <button class="tab active" data-block="A">Aブロック</button>
-      <button class="tab" data-block="B">Bブロック</button>
-      <button class="tab" data-block="C">Cブロック</button>
-      <button class="tab" data-block="D">Dブロック</button>
+    <div class="tabs stage-tabs" id="stageTabs" aria-label="大会日程選択">
+      <button class="tab" data-stage="prelim">予選</button>
+      <button class="tab active" data-stage="main">本選</button>
     </div>
 
-    <div class="tabs" id="categoryTabs" aria-label="階層選択">
-      <button class="tab active" data-category="total">総合</button>
-      <button class="tab" data-category="reverse">リバースバベル</button>
-      <button class="tab" data-category="another">アナザーバベル</button>
-      <button class="tab" data-category="rebuild">バベルリビルド</button>
-    </div>
+    <div id="mainRanking">
+      <div class="tabs" id="blockTabs" aria-label="ブロック選択">
+        <button class="tab active" data-block="A">Aブロック</button>
+        <button class="tab" data-block="B">Bブロック</button>
+        <button class="tab" data-block="C">Cブロック</button>
+        <button class="tab" data-block="D">Dブロック</button>
+      </div>
 
-    <div id="status" class="status" role="status">ランキングデータを読み込み中…</div>
+      <div class="tabs" id="categoryTabs" aria-label="階層選択">
+        <button class="tab active" data-category="total">総合</button>
+        <button class="tab" data-category="reverse">リバースバベル</button>
+        <button class="tab" data-category="another">アナザーバベル</button>
+        <button class="tab" data-category="rebuild">バベルリビルド</button>
+      </div>
+    </div>
 
     <div class="table-wrap">
       <table>
+        <colgroup>
+          <col class="rank-col">
+          <col class="id-col">
+          <col class="time-col">
+        </colgroup>
         <thead>
           <tr>
             <th>順位</th>
@@ -243,11 +447,14 @@ footer { color: var(--muted); font-size: 12px; text-align: center; padding: 20px
           </tr>
         </thead>
         <tbody id="rankingBody">
-          <tr><td colspan="3" class="empty">読み込み中…</td></tr>
+          <tr>
+            <td colspan="3" class="empty">ランキングデータを読み込み中…</td>
+          </tr>
         </tbody>
       </table>
     </div>
-    <div id="updated" class="status">最終更新：確認中</div>
+
+    <div id="updated">データ更新時刻：確認中</div>
   </section>
 </main>
 
@@ -257,6 +464,7 @@ footer { color: var(--muted); font-size: 12px; text-align: center; padding: 20px
 const API_URL = "https://script.google.com/macros/s/AKfycbw1z7lljuIWST1ibBa0NZzH4__VTNh1PAhaRkS2lWKuu4iKezHOz66RH4UzVZJqNCE5Tw/exec";
 
 let rankingData = null;
+let currentStage = "main";
 let currentBlock = "A";
 let currentCategory = "total";
 
@@ -267,12 +475,10 @@ const categoryNames = {
   rebuild: "バベルリビルド"
 };
 
-
 let isLoading = false;
 let requestId = 0;
 
 function loadRanking() {
-  // 前の通信が終わっていなければ、重複して読み込まない
   if (isLoading) return;
 
   isLoading = true;
@@ -282,6 +488,7 @@ function loadRanking() {
   const callbackName = "receiveRankingData";
 
   let finished = false;
+
   const timeoutId = setTimeout(() => {
     finishWithError();
   }, 20000);
@@ -299,15 +506,15 @@ function loadRanking() {
     if (finished) return;
     cleanup();
 
-    // 既に表示されているランキングは消さない
-    document.getElementById("status").textContent =
-      rankingData
-        ? "更新に失敗しました。前回のデータを表示中です。次回の更新をお待ちください。"
-        : "ランキングを読み込めませんでした。ページを再読み込みしてください。";
+    if (currentStage === "prelim") return;
 
-    if (!rankingData) {
+    if (rankingData) {
+      document.getElementById("updated").textContent =
+        "更新に失敗しました。前回のデータを表示中です。";
+    } else {
       document.getElementById("rankingBody").innerHTML =
-        '<tr><td colspan="3" class="empty">データの取得に失敗しました。</td></tr>';
+        '<tr><td colspan="3" class="empty">データの取得に失敗しました。ページを再読み込みしてください。</td></tr>';
+      document.getElementById("updated").textContent = "";
     }
   }
 
@@ -333,6 +540,27 @@ function loadRanking() {
 }
 
 function renderRanking() {
+  document.querySelectorAll("[data-stage]").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.stage === currentStage
+    );
+  });
+
+  const mainRanking = document.getElementById("mainRanking");
+  const tbody = document.getElementById("rankingBody");
+  const updated = document.getElementById("updated");
+
+  if (currentStage === "prelim") {
+    mainRanking.hidden = true;
+    tbody.innerHTML =
+      '<tr><td colspan="3" class="empty">予選ランキングは準備中です。</td></tr>';
+    updated.textContent = "";
+    return;
+  }
+
+  mainRanking.hidden = false;
+
   if (!rankingData || !rankingData.blocks) return;
 
   const available = rankingData.blocks[currentBlock];
@@ -343,21 +571,31 @@ function renderRanking() {
   }
 
   document.querySelectorAll("[data-block]").forEach(button => {
-    button.classList.toggle("active", button.dataset.block === currentBlock);
+    button.classList.toggle(
+      "active",
+      button.dataset.block === currentBlock
+    );
   });
 
   document.querySelectorAll("[data-category]").forEach(button => {
     const category = button.dataset.category;
-    const supported = Object.prototype.hasOwnProperty.call(available, category);
+    const supported = Object.prototype.hasOwnProperty.call(
+      available,
+      category
+    );
+
     button.hidden = !supported;
-    button.classList.toggle("active", category === currentCategory);
+    button.classList.toggle(
+      "active",
+      category === currentCategory
+    );
   });
 
   const entries = available[currentCategory] || [];
-  const tbody = document.getElementById("rankingBody");
 
   if (entries.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="3" class="empty">現在、記録はありません。</td></tr>';
+    tbody.innerHTML =
+      '<tr><td colspan="3" class="empty">現在、記録はありません。</td></tr>';
   } else {
     let previousTime = null;
     let previousRank = 0;
@@ -366,7 +604,6 @@ function renderRanking() {
       const time = Number(entry.time);
       const roundedTime = Math.round(time * 100) / 100;
 
-      // 表示上同じ残りタイムなら同率順位にする
       const rank = index > 0 && roundedTime === previousTime
         ? previousRank
         : index + 1;
@@ -382,16 +619,15 @@ function renderRanking() {
     }).join("");
   }
 
-  document.getElementById("status").textContent =
-    currentBlock + "ブロック / " + categoryNames[currentCategory] +
-    " / " + entries.length + "件";
-
   const date = new Date(rankingData.updatedAt);
-  document.getElementById("updated").textContent =
-    "データ更新時刻： " +
+
+  updated.textContent =
+    "データ更新時刻：" +
     (Number.isNaN(date.getTime())
       ? "不明"
-      : date.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }) + "（日本時間）");
+      : date.toLocaleString("ja-JP", {
+          timeZone: "Asia/Tokyo"
+        }) + "（日本時間）");
 }
 
 function escapeHTML(value) {
@@ -404,9 +640,18 @@ function escapeHTML(value) {
   })[char]);
 }
 
+document.getElementById("stageTabs").addEventListener("click", event => {
+  const button = event.target.closest("[data-stage]");
+  if (!button) return;
+
+  currentStage = button.dataset.stage;
+  renderRanking();
+});
+
 document.getElementById("blockTabs").addEventListener("click", event => {
   const button = event.target.closest("[data-block]");
   if (!button) return;
+
   currentBlock = button.dataset.block;
   renderRanking();
 });
@@ -414,6 +659,7 @@ document.getElementById("blockTabs").addEventListener("click", event => {
 document.getElementById("categoryTabs").addEventListener("click", event => {
   const button = event.target.closest("[data-category]");
   if (!button || button.hidden) return;
+
   currentCategory = button.dataset.category;
   renderRanking();
 });
@@ -421,5 +667,6 @@ document.getElementById("categoryTabs").addEventListener("click", event => {
 loadRanking();
 setInterval(loadRanking, 5 * 60 * 1000);
 </script>
+
 </body>
 </html>
