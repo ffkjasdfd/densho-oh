@@ -467,15 +467,16 @@ footer {
     height: 32px;
   }
 }
-  /* タブを画面幅いっぱいに広げる */
+ 
+/* タブをカード内の横幅いっぱいに均等配置 */
 .stage-tabs,
 #blockTabs,
 #categoryTabs {
   display: grid;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  gap: 0;
+  width: 100%;
+  gap: 6px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* 予選 / 本選：2分割 */
@@ -493,35 +494,42 @@ footer {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-/* ボタンを各区画いっぱいに広げる */
+/* ボタンを区画いっぱいに広げる */
 .stage-tabs .tab,
 #blockTabs .tab,
 #categoryTabs .tab {
   width: 100%;
   min-width: 0;
   margin: 0;
-  border-radius: 0;
   text-align: center;
+  box-sizing: border-box;
 }
 
-/* スマホで文字が収まるように調整 */
+/* スマホ向け調整 */
 @media (max-width: 600px) {
+  .stage-tabs,
+  #blockTabs,
+  #categoryTabs {
+    gap: 4px;
+  }
+
   .stage-tabs .tab {
-    padding: 12px 4px;
+    padding: 11px 4px;
     font-size: 13px;
   }
 
   #blockTabs .tab {
-    padding: 12px 2px;
+    padding: 10px 2px;
     font-size: 12px;
   }
 
   #categoryTabs .tab {
-    padding: 10px 2px;
-    font-size: 10px;
+    padding: 9px 2px;
+    font-size: 11px;
     overflow-wrap: anywhere;
   }
 }
+
 </style>
 </head>
 
