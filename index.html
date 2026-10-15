@@ -147,28 +147,68 @@ const categoryNames = {
   rebuild: "バベルリビルド"
 };
 
+
+let isLoading = false;
+let requestId = 0;
+
 function loadRanking() {
+  // 前の通信が終わっていなければ、重複して読み込まない
+  if (isLoading) return;
+
+  isLoading = true;
+  const thisRequest = ++requestId;
+
   const script = document.createElement("script");
   const callbackName = "receiveRankingData";
 
-  window[callbackName] = function(data) {
-    rankingData = data;
-    renderRanking();
+  let finished = false;
+  const timeoutId = setTimeout(() => {
+    finishWithError();
+  }, 20000);
+
+  function cleanup() {
+    if (finished) return;
+    finished = true;
+    clearTimeout(timeoutId);
     delete window[callbackName];
     script.remove();
+    isLoading = false;
+  }
+
+  function finishWithError() {
+    if (finished) return;
+    cleanup();
+
+    // 既に表示されているランキングは消さない
+    document.getElementById("status").textContent =
+      rankingData
+        ? "更新に失敗しました。前回のデータを表示中です。次回の更新をお待ちください。"
+        : "ランキングを読み込めませんでした。ページを再読み込みしてください。";
+
+    if (!rankingData) {
+      document.getElementById("rankingBody").innerHTML =
+        '<tr><td colspan="3" class="empty">データの取得に失敗しました。</td></tr>';
+    }
+  }
+
+  window[callbackName] = function(data) {
+    if (finished || thisRequest !== requestId) return;
+
+    if (!data || !data.blocks || data.error) {
+      finishWithError();
+      return;
+    }
+
+    rankingData = data;
+    cleanup();
+    renderRanking();
   };
 
-  script.onerror = function() {
-    document.getElementById("status").textContent =
-      "ランキングを読み込めませんでした。時間をおいて再読み込みしてください。";
-    document.getElementById("rankingBody").innerHTML =
-      '<tr><td colspan="3" class="empty">データの取得に失敗しました。</td></tr>';
-    delete window[callbackName];
-    script.remove();
-  };
+  script.onerror = finishWithError;
 
   script.src = API_URL + "?callback=" + callbackName +
     "&_=" + Date.now();
+
   document.head.appendChild(script);
 }
 
