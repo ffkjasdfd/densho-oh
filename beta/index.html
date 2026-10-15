@@ -104,6 +104,7 @@ header {
 }
 
 .header-x svg {
+  display: block;
   width: 25px;
   height: 25px;
   fill: currentColor;
@@ -253,10 +254,49 @@ td:last-child {
   white-space: nowrap;
 }
 
-tbody tr:nth-child(-n+3) td:first-child {
-  color: var(--accent);
+/* 1位：金 */
+tbody tr.rank-1 {
+  background: rgba(212, 175, 55, 0.13);
 }
 
+tbody tr.rank-1 td:first-child {
+  color: #e6c65b;
+  font-weight: 800;
+}
+
+tbody tr.rank-1:hover {
+  background: rgba(212, 175, 55, 0.20);
+}
+
+/* 2位：銀 */
+tbody tr.rank-2 {
+  background: rgba(192, 200, 210, 0.10);
+}
+
+tbody tr.rank-2 td:first-child {
+  color: #c8d0da;
+  font-weight: 800;
+}
+
+tbody tr.rank-2:hover {
+  background: rgba(192, 200, 210, 0.17);
+}
+
+/* 3位：銅 */
+tbody tr.rank-3 {
+  background: rgba(184, 115, 71, 0.12);
+}
+
+tbody tr.rank-3 td:first-child {
+  color: #d99a72;
+  font-weight: 800;
+}
+
+tbody tr.rank-3:hover {
+  background: rgba(184, 115, 71, 0.19);
+}
+
+/* 4位以下のホバー */
 tbody tr:hover {
   background: #191919;
 }
@@ -426,7 +466,6 @@ footer {
 
 <body>
 
-
 <header>
   <div class="header-inner">
     <a class="header-logo" href="/">
@@ -452,10 +491,9 @@ footer {
   </div>
 </header>
 
-
 <main class="wrap">
   <section class="card">
-  <h2 class="beta-heading">伝承王-β-</h2>
+    <h2 class="beta-heading">伝承王-β-</h2>
 
     <div class="tabs stage-tabs" id="stageTabs" aria-label="大会日程選択">
       <button class="tab" data-stage="prelim">予選</button>
@@ -597,6 +635,7 @@ function renderRanking() {
   const tbody = document.getElementById("rankingBody");
   const updated = document.getElementById("updated");
 
+  /* 予選は準備中の表示 */
   if (currentStage === "prelim") {
     mainRanking.hidden = true;
     tbody.innerHTML =
@@ -616,6 +655,7 @@ function renderRanking() {
     currentCategory = "total";
   }
 
+  /* ブロックタブの状態 */
   document.querySelectorAll("[data-block]").forEach(button => {
     button.classList.toggle(
       "active",
@@ -623,6 +663,7 @@ function renderRanking() {
     );
   });
 
+  /* 階層タブの状態 */
   document.querySelectorAll("[data-category]").forEach(button => {
     const category = button.dataset.category;
     const supported = Object.prototype.hasOwnProperty.call(
@@ -639,6 +680,7 @@ function renderRanking() {
 
   const entries = available[currentCategory] || [];
 
+  /* ランキングを描画 */
   if (entries.length === 0) {
     tbody.innerHTML =
       '<tr><td colspan="3" class="empty">現在、記録はありません。</td></tr>';
@@ -650,6 +692,7 @@ function renderRanking() {
       const time = Number(entry.time);
       const roundedTime = Math.round(time * 100) / 100;
 
+      /* 同タイムは同順位 */
       const rank = index > 0 && roundedTime === previousTime
         ? previousRank
         : index + 1;
@@ -657,7 +700,10 @@ function renderRanking() {
       previousTime = roundedTime;
       previousRank = rank;
 
-      return `<tr>
+      /* 1～3位に順位別のクラスを付与 */
+      const rankClass = rank <= 3 ? ` rank-${rank}` : "";
+
+      return `<tr class="${rankClass.trim()}">
         <td>${rank}位</td>
         <td>${escapeHTML(String(entry.id))}</td>
         <td>${time.toFixed(2)}秒</td>
@@ -665,6 +711,7 @@ function renderRanking() {
     }).join("");
   }
 
+  /* 更新時刻 */
   const date = new Date(rankingData.updatedAt);
 
   updated.textContent =
@@ -686,6 +733,7 @@ function escapeHTML(value) {
   })[char]);
 }
 
+/* 予選・本選の切り替え */
 document.getElementById("stageTabs").addEventListener("click", event => {
   const button = event.target.closest("[data-stage]");
   if (!button) return;
@@ -694,6 +742,7 @@ document.getElementById("stageTabs").addEventListener("click", event => {
   renderRanking();
 });
 
+/* ブロックの切り替え */
 document.getElementById("blockTabs").addEventListener("click", event => {
   const button = event.target.closest("[data-block]");
   if (!button) return;
@@ -702,6 +751,7 @@ document.getElementById("blockTabs").addEventListener("click", event => {
   renderRanking();
 });
 
+/* 階層の切り替え */
 document.getElementById("categoryTabs").addEventListener("click", event => {
   const button = event.target.closest("[data-category]");
   if (!button || button.hidden) return;
@@ -710,6 +760,7 @@ document.getElementById("categoryTabs").addEventListener("click", event => {
   renderRanking();
 });
 
+/* 初回読み込み・5分ごとの自動更新 */
 loadRanking();
 setInterval(loadRanking, 5 * 60 * 1000);
 </script>
