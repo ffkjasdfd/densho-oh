@@ -188,22 +188,18 @@
       font-size: 14px;
     }
 
+
 /* 大会一覧 */
 .tournament-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
   margin-top: 36px;
   text-align: left;
 }
 
 .tournament-card {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 20% minmax(0, 1fr);
   align-items: stretch;
-  gap: 0;
   width: 100%;
-  box-sizing: border-box;
   padding: 24px 12px;
   border: 1px solid var(--line);
   background: #fff;
@@ -217,31 +213,26 @@
   background: var(--soft);
 }
 
-/* 左側20%：ロゴ枠 */
+/* 左側20%：ロゴ */
 .tournament-logo {
-  flex: 0 0 20%;
   min-width: 0;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  background: transparent;
+  padding: 0 4px;
 }
 
-/* ロゴを枠内で大きく中央配置 */
 .tournament-logo img {
   display: block;
-  width: 90%;
+  width: 100%;
   max-width: 180px;
   max-height: 140px;
   height: auto;
   object-fit: contain;
 }
 
-/* 右側：説明枠 */
+/* 右側80%：説明 */
 .tournament-info {
-  flex: 1;
   min-width: 0;
   padding-left: 16px;
   border-left: 1px solid var(--line);
@@ -277,6 +268,53 @@
   border-bottom: 1px solid #999;
   color: var(--text);
   font-size: 12px;
+}
+
+.card-arrow {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform .2s;
+}
+
+.tournament-card:hover .card-arrow {
+  transform: translateX(4px);
+}
+
+/* スマートフォン */
+@media (max-width: 600px) {
+  .tournament-list {
+    margin-top: 28px;
+  }
+
+  .tournament-card {
+    grid-template-columns: 20% minmax(0, 1fr);
+    padding: 18px 8px;
+  }
+
+  .tournament-logo {
+    padding: 0 2px;
+  }
+
+  .tournament-logo img {
+    max-height: 100px;
+  }
+
+  .tournament-info {
+    padding-left: 10px;
+  }
+
+  .tournament-info h3 {
+    font-size: 19px;
+  }
+
+  .tournament-description {
+    font-size: 12px;
+  }
+
+  .tournament-link {
+    margin-top: 8px;
+    font-size: 11px;
+  }
 }
 
 .card-arrow {
@@ -483,10 +521,12 @@
 
       <div class="tournament-list">
         <a class="tournament-card" href="/beta/">
-          <div class="tournament-logo">
- 　　　　　　 <img src="/beta-logo.png" alt="伝承王β ロゴ"> 
-          </div>
+          
+       <div class="tournament-logo">
+         <img src="/beta-logo.png" alt="伝承王β ロゴ">
+       </div>
 
+          
           <div class="tournament-info">
             <p class="tournament-number">TOURNAMENT 01</p>
             <h3>伝承王β</h3>
@@ -523,4 +563,4 @@
   </footer>
 </body>
 </html>
-```
+
