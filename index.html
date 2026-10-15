@@ -189,94 +189,139 @@
     }
 
     /* 大会一覧 */
-    .tournament-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-top: 36px;
-      text-align: left;
-    }
+.tournament-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 36px;
+  text-align: left;
+}
 
-    .tournament-card {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 32px;
-      width: 100%;
-      padding: 28px 20px;
-      border: 1px solid var(--line);
-      background: #fff;
-      color: var(--text);
-      text-decoration: none;
-      transition: border-color .2s, background .2s;
-    }
+.tournament-card {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+  padding: 24px 20px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
 
-    .tournament-card:hover {
-      border-color: #999;
-      background: var(--soft);
-    }
+.tournament-card:hover {
+  border-color: #999;
+  background: var(--soft);
+}
 
-    /* ロゴ：約20% */
-    .tournament-logo {
-      flex: 0 0 20%;
-      aspect-ratio: 1 / 1;
-      min-width: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: var(--soft);
-      color: #999;
-      font-size: 12px;
-      text-align: center;
-    }
+/* 左側20%：ロゴ枠 */
+.tournament-logo {
+  flex: 0 0 20%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: transparent;
+  color: #999;
+  font-size: 12px;
+  text-align: center;
+}
 
-    .tournament-logo img {
-      display: block;
-      max-width: 60%;
-      max-height: 60%;
-      width: 60%;
-      height: 60%;
-      object-fit: contain;
-    }
+/* ロゴ画像を枠内の中央に収める */
+.tournament-logo img {
+  display: block;
+  max-width: 100%;
+  max-height: 140px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
 
-    /* 説明：約80% */
-    .tournament-info {
-      flex: 1;
-      min-width: 0;
-    }
+/* 右側80%：説明枠 */
+.tournament-info {
+  flex: 1;
+  min-width: 0;
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
 
-    .tournament-number {
-      margin: 0 0 4px;
-      color: var(--muted);
-      font-family: Georgia, serif;
-      font-size: 11px;
-      letter-spacing: .12em;
-    }
+.tournament-number {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-family: Georgia, serif;
+  font-size: 11px;
+  letter-spacing: .12em;
+}
 
-    .tournament-info h3 {
-      margin: 0;
-      font-family: "Yu Mincho", "Noto Serif JP", serif;
-      font-size: 24px;
-      font-weight: 500;
-      letter-spacing: .06em;
-    }
+.tournament-info h3 {
+  margin: 0;
+  font-family: "Yu Mincho", "Noto Serif JP", serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: .06em;
+}
 
-    .tournament-description {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.9;
-    }
+.tournament-description {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
 
-    .tournament-link {
-      display: inline-block;
-      margin-top: 14px;
-      padding-bottom: 2px;
-      border-bottom: 1px solid #999;
-      color: var(--text);
-      font-size: 12px;
-    }
+.tournament-link {
+  display: inline-block;
+  margin-top: 14px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #999;
+  color: var(--text);
+  font-size: 12px;
+}
+
+.card-arrow {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform .2s;
+}
+
+.tournament-card:hover .card-arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 600px) {
+  .tournament-card {
+    gap: 0;
+    padding: 18px 10px;
+  }
+
+  .tournament-logo {
+    flex-basis: 20%;
+    padding: 4px;
+  }
+
+  .tournament-logo img {
+    max-height: 100px;
+  }
+
+  .tournament-info {
+    padding-left: 12px;
+  }
+
+  .tournament-info h3 {
+    font-size: 19px;
+  }
+
+  .tournament-description {
+    font-size: 12px;
+  }
+
+  .tournament-link {
+    margin-top: 8px;
+    font-size: 11px;
+  }
+}
 
     .card-arrow {
       display: inline-block;
