@@ -146,42 +146,48 @@ main {
 }
 
 /* タブ共通 */
+/* タブ群全体 */
 .tabs {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
-  margin: 0 0 18px;
+  margin: 0;
   border: 2px solid var(--accent);
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
   overflow: hidden;
 }
 
+/* 各タブ：未選択 */
 .tab {
   min-width: 0;
-  width: 100%;
   padding: 11px 6px;
   border: none;
-  border-right: 1px solid #e1e5eb;
+  border-right: 1px solid var(--accent);
   border-radius: 0;
-  background: #f7f8fa;
-  color: #626b79;
+  background: #fff;
+  color: var(--accent);
   font-size: 14px;
   text-align: center;
   overflow-wrap: anywhere;
   cursor: pointer;
-  transition: background .15s, color .15s;
 }
 
+/* 最後のタブの右境界線は不要 */
 .tab:last-child {
   border-right: none;
 }
 
+/* 選択中 */
 .tab.active {
-  background: #fff;
-  color: var(--accent);
+  background: var(--accent);
+  color: #fff;
   font-weight: 700;
-  box-shadow: inset 0 -4px 0 var(--accent);
+}
+
+/* ホバー */
+.tab:hover:not(.active) {
+  background: #edf3ff;
 }
 
 
