@@ -146,21 +146,25 @@ main {
 }
 
 /* タブ共通 */
-/* タブ群全体 */
+/* タブ群 */
 .tabs {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
-  margin: 0;
+  margin: 0 0 16px;
+  padding: 0;
   border: 2px solid var(--accent);
   border-radius: 8px 8px 0 0;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* 各タブ：未選択 */
+/* タブ */
 .tab {
   min-width: 0;
+  width: 100%;
+  margin: 0;
   padding: 11px 6px;
   border: none;
   border-right: 1px solid var(--accent);
@@ -171,9 +175,9 @@ main {
   text-align: center;
   overflow-wrap: anywhere;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-/* 最後のタブの右境界線は不要 */
 .tab:last-child {
   border-right: none;
 }
@@ -185,11 +189,10 @@ main {
   font-weight: 700;
 }
 
-/* ホバー */
+/* 未選択タブのホバー */
 .tab:hover:not(.active) {
   background: #edf3ff;
 }
-
 
 /* 予選・本選 */
 .stage-tabs {
