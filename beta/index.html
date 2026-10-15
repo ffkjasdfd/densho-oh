@@ -146,13 +146,12 @@ main {
 }
 
 /* タブ共通 */
-/* タブ群 */
 .tabs {
   display: grid;
   width: 100%;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
-  margin: 0 0 16px;
+  margin: 0;
   padding: 0;
   border: 2px solid var(--accent);
   border-radius: 8px 8px 0 0;
@@ -197,9 +196,7 @@ main {
 /* 予選・本選 */
 .stage-tabs {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  padding-bottom: 18px;
   margin-bottom: 22px;
-  border-bottom: 1px solid var(--line);
 }
 
 .stage-tabs .tab {
@@ -209,18 +206,31 @@ main {
 /* ブロック・階層タブ */
 #blockTabs {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
+  margin-bottom: 0;
+  border-radius: 8px 8px 0 0;
 }
 
 #categoryTabs {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
-  margin-bottom: 24px;
+  margin-bottom: 0;
+  border-top: none;
+  border-radius: 0;
 }
 
 #categoryTabs .tab {
   padding: 9px 4px;
   font-size: 13px;
+}
+
+/* ランキング表示全体の青枠 */
+.ranking-panel {
+  width: 100%;
+  margin: 0 0 24px;
+  padding: 20px;
+  border: 2px solid var(--accent);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background: #fff;
 }
 
 /* ランキング表 */
@@ -333,6 +343,7 @@ tbody tr:hover {
   overflow-wrap: normal;
 }
 
+/* 更新時刻 */
 #updated {
   max-width: 680px;
   margin: 20px auto 0;
@@ -407,11 +418,10 @@ footer {
   }
 
   .tabs {
-    gap: 0px;
+    gap: 0;
   }
 
   .stage-tabs {
-    padding-bottom: 16px;
     margin-bottom: 18px;
   }
 
@@ -421,8 +431,7 @@ footer {
   }
 
   #blockTabs {
-    gap: 0px;
-    margin-bottom: 14px;
+    margin-bottom: 0;
   }
 
   #blockTabs .tab {
@@ -431,13 +440,17 @@ footer {
   }
 
   #categoryTabs {
-    gap: 0px;
-    margin-bottom: 18px;
+    margin-bottom: 0;
   }
 
   #categoryTabs .tab {
     padding: 9px 2px;
     font-size: 11px;
+  }
+
+  .ranking-panel {
+    padding: 12px 8px;
+    margin-bottom: 18px;
   }
 
   .table-wrap {
@@ -476,6 +489,11 @@ footer {
     padding-left: 7px;
   }
 
+  .ranking-panel {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
   th,
   td {
     padding-right: 2px;
@@ -510,7 +528,7 @@ footer {
       aria-label="伝承王の運営アカウントをXで開く"
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231 5.214 6.817 5.97-6.817h-3.308l7.227-8.26-8.502-11.24h6.657l5.214 6.817 5.97-6.817z"/>
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231 5.214 6.817 5.97 6.817h-3.308l7.227-8.26-8.502-11.24h6.657l5.214 6.817 5.97 6.817z"/>
       </svg>
     </a>
   </div>
@@ -541,29 +559,31 @@ footer {
       </div>
     </div>
 
-    <div class="table-wrap">
-      <table>
-        <colgroup>
-          <col class="rank-col">
-          <col class="id-col">
-          <col class="time-col">
-        </colgroup>
-        <thead>
-          <tr>
-            <th>順位</th>
-            <th>固有番号</th>
-            <th>残りタイム</th>
-          </tr>
-        </thead>
-        <tbody id="rankingBody">
-          <tr>
-            <td colspan="3" class="empty">ランキングデータを読み込み中…</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="ranking-panel">
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col class="rank-col">
+            <col class="id-col">
+            <col class="time-col">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>順位</th>
+              <th>固有番号</th>
+              <th>残りタイム</th>
+            </tr>
+          </thead>
+          <tbody id="rankingBody">
+            <tr>
+              <td colspan="3" class="empty">ランキングデータを読み込み中…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div id="updated">データ更新時刻：確認中</div>
+      <div id="updated">データ更新時刻：確認中</div>
+    </div>
   </section>
 </main>
 
