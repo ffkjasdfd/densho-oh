@@ -145,7 +145,10 @@ main {
   line-height: 1.2;
 }
 
-/* タブ共通 */
+/* ========================================
+   タブ共通
+======================================== */
+
 .tabs {
   display: grid;
   width: 100%;
@@ -153,13 +156,11 @@ main {
   gap: 0;
   margin: 0;
   padding: 0;
-  border: 2px solid var(--accent);
-  border-radius: 8px 8px 0 0;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
-/* タブ */
 .tab {
   min-width: 0;
   width: 100%;
@@ -193,47 +194,96 @@ main {
   background: #edf3ff;
 }
 
+/* 非表示タブ */
+[hidden] {
+  display: none !important;
+}
+
+/* ========================================
+   第1層：予選・本選の外枠
+======================================== */
+
+.stage-frame {
+  width: 100%;
+  padding: 0 0 24px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
 /* 予選・本選 */
 .stage-tabs {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-bottom: 22px;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  border-radius: 0;
 }
 
 .stage-tabs .tab {
+  padding: 12px 6px;
   font-size: 15px;
 }
 
-/* ブロック・階層タブ */
-#blockTabs {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-bottom: 0;
-  border-radius: 8px 8px 0 0;
+/* ========================================
+   第2層：ブロック選択
+======================================== */
+
+.block-frame {
+  width: 95%;
+  margin: 22px auto 0;
+  padding: 12px;
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  background: #fff;
 }
 
+#blockTabs {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-radius: 5px;
+}
+
+/* ========================================
+   第3層：階層選択＋ランキング
+======================================== */
+
+.category-frame {
+  width: 90%;
+  margin: 20px auto 0;
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* 階層タブ */
 #categoryTabs {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-bottom: 0;
-  border-top: none;
+  border: none;
+  border-bottom: 1px solid var(--accent);
   border-radius: 0;
 }
 
 #categoryTabs .tab {
-  padding: 9px 4px;
+  padding: 10px 4px;
   font-size: 13px;
 }
 
-/* ランキング表示全体の青枠 */
+/* ランキング表示 */
 .ranking-panel {
   width: 100%;
-  margin: 0 0 24px;
+  margin: 0;
   padding: 20px;
-  border: 2px solid var(--accent);
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+  border: none;
+  border-radius: 0;
   background: #fff;
 }
 
-/* ランキング表 */
+/* ========================================
+   ランキング表
+======================================== */
+
 .table-wrap {
   width: 100%;
   max-width: 680px;
@@ -352,6 +402,7 @@ tbody tr:hover {
   text-align: right;
 }
 
+/* フッター */
 footer {
   padding: 22px 16px;
   border-top: 1px solid var(--line);
@@ -360,7 +411,10 @@ footer {
   text-align: center;
 }
 
-/* タブレット */
+/* ========================================
+   タブレット
+======================================== */
+
 @media (max-width: 900px) {
   .header-logo {
     width: 70px;
@@ -368,7 +422,10 @@ footer {
   }
 }
 
-/* スマートフォン */
+/* ========================================
+   スマートフォン
+======================================== */
+
 @media (max-width: 600px) {
   header {
     height: 78px;
@@ -421,8 +478,9 @@ footer {
     gap: 0;
   }
 
-  .stage-tabs {
-    margin-bottom: 18px;
+  /* 第1層 */
+  .stage-frame {
+    padding-bottom: 14px;
   }
 
   .stage-tabs .tab {
@@ -430,8 +488,11 @@ footer {
     font-size: 13px;
   }
 
-  #blockTabs {
-    margin-bottom: 0;
+  /* 第2層 */
+  .block-frame {
+    width: 96%;
+    margin-top: 14px;
+    padding: 7px;
   }
 
   #blockTabs .tab {
@@ -439,18 +500,22 @@ footer {
     font-size: 12px;
   }
 
-  #categoryTabs {
-    margin-bottom: 0;
+  /* 第3層 */
+  .category-frame {
+    width: 94%;
+    margin-top: 14px;
   }
 
   #categoryTabs .tab {
     padding: 9px 2px;
     font-size: 11px;
+    overflow-wrap: anywhere;
   }
 
+  /* ランキング */
   .ranking-panel {
     padding: 12px 8px;
-    margin-bottom: 18px;
+    margin-bottom: 0;
   }
 
   .table-wrap {
@@ -477,7 +542,10 @@ footer {
   }
 }
 
-/* 小型スマートフォン */
+/* ========================================
+   小型スマートフォン
+======================================== */
+
 @media (max-width: 360px) {
   .header-logo {
     width: 42px;
@@ -487,6 +555,14 @@ footer {
   .card {
     padding-right: 7px;
     padding-left: 7px;
+  }
+
+  .block-frame {
+    padding: 5px;
+  }
+
+  .category-frame {
+    width: 94%;
   }
 
   .ranking-panel {
@@ -528,7 +604,7 @@ footer {
       aria-label="伝承王の運営アカウントをXで開く"
     >
       <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231 5.214 6.817 5.97 6.817h-3.308l7.227-8.26-8.502-11.24h6.657l5.214 6.817 5.97 6.817z"/>
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231 5.214 6.817 5.97 6.817h-3.308l7.227-8.26-8.502-11.24h6.657l5.214 6.817 5.97-6.817z"/>
       </svg>
     </a>
   </div>
@@ -538,51 +614,62 @@ footer {
   <section class="card">
     <h2 class="beta-heading">伝承王-β-</h2>
 
-    <div class="tabs stage-tabs" id="stageTabs" aria-label="大会日程選択">
-      <button class="tab" data-stage="prelim">予選</button>
-      <button class="tab active" data-stage="main">本選</button>
-    </div>
-
-    <div id="mainRanking">
-      <div class="tabs" id="blockTabs" aria-label="ブロック選択">
-        <button class="tab active" data-block="A">Aブロック</button>
-        <button class="tab" data-block="B">Bブロック</button>
-        <button class="tab" data-block="C">Cブロック</button>
-        <button class="tab" data-block="D">Dブロック</button>
+    <!-- 第1層：大会日程 -->
+    <div class="stage-frame">
+      <div class="tabs stage-tabs" id="stageTabs" aria-label="大会日程選択">
+        <button class="tab" data-stage="prelim">予選</button>
+        <button class="tab active" data-stage="main">本選</button>
       </div>
 
-      <div class="tabs" id="categoryTabs" aria-label="階層選択">
-        <button class="tab active" data-category="total">総合</button>
-        <button class="tab" data-category="reverse">リバースバベル</button>
-        <button class="tab" data-category="another">アナザーバベル</button>
-        <button class="tab" data-category="rebuild">バベルリビルド</button>
-      </div>
-    </div>
+      <div id="mainRanking">
+        <!-- 第2層：ブロック -->
+        <div class="block-frame">
+          <div class="tabs" id="blockTabs" aria-label="ブロック選択">
+            <button class="tab active" data-block="A">Aブロック</button>
+            <button class="tab" data-block="B">Bブロック</button>
+            <button class="tab" data-block="C">Cブロック</button>
+            <button class="tab" data-block="D">Dブロック</button>
+          </div>
 
-    <div class="ranking-panel">
-      <div class="table-wrap">
-        <table>
-          <colgroup>
-            <col class="rank-col">
-            <col class="id-col">
-            <col class="time-col">
-          </colgroup>
-          <thead>
-            <tr>
-              <th>順位</th>
-              <th>固有番号</th>
-              <th>残りタイム</th>
-            </tr>
-          </thead>
-          <tbody id="rankingBody">
-            <tr>
-              <td colspan="3" class="empty">ランキングデータを読み込み中…</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <!-- 第3層：階層＋ランキング -->
+          <div class="category-frame">
+            <div class="tabs" id="categoryTabs" aria-label="階層選択">
+              <button class="tab active" data-category="total">総合</button>
+              <button class="tab" data-category="reverse">リバースバベル</button>
+              <button class="tab" data-category="another">アナザーバベル</button>
+              <button class="tab" data-category="rebuild">バベルリビルド</button>
+            </div>
 
-      <div id="updated">データ更新時刻：確認中</div>
+            <div class="ranking-panel">
+              <div class="table-wrap">
+                <table>
+                  <colgroup>
+                    <col class="rank-col">
+                    <col class="id-col">
+                    <col class="time-col">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>順位</th>
+                      <th>固有番号</th>
+                      <th>残りタイム</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rankingBody">
+                    <tr>
+                      <td colspan="3" class="empty">
+                        ランキングデータを読み込み中…
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="updated">データ更新時刻：確認中</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
