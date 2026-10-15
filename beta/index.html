@@ -169,11 +169,11 @@ main {
   border: none;
   border-right: 1px solid var(--accent);
   border-radius: 0;
+  outline: none;
   background: #fff;
   color: var(--accent);
   font-size: 14px;
   text-align: center;
-  overflow-wrap: anywhere;
   cursor: pointer;
   box-sizing: border-box;
 }
@@ -209,12 +209,12 @@ main {
 /* ブロック・階層タブ */
 #blockTabs {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
+  gap: 0;
 }
 
 #categoryTabs {
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
+  gap: 0;
   margin-bottom: 24px;
 }
 
@@ -407,7 +407,7 @@ footer {
   }
 
   .tabs {
-    gap: 4px;
+    gap: 0px;
   }
 
   .stage-tabs {
@@ -421,7 +421,7 @@ footer {
   }
 
   #blockTabs {
-    gap: 4px;
+    gap: 0px;
     margin-bottom: 14px;
   }
 
@@ -431,7 +431,7 @@ footer {
   }
 
   #categoryTabs {
-    gap: 4px;
+    gap: 0px;
     margin-bottom: 18px;
   }
 
