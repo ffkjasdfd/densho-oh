@@ -3,6 +3,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b1020">
 <title>伝承王</title>
@@ -44,10 +45,20 @@ header {
 
 .header-logo {
   justify-self: start;
-  font-size: 14px;
-  font-weight: 700;
-  color: #171717;
+  display: flex;
+  align-items: center;
+  width: 130px;
+  height: 60px;
   text-decoration: none;
+}
+
+.header-logo img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 .header-title {
@@ -95,8 +106,9 @@ header {
   }
 
   .header-logo {
-    font-size: 11px;
-  }
+  width: 80px;
+  height: 44px;
+ }
 
   .header-title h1 {
     font-size: 25px;
@@ -177,8 +189,8 @@ footer { color: var(--muted); font-size: 12px; text-align: center; padding: 20px
 <header>
   <div class="header-inner">
     <a class="header-logo" href="https://densho-oh.pages.dev/">
-      伝承王
-    </a>
+  <img src="/logo.png" alt="伝承王">
+</a>
 
     <div class="header-title">
       <h1>伝承王</h1>
