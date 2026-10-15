@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090d18">
+<title>伝承王 | 伝承王β</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #090d18;
+  --panel: #11182a;
+  --line: #293550;
+  --text: #f1f5ff;
+  --muted: #9ba9c5;
+  --accent: #b7a0ff;
+  --cyan: #76d9e8;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 15% 0%, #30245655, transparent 45%),
+    radial-gradient(ellipse at 100% 15%, #26899d20, transparent 38%),
+    var(--bg);
+  font-family: system-ui, sans-serif;
+}
+.wrap { width: min(1000px, calc(100% - 32px)); margin: auto; }
+header { padding: 24px 0; border-bottom: 1px solid #ffffff18; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo {
+  width: 44px; height: 44px; display: grid; place-items: center;
+  border: 1px solid #7164a9; border-radius: 12px;
+  color: var(--accent); font-size: 22px; font-weight: 900;
+  background: linear-gradient(145deg, #252044, #11182a);
+}
+.brand-name { font-size: 21px; font-weight: 850; letter-spacing: .12em; }
+.brand-sub { color: var(--muted); font-size: 10px; letter-spacing: .16em; }
+main { padding: 34px 0 56px; }
+.eyebrow { color: var(--cyan); font-size: 11px; letter-spacing: .2em; font-weight: 800; }
+h1 { margin: 8px 0; font-size: clamp(32px, 6vw, 48px); }
+.intro { color: var(--muted); font-size: 14px; line-height: 1.8; }
+.event {
+  margin-top: 28px; border: 1px solid var(--line);
+  border-radius: 18px; overflow: hidden;
+  background: linear-gradient(135deg, #19223af5, #0d1322fa);
+  box-shadow: 0 18px 55px #0003;
+}
+.event-head { padding: 24px; display: flex; justify-content: space-between; gap: 16px; }
+.kicker { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .18em; }
+h2 { margin: 8px 0; font-size: 27px; }
+.desc { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.status { white-space: nowrap; height: fit-content; border: 1px solid #3c4966; border-radius: 20px; padding: 7px 10px; font-size: 11px; color: #cbd5ed; }
+.content { padding: 22px 24px 26px; border-top: 1px solid var(--line); }
+.label { margin-bottom: 10px; color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .12em; }
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+button {
+  border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 14px; background: #0d1425; color: #c3cde2;
+  font: inherit; font-size: 13px; cursor: pointer;
+}
+button:hover { border-color: #8472c6; color: white; }
+button[aria-selected="true"] {
+  color: white; border-color: #8472c6;
+  background: linear-gradient(135deg, #3b3264, #242743);
+}
+.category { margin-top: 22px; }
+.table-shell { margin-top: 20px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.table-head { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; background: #161f35; border-bottom: 1px solid var(--line); }
+.table-title { font-size: 14px; font-weight: 750; }
+.table-note { color: var(--muted); font-size: 11px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid #293550aa; font-size: 14px; }
+th { color: var(--muted); font-size: 11px; letter-spacing: .08em; background: #0b101e99; }
+tbody tr:last-child td { border-bottom: 0; }
+th:last-child, td.time { text-align: right; }
+td.rank { color: #d4c9ff; font-weight: 800; }
+td.time { font-variant-numeric: tabular-nums; font-weight: 800; font-size: 16px; }
+.empty { padding: 34px 14px; text-align: center; color: var(--muted); line-height: 1.9; font-size: 13px; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 14px; color: var(--muted); font-size: 11px; }
+footer { border-top: 1px solid #ffffff18; padding: 20px 0 28px; color: #7785a2; font-size: 11px; }
+@media (max-width: 600px) {
+  .wrap { width: calc(100% - 22px); }
+  .event-head { padding: 18px 16px; }
+  .content { padding: 18px 14px 20px; }
+  h2 { font-size: 23px; }
+  .status { font-size: 10px; padding: 6px 8px; }
+  button { padding: 9px 11px; }
+  th, td { padding: 12px 10px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap brand">
+    <div class="logo">伝</div>
+    <div>
+      <div class="brand-name">伝承王</div>
+      <div class="brand-sub">UNOFFICIAL TOURNAMENT RANKINGS</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="eyebrow">TOURNAMENT ARCHIVE</div>
+  <h1>伝承王</h1>
+  <p class="intro">
+    大会ごとのランキングを確認できます。<br>
+    各大会のランキングは、こちらからご覧いただけます。
+  </p>
+
+  <section class="event">
+    <div class="event-head">
+      <div>
+        <div class="kicker">TOURNAMENT β</div>
+        <h2>伝承王β</h2>
+        <p class="desc">ブロック別ランキング・各階層の残りタイム</p>
+      </div>
+      <div class="status">ランキング準備中</div>
+    </div>
+
+    <div class="content">
+      <div class="label">BLOCK</div>
+      <div class="tabs" role="tablist" aria-label="ブロック">
+        <button role="tab" data-block="A" aria-selected="true">Aブロック</button>
+        <button role="tab" data-block="B" aria-selected="false">Bブロック</button>
+        <button role="tab" data-block="C" aria-selected="false">Cブロック</button>
+        <button role="tab" data-block="D" aria-selected="false">Dブロック</button>
+      </div>
+
+      <div class="category">
+        <div class="label">RANKING CATEGORY</div>
+        <div class="tabs" role="tablist" aria-label="ランキング種別">
+          <button role="tab" data-category="total" aria-selected="true">総合</button>
+          <button role="tab" data-category="reverse" aria-selected="false">リバースバベル</button>
+          <button role="tab" data-category="another" aria-selected="false">アナザーバベル</button>
+          <button role="tab" data-category="rebuild" aria-selected="false">バベルリビルド</button>
+        </div>
+      </div>
+
+      <div class="table-shell">
+        <div class="table-head">
+          <div class="table-title" id="table-title">Aブロック / 総合</div>
+          <div class="table-note">残りタイム順</div>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead>
+              <tr><th>順位</th><th>固有番号</th><th>残りタイム</th></tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="3" class="empty">
+                ランキングデータを接続する準備中です。<br>
+                接続後、ここに順位が表示されます。
+              </td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="foot">
+        <span>最終更新：未接続</span>
+        <span>残りタイムが大きい順</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">伝承王βは非公式大会です。公式運営とは関係ありません。</div>
+</footer>
+
+<script>
+const state = { block: "A", category: "total" };
+
+const categoryNames = {
+  total: "総合",
+  reverse: "リバースバベル",
+  another: "アナザーバベル",
+  rebuild: "バベルリビルド"
+};
+
+function updateTabs() {
+  if (state.block === "D" &&
+      ["another", "rebuild"].includes(state.category)) {
+    state.category = "total";
+  }
+
+  document.querySelectorAll("[data-block]").forEach(button => {
+    button.setAttribute(
+      "aria-selected",
+      String(button.dataset.block === state.block)
+    );
+  });
+
+  document.querySelectorAll("[data-category]").forEach(button => {
+    const unavailable =
+      state.block === "D" &&
+      ["another", "rebuild"].includes(button.dataset.category);
+
+    button.hidden = unavailable;
+    button.setAttribute(
+      "aria-selected",
+      String(button.dataset.category === state.category)
+    );
+  });
+
+  document.getElementById("table-title").textContent =
+    `${state.block}ブロック / ${categoryNames[state.category]}`;
+}
+
+document.querySelectorAll("[data-block]").forEach(button => {
+  button.addEventListener("click", () => {
+    state.block = button.dataset.block;
+    updateTabs();
+  });
+});
+
+document.querySelectorAll("[data-category]").forEach(button => {
+  button.addEventListener("click", () => {
+    state.category = button.dataset.category;
+    updateTabs();
+  });
+});
+
+updateTabs();
+</script>
+</body>
+</html>
