@@ -430,6 +430,22 @@ footer {
     font-size: 12px;
   }
 }
+  .beta-heading {
+  margin: 0 0 28px;
+  font-family: "Noto Serif JP", "Yu Mincho", serif;
+  font-size: clamp(42px, 7vw, 72px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .beta-heading {
+    font-size: clamp(36px, 9vw, 52px);
+    margin-bottom: 24px;
+  }
+}
 </style>
 </head>
 
@@ -464,6 +480,7 @@ footer {
 
 <main class="wrap">
   <section class="card">
+  <h2 class="beta-heading">伝承王-β-</h2>
 
     <div class="tabs stage-tabs" id="stageTabs" aria-label="大会日程選択">
       <button class="tab" data-stage="prelim">予選</button>
