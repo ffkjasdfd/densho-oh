@@ -259,6 +259,7 @@ document.getElementById("categoryTabs").addEventListener("click", event => {
 });
 
 loadRanking();
+setInterval(loadRanking, 5 * 60 * 1000);
 </script>
 </body>
 </html>
