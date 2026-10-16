@@ -603,41 +603,326 @@ footer {
   background-position: center top;
   background-repeat: no-repeat;
 }
+  
+/* ========================================
+   共通ヘッダー：メニュー・HOME・X
+======================================== */
+
+.header-inner {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+.menu-button {
+  justify-self: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-button span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #222;
+}
+
+.header-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 44px;
+  min-height: 44px;
+  color: #111;
+  text-decoration: none;
+}
+
+.header-home svg {
+  width: 21px;
+  height: 21px;
+}
+
+.header-home span {
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.header-x {
+  flex: none;
+}
+
+/* サイドメニュー */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgb(0 0 0 / 35%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s, visibility .25s;
+}
+
+.site-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+  width: min(320px, 85vw);
+  padding: 24px;
+  background: #fff;
+  box-shadow: 4px 0 20px rgb(0 0 0 / 8%);
+  transform: translateX(-105%);
+  transition: transform .25s ease, visibility .25s;
+  visibility: hidden;
+}
+
+.site-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: Georgia, serif;
+  letter-spacing: .15em;
+}
+
+.site-menu-header button {
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.site-menu > a {
+  display: block;
+  padding: 15px 4px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.site-menu > a:hover {
+  background: #f7f9fc;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+body.menu-open .menu-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.menu-open .site-menu {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+/* ロゴ下の集計結果エリア */
+
+.results-heading {
+  margin: 0 0 26px;
+  padding: 24px 12px 28px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+
+.results-heading h2 {
+  margin: 0;
+  font-family: "Noto Serif JP", "Yu Mincho", serif;
+  font-size: clamp(25px, 4vw, 32px);
+  font-weight: 600;
+  letter-spacing: .12em;
+}
+
+.results-period-label {
+  margin: 14px 0 2px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+.results-period {
+  margin: 0;
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* スマートフォン */
+
+@media (max-width: 600px) {
+  .header-inner {
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+  }
+
+  .menu-button {
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+  }
+
+  .header-actions {
+    gap: 5px;
+  }
+
+  .header-home {
+    width: 36px;
+  }
+
+  .header-home svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .header-x {
+    width: 32px;
+    height: 36px;
+  }
+
+  .header-x svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .results-heading {
+    margin-bottom: 18px;
+    padding: 20px 6px 22px;
+  }
+
+  .results-period {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-inner {
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+  }
+
+  .header-title h1 {
+    font-size: 21px;
+  }
+
+  .header-title .subtitle {
+    font-size: 7px;
+  }
+
+  .header-actions {
+    gap: 2px;
+  }
+}
+
 </style>
 </head>
 
 <body>
 
+
 <header>
   <div class="header-inner">
-    <a class="header-logo" href="/">
-      <img src="/logo.png" alt="伝承王">
-    </a>
+    <button
+      class="menu-button"
+      id="menu-open"
+      type="button"
+      aria-label="メニューを開く"
+      aria-controls="site-menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
     <div class="header-title">
       <h1>伝承王</h1>
       <div class="subtitle">Legend of GARDENER</div>
     </div>
 
-    <a
-      class="header-x"
-      href="https://x.com/rxr_legendary"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="伝承王の運営アカウントをXで開く"
-    >
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"/>
-</svg>
-    </a>
+    <div class="header-actions">
+      <a class="header-home" href="/" aria-label="HOME">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>HOME</span>
+      </a>
+
+      <a
+        class="header-x"
+        href="https://x.com/rxr_legendary"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="伝承王の運営アカウントをXで開く"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"/>
+        </svg>
+      </a>
+    </div>
   </div>
 </header>
+
+<div class="menu-overlay" id="menu-overlay"></div>
+
+<nav
+  class="site-menu"
+  id="site-menu"
+  aria-label="サイトメニュー"
+  aria-hidden="true"
+>
+  <div class="site-menu-header">
+    <span>MENU</span>
+    <button id="menu-close" type="button" aria-label="メニューを閉じる">×</button>
+  </div>
+
+  <a href="/">HOME</a>
+  <a href="/beta/">開催中の大会</a>
+  <a href="/archive/">過去開催の大会</a>
+  <a href="/#information">お問い合わせ</a>
+</nav>
+
 
 <main class="wrap">
   <section class="card">
     <div class="beta-logo">
   <img src="/beta-logo.png" alt="伝承王β">
 </div>
+    
+<div class="results-heading">
+  <h2>集計結果</h2>
+  <p class="results-period-label">開催期間</p>
+  <p class="results-period">
+    2026年10月11日(日) ～ 2026年10月25日(日)
+  </p>
+</div>
+
 
     <!-- 第1層：大会日程 -->
     <div class="stage-frame">
