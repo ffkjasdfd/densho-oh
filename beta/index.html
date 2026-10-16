@@ -998,6 +998,31 @@ footer {
     gap: 2px;
   }
 }
+   /* ========================================
+   画像・PV下のテキスト
+======================================== */
+
+.media-text {
+  margin-top: 12px;
+
+  color: #65708a;
+
+  font-size: 13px;
+
+  line-height: 1.8;
+}
+
+.media-text a {
+  color: #315dc8;
+
+  text-decoration: underline;
+
+  text-underline-offset: 3px;
+}
+
+.media-text a:hover {
+  text-decoration-thickness: 2px;
+}
 
 </style>
 </head>
@@ -1195,54 +1220,78 @@ footer {
          キービジュアル
     ===================================== -->
 
-    <section class="content-section">
+    <!-- ====================================
+     キービジュアル
+===================================== -->
 
-      <h2>
-        キービジュアル
-      </h2>
+<section class="content-section">
 
-      <div class="key-visual">
+  <h2>
+    キービジュアル
+  </h2>
 
-        <img
-          src="/beta/key-visual.png"
-          alt="伝承王β キービジュアル"
-        >
+  <div class="key-visual">
 
-      </div>
+    <img
+      src="/beta/key-visual.webp"
+      alt="伝承王β キービジュアル"
+    >
 
-    </section>
+  </div>
+
+  <div class="media-text">
+    Illustration：
+    <a
+      href="https://x.com/hituki_ruon?s=21"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      // key visual by 日月🦋 ( @hituki_ruon ) 様
+    </a>
+  </div>
+
+</section>
 
 
     <!-- ====================================
          PV
     ===================================== -->
 
-    <section class="content-section">
+   <section class="content-section">
 
-      <h2>
-        大会PV
-      </h2>
+  <h2>
+    大会PV
+  </h2>
 
-      <div class="pv">
+  <div class="pv">
 
-        <video
-          controls
-          playsinline
-          preload="metadata"
-        >
+    <video
+      controls
+      playsinline
+      preload="metadata"
+    >
+      <source
+        src="/beta/pv.mp4"
+        type="video/mp4"
+      >
 
-          <source
-            src="/beta/pv.mp4"
-            type="video/mp4"
-          >
+      お使いのブラウザでは動画を再生できません。
+    </video>
 
-          お使いのブラウザでは動画を再生できません。
+  </div>
 
-        </video>
+  <div class="media-text">
+    Movie：
+    <a
+      href="https://x.com/akitogamesx?s=21"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      // PV by AkitoGames ( @AkitoGamesX ) 様
+    </a>
+  </div>
 
-      </div>
-
-    </section>
+</section>
 
 
     <!-- ====================================
@@ -1291,7 +1340,9 @@ footer {
           </div>
 
           <div class="reward-text">
-            ～～～～
+            １位：イラスト，Xヘッダー，Xアイコン
+             ２位：イラスト，Xヘッダー，Xアイコン
+             ３位：イラスト，Xヘッダー，Xアイコン
           </div>
 
         </div>
@@ -1306,7 +1357,7 @@ footer {
           </div>
 
           <div class="reward-text">
-            ～～～～
+            １位：Xヘッダー，Xアイコン
           </div>
 
         </div>
@@ -1321,7 +1372,7 @@ footer {
           </div>
 
           <div class="reward-text">
-            ～～～～
+            １位：Xヘッダー，Xアイコン
           </div>
 
         </div>
@@ -1336,10 +1387,35 @@ footer {
           </div>
 
           <div class="reward-text">
-            ～～～～
+            １位：Xヘッダー，Xアイコン
           </div>
 
         </div>
+
+         <div class="reward-group">
+
+          <div class="reward-title">
+            RPキャンペーン
+          </div>
+            <div class="reward-text">
+            イラスト
+          </div>
+
+         </div>
+
+            
+
+            <div class="reward-group">
+
+          <div class="reward-title">
+            ユニーク編成賞
+          </div>
+
+         <div class="reward-text">
+            イラスト
+          </div>
+
+         </div>
 
 
       </div>
