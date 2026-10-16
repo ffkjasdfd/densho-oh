@@ -135,14 +135,21 @@ main {
 }
 
 /* 大見出し */
-.beta-heading {
-  margin: 0 0 28px;
-  color: var(--text);
-  font-family: "Noto Serif JP", "Yu Mincho", serif;
-  font-size: clamp(42px, 7vw, 72px);
-  font-weight: 800;
-  letter-spacing: .04em;
-  line-height: 1.2;
+/* βページのメインロゴ */
+.beta-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 32px;
+}
+
+.beta-logo img {
+  display: block;
+  width: min(520px, 85%);
+  height: auto;
+  max-height: 220px;
+  object-fit: contain;
 }
 
 /* ========================================
@@ -469,10 +476,14 @@ footer {
     border-radius: 10px;
   }
 
-  .beta-heading {
-    margin-bottom: 24px;
-    font-size: clamp(36px, 9vw, 52px);
-  }
+  .beta-logo {
+  margin-bottom: 24px;
+}
+
+.beta-logo img {
+  width: 90%;
+  max-height: 160px;
+}
 
   .tabs {
     gap: 0;
@@ -612,7 +623,9 @@ footer {
 
 <main class="wrap">
   <section class="card">
-    <h2 class="beta-heading">伝承王-β-</h2>
+    <div class="beta-logo">
+  <img src="/beta-logo.png" alt="伝承王β">
+</div>
 
     <!-- 第1層：大会日程 -->
     <div class="stage-frame">
