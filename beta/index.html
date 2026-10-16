@@ -1207,5 +1207,37 @@ loadRanking();
 setInterval(loadRanking, 5 * 60 * 1000);
 </script>
 
+  
+<script>
+  const menuOpen = document.getElementById("menu-open");
+  const menuClose = document.getElementById("menu-close");
+  const menuOverlay = document.getElementById("menu-overlay");
+  const siteMenu = document.getElementById("site-menu");
+
+  function openMenu() {
+    document.body.classList.add("menu-open");
+    menuOpen.setAttribute("aria-expanded", "true");
+    siteMenu.setAttribute("aria-hidden", "false");
+  }
+
+  function closeMenu() {
+    document.body.classList.remove("menu-open");
+    menuOpen.setAttribute("aria-expanded", "false");
+    siteMenu.setAttribute("aria-hidden", "true");
+  }
+
+  menuOpen.addEventListener("click", openMenu);
+  menuClose.addEventListener("click", closeMenu);
+  menuOverlay.addEventListener("click", closeMenu);
+
+  siteMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeMenu();
+  });
+</script>
+
 </body>
 </html>
