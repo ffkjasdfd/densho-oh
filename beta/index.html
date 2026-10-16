@@ -593,16 +593,19 @@ footer {
     font-size: 12px;
   }
 }
-  body::before {
+  
+body::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   background-image: url("/beta-background.png");
-  background-size: cover;
+  background-size: auto 100%;
   background-position: center top;
   background-repeat: no-repeat;
+  pointer-events: none;
 }
+
   
 /* ========================================
    共通ヘッダー：メニュー・HOME・X
