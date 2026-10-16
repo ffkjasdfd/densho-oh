@@ -531,32 +531,44 @@ main {
 
 
 /* ========================================
-   キービジュアル・PV・報酬
+   キービジュアル
 ======================================== */
 
-.placeholder {
-  min-height: 130px;
+.key-visual {
+  overflow: hidden;
 
-  display: grid;
+  border-radius: 10px;
+}
 
-  place-items: center;
+.key-visual img {
+  display: block;
 
-  padding: 20px;
+  width: 100%;
+  height: auto;
+}
 
-  border:
-    1px dashed #bdc6d8;
+
+/* ========================================
+   大会PV
+======================================== */
+
+.pv {
+  overflow: hidden;
 
   border-radius: 10px;
 
-  background: #f7f9fd;
-
-  color: #78839a;
-
-  text-align: center;
+  background: #000;
 }
 
-.placeholder p {
-  margin: 0;
+.pv video {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-height: 80vh;
+
+  background: #000;
 }
 
 
@@ -565,28 +577,58 @@ main {
 ======================================== */
 
 .schedule {
-  display: grid;
+  padding: 18px 20px;
 
-  gap: 12px;
-}
-
-
-/*
-  中身は後から入れる。
-  現状はテキストボックスのみ。
-*/
-
-.schedule-item {
-  min-height: 70px;
-
-  padding: 16px;
-
-  border:
-    1px solid #d8dfef;
+  border: 1px solid #d8dfef;
 
   border-radius: 8px;
 
   background: #f2f5fb;
+
+  font-size: 14px;
+
+  line-height: 2;
+}
+
+
+/* ========================================
+   報酬一覧
+======================================== */
+
+.reward-box {
+  padding: 22px;
+
+  border: 1px solid #d8dfef;
+
+  border-radius: 10px;
+
+  background: #f7f9fd;
+}
+
+.reward-group + .reward-group {
+  margin-top: 24px;
+
+  padding-top: 24px;
+
+  border-top: 1px solid #d8dfef;
+}
+
+.reward-title {
+  margin-bottom: 8px;
+
+  color: #263b70;
+
+  font-size: 17px;
+
+  font-weight: 700;
+}
+
+.reward-text {
+  color: var(--text);
+
+  font-size: 14px;
+
+  line-height: 1.8;
 }
 
 
@@ -715,6 +757,8 @@ main {
   margin: 0;
 
   font-weight: 600;
+
+  line-height: 1.8;
 }
 
 
@@ -864,6 +908,32 @@ footer {
 
   .content-section h2 {
     font-size: 19px;
+  }
+
+
+  /* 日程 */
+
+  .schedule {
+    padding: 15px;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+  }
+
+
+  /* 報酬 */
+
+  .reward-box {
+    padding: 16px;
+  }
+
+  .reward-title {
+    font-size: 16px;
+  }
+
+  .reward-text {
+    font-size: 13px;
   }
 
 
@@ -1131,11 +1201,12 @@ footer {
         キービジュアル
       </h2>
 
-      <div class="placeholder">
+      <div class="key-visual">
 
-        <p>
-          キービジュアル掲載予定
-        </p>
+        <img
+          src="/beta/key-visual.png"
+          alt="伝承王β キービジュアル"
+        >
 
       </div>
 
@@ -1152,11 +1223,22 @@ footer {
         大会PV
       </h2>
 
-      <div class="placeholder">
+      <div class="pv">
 
-        <p>
-          PV掲載予定
-        </p>
+        <video
+          controls
+          playsinline
+          preload="metadata"
+        >
+
+          <source
+            src="/beta/pv.mp4"
+            type="video/mp4"
+          >
+
+          お使いのブラウザでは動画を再生できません。
+
+        </video>
 
       </div>
 
@@ -1173,21 +1255,13 @@ footer {
         日程
       </h2>
 
-
       <div class="schedule">
 
-         告知：9月19日(土)13:13<br>
-         応募：9月19日(土)13:13 ～ 9月26日(土)23:59<br>
-         予選：10月2日(金)4:00 ～ 10月8日(木)3:59<br>
-         本選：10月11日(日)4:00 ～ 10月25日(日)3:59<br>
-         結果発表：10月27日(金)13:13
-
-        <div class="schedule-item">
-
-        </div>
-
-
-       
+        告知：9月19日(土)13:13<br>
+        応募：9月19日(土)13:13 ～ 9月26日(土)23:59<br>
+        予選：10月2日(金)4:00 ～ 10月8日(木)3:59<br>
+        本選：10月11日(日)4:00 ～ 10月25日(日)3:59<br>
+        結果発表：10月27日(金)13:13
 
       </div>
 
@@ -1204,11 +1278,69 @@ footer {
         報酬一覧
       </h2>
 
-      <div class="placeholder">
 
-        <p>
-          
-        </p>
+      <div class="reward-box">
+
+
+        <!-- Aブロック -->
+
+        <div class="reward-group">
+
+          <div class="reward-title">
+            Aブロック
+          </div>
+
+          <div class="reward-text">
+            ～～～～
+          </div>
+
+        </div>
+
+
+        <!-- Bブロック -->
+
+        <div class="reward-group">
+
+          <div class="reward-title">
+            Bブロック
+          </div>
+
+          <div class="reward-text">
+            ～～～～
+          </div>
+
+        </div>
+
+
+        <!-- Cブロック -->
+
+        <div class="reward-group">
+
+          <div class="reward-title">
+            Cブロック
+          </div>
+
+          <div class="reward-text">
+            ～～～～
+          </div>
+
+        </div>
+
+
+        <!-- Dブロック -->
+
+        <div class="reward-group">
+
+          <div class="reward-title">
+            Dブロック
+          </div>
+
+          <div class="reward-text">
+            ～～～～
+          </div>
+
+        </div>
+
 
       </div>
 
@@ -1304,9 +1436,8 @@ footer {
         </h3>
 
         <p>
-           リバ×リバ攻略wiki管理人<br>
-           まんじゅう
-           
+          リバ×リバ攻略wiki管理人<br>
+          まんじゅう
         </p>
 
       </div>
@@ -1325,14 +1456,13 @@ footer {
           あうろら<br>
           星空ぁっとにゃんにゃん<br>
           bake2-バケツ<br>
-           がかみもぢ<br>
-           けいにし<br>
-           こるん<br>
-           ネフェルトリBB<br>
-           ユント<br>
-           錬_FORTRESS<br>
-           黒葉
-           
+          がかみもぢ<br>
+          けいにし<br>
+          こるん<br>
+          ネフェルトリBB<br>
+          ユント<br>
+          錬_FORTRESS<br>
+          黒葉
         </p>
 
       </div>
@@ -1363,9 +1493,9 @@ footer {
 
         <p>
           ねこたろう＠アイコン化の人<br>
-            ﾙ<br>
-           あまとう<br>
-           おぱん
+          ﾙ<br>
+          あまとう<br>
+          おぱん
         </p>
 
       </div>
