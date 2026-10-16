@@ -1,0 +1,1248 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="/beta-logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>伝承王 -β-</title>
+
+<style>
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --panel2: #f5f7fa;
+  --line: #e5e7eb;
+  --text: #252a34;
+  --muted: #737b89;
+  --accent: #315dc8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  position: relative;
+  isolation: isolate;
+}
+
+/* ヘッダー */
+header {
+  height: 100px;
+  padding: 0 32px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+}
+
+.header-inner {
+  width: min(1200px, 100%);
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.header-logo {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  width: 130px;
+  height: 60px;
+  text-decoration: none;
+}
+
+.header-logo img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.header-title {
+  text-align: center;
+}
+
+.header-title h1 {
+  margin: 0;
+  font-family: "Noto Serif JP", "Yu Mincho", serif;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  line-height: 1.3;
+}
+
+.header-title .subtitle {
+  margin-top: 2px;
+  color: #737b89;
+  font-family: Georgia, serif;
+  font-size: 11px;
+  letter-spacing: .12em;
+}
+
+.header-x {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  color: #171717;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: background .15s;
+}
+
+.header-x:hover {
+  background: #f1f3f5;
+}
+
+.header-x svg {
+  display: block;
+  width: 25px;
+  height: 25px;
+  fill: currentColor;
+}
+
+/* ページレイアウト */
+.wrap {
+  width: min(1000px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+main {
+  padding: 30px 0 56px;
+}
+
+.card {
+  min-width: 0;
+  padding: 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+/* 大見出し */
+/* βページのメインロゴ */
+.beta-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 32px;
+}
+
+.beta-logo img {
+  display: block;
+  width: min(520px, 85%);
+  height: auto;
+  max-height: 220px;
+  object-fit: contain;
+}
+
+/* ========================================
+   タブ共通
+======================================== */
+
+.tabs {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tab {
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  padding: 11px 6px;
+  border: none;
+  border-right: 1px solid var(--accent);
+  border-radius: 0;
+  outline: none;
+  background: #fff;
+  color: var(--accent);
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.tab:last-child {
+  border-right: none;
+}
+
+/* 選択中 */
+.tab.active {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 未選択タブのホバー */
+.tab:hover:not(.active) {
+  background: #edf3ff;
+}
+
+/* 非表示タブ */
+[hidden] {
+  display: none !important;
+}
+
+/* ========================================
+   第1層：予選・本選の外枠
+======================================== */
+
+.stage-frame {
+  width: 100%;
+  padding: 0 0 24px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* 予選・本選 */
+.stage-tabs {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  border-radius: 0;
+}
+
+.stage-tabs .tab {
+  padding: 12px 6px;
+  font-size: 15px;
+}
+
+/* ========================================
+   第2層：ブロック選択
+======================================== */
+
+.block-frame {
+  width: 95%;
+  margin: 22px auto 0;
+  padding: 12px;
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  background: #fff;
+}
+
+#blockTabs {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-radius: 5px;
+}
+
+/* ========================================
+   第3層：階層選択＋ランキング
+======================================== */
+
+.category-frame {
+  width: 90%;
+  margin: 20px auto 0;
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* 階層タブ */
+#categoryTabs {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  border-radius: 0;
+}
+
+#categoryTabs .tab {
+  padding: 10px 4px;
+  font-size: 13px;
+}
+
+/* ランキング表示 */
+.ranking-panel {
+  width: 100%;
+  margin: 0;
+  padding: 20px;
+  border: none;
+  border-radius: 0;
+  background: #fff;
+}
+
+/* ========================================
+   ランキング表
+======================================== */
+
+.table-wrap {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+col.rank-col {
+  width: 20%;
+}
+
+col.id-col,
+col.time-col {
+  width: 40%;
+}
+
+thead {
+  background: #f5f7fa;
+}
+
+th,
+td {
+  padding: 15px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+th {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+td {
+  color: #303642;
+  font-size: 14px;
+}
+
+td:first-child {
+  font-weight: 700;
+}
+
+td:last-child {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 1位：金 */
+tbody tr.rank-1 {
+  background: #fff8e6;
+}
+
+tbody tr.rank-1 td:first-child {
+  color: #a97918;
+  font-weight: 800;
+}
+
+tbody tr.rank-1:hover {
+  background: #fff1c9;
+}
+
+/* 2位：銀 */
+tbody tr.rank-2 {
+  background: #f4f6f8;
+}
+
+tbody tr.rank-2 td:first-child {
+  color: #707985;
+  font-weight: 800;
+}
+
+tbody tr.rank-2:hover {
+  background: #e9edf2;
+}
+
+/* 3位：銅 */
+tbody tr.rank-3 {
+  background: #fff3ec;
+}
+
+tbody tr.rank-3 td:first-child {
+  color: #a86b46;
+  font-weight: 800;
+}
+
+tbody tr.rank-3:hover {
+  background: #ffe8d9;
+}
+
+/* 4位以下のホバー */
+tbody tr:hover {
+  background: #f7f9fc;
+}
+
+.empty {
+  padding: 36px 10px;
+  color: var(--muted);
+  text-align: center;
+  overflow-wrap: normal;
+}
+
+/* 更新時刻 */
+#updated {
+  max-width: 680px;
+  margin: 20px auto 0;
+  color: #858b96;
+  font-size: 11px;
+  text-align: right;
+}
+
+/* フッター */
+footer {
+  padding: 22px 16px;
+  border-top: 1px solid var(--line);
+  color: #858b96;
+  font-size: 11px;
+  text-align: center;
+}
+
+/* ========================================
+   タブレット
+======================================== */
+
+@media (max-width: 900px) {
+  .header-logo {
+    width: 70px;
+    height: 44px;
+  }
+}
+
+/* ========================================
+   スマートフォン
+======================================== */
+
+@media (max-width: 600px) {
+  header {
+    height: 78px;
+    padding: 0 14px;
+  }
+
+  .header-logo {
+    width: 52px;
+    height: 36px;
+  }
+
+  .header-title h1 {
+    font-size: 25px;
+  }
+
+  .header-title .subtitle {
+    font-size: 8px;
+    letter-spacing: .04em;
+  }
+
+  .header-x {
+    width: 32px;
+    height: 36px;
+  }
+
+  .header-x svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .wrap {
+    width: calc(100% - 20px);
+  }
+
+  main {
+    padding: 18px 0 38px;
+  }
+
+  .card {
+    padding: 16px 10px;
+    border-radius: 10px;
+  }
+
+  .beta-logo {
+  margin-bottom: 24px;
+}
+
+.beta-logo img {
+  width: 90%;
+  max-height: 160px;
+}
+
+  .tabs {
+    gap: 0;
+  }
+
+  /* 第1層 */
+  .stage-frame {
+    padding-bottom: 14px;
+  }
+
+  .stage-tabs .tab {
+    padding: 11px 4px;
+    font-size: 13px;
+  }
+
+  /* 第2層 */
+  .block-frame {
+    width: 96%;
+    margin-top: 14px;
+    padding: 7px;
+  }
+
+  #blockTabs .tab {
+    padding: 10px 2px;
+    font-size: 12px;
+  }
+
+  /* 第3層 */
+  .category-frame {
+    width: 94%;
+    margin-top: 14px;
+  }
+
+  #categoryTabs .tab {
+    padding: 9px 2px;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  /* ランキング */
+  .ranking-panel {
+    padding: 12px 8px;
+    margin-bottom: 0;
+  }
+
+  .table-wrap {
+    width: 100%;
+  }
+
+  th,
+  td {
+    padding: 13px 3px;
+  }
+
+  th {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+
+  td {
+    font-size: 13px;
+  }
+
+  #updated {
+    margin-top: 16px;
+    font-size: 10px;
+  }
+}
+
+/* ========================================
+   小型スマートフォン
+======================================== */
+
+@media (max-width: 360px) {
+  .header-logo {
+    width: 42px;
+    height: 32px;
+  }
+
+  .card {
+    padding-right: 7px;
+    padding-left: 7px;
+  }
+
+  .block-frame {
+    padding: 5px;
+  }
+
+  .category-frame {
+    width: 94%;
+  }
+
+  .ranking-panel {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  th,
+  td {
+    padding-right: 2px;
+    padding-left: 2px;
+  }
+
+  td {
+    font-size: 12px;
+  }
+}
+  
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  background-image: url("/beta-background.png");
+  background-size: auto 100vh;
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  pointer-events: none;
+}
+
+  
+/* ========================================
+   共通ヘッダー：メニュー・HOME・X
+======================================== */
+
+.header-inner {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+.menu-button {
+  justify-self: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-button span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #222;
+}
+
+.header-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  width: 44px;
+  min-height: 44px;
+  color: #111;
+  text-decoration: none;
+}
+
+.header-home svg {
+  width: 21px;
+  height: 21px;
+}
+
+.header-home span {
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.header-x {
+  flex: none;
+}
+
+/* サイドメニュー */
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgb(0 0 0 / 35%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s, visibility .25s;
+}
+
+.site-menu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1001;
+  width: min(320px, 85vw);
+  padding: 24px;
+  background: #fff;
+  box-shadow: 4px 0 20px rgb(0 0 0 / 8%);
+  transform: translateX(-105%);
+  transition: transform .25s ease, visibility .25s;
+  visibility: hidden;
+}
+
+.site-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: Georgia, serif;
+  letter-spacing: .15em;
+}
+
+.site-menu-header button {
+  border: 0;
+  background: transparent;
+  color: #222;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.site-menu > a {
+  display: block;
+  padding: 15px 4px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.site-menu > a:hover {
+  background: #f7f9fc;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+body.menu-open .menu-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.menu-open .site-menu {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+/* ロゴ下の集計結果エリア */
+
+.results-heading {
+  margin: 0 0 26px;
+  padding: 24px 12px 28px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+
+.results-heading h2 {
+  margin: 0;
+  font-family: "Noto Serif JP", "Yu Mincho", serif;
+  font-size: clamp(25px, 4vw, 32px);
+  font-weight: 600;
+  letter-spacing: .12em;
+}
+
+.results-period-label {
+  margin: 14px 0 2px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+.results-period {
+  margin: 0;
+  color: var(--text);
+  font-size: 14px;
+}
+
+/* スマートフォン */
+
+@media (max-width: 600px) {
+  .header-inner {
+    grid-template-columns: 36px minmax(0, 1fr) auto;
+  }
+
+  .menu-button {
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+  }
+
+  .header-actions {
+    gap: 5px;
+  }
+
+  .header-home {
+    width: 36px;
+  }
+
+  .header-home svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .header-x {
+    width: 32px;
+    height: 36px;
+  }
+
+  .header-x svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .results-heading {
+    margin-bottom: 18px;
+    padding: 20px 6px 22px;
+  }
+
+  .results-period {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header-inner {
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+  }
+
+  .header-title h1 {
+    font-size: 21px;
+  }
+
+  .header-title .subtitle {
+    font-size: 7px;
+  }
+
+  .header-actions {
+    gap: 2px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+
+<header>
+  <div class="header-inner">
+    <button
+      class="menu-button"
+      id="menu-open"
+      type="button"
+      aria-label="メニューを開く"
+      aria-controls="site-menu"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="header-title">
+      <h1>伝承王</h1>
+      <div class="subtitle">Legend of GARDENER</div>
+    </div>
+
+    <div class="header-actions">
+      <a class="header-home" href="/" aria-label="HOME">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <span>HOME</span>
+      </a>
+
+      <a
+        class="header-x"
+        href="https://x.com/rxr_legendary"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="伝承王の運営アカウントをXで開く"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menu-overlay"></div>
+
+<nav
+  class="site-menu"
+  id="site-menu"
+  aria-label="サイトメニュー"
+  aria-hidden="true"
+>
+  <div class="site-menu-header">
+    <span>MENU</span>
+    <button id="menu-close" type="button" aria-label="メニューを閉じる">×</button>
+  </div>
+
+  <a href="/">HOME</a>
+  <a href="/beta/">開催中の大会</a>
+  <a href="/archive/">過去開催の大会</a>
+  <a href="/#information">お問い合わせ</a>
+</nav>
+
+
+<main class="wrap">
+  <section class="card">
+    <div class="beta-logo">
+  <img src="/beta-logo.png" alt="伝承王β">
+</div>
+    
+<div class="results-heading">
+  <h2>集計結果</h2>
+  <p class="results-period-label">開催期間</p>
+  <p class="results-period">
+    2026年10月11日(日) ～ 2026年10月25日(日)
+  </p>
+</div>
+
+
+    <!-- 第1層：大会日程 -->
+    <div class="stage-frame">
+      <div class="tabs stage-tabs" id="stageTabs" aria-label="大会日程選択">
+        <button class="tab" data-stage="prelim">予選</button>
+        <button class="tab active" data-stage="main">本選</button>
+      </div>
+
+      <div id="mainRanking">
+        <!-- 第2層：ブロック -->
+        <div class="block-frame">
+          <div class="tabs" id="blockTabs" aria-label="ブロック選択">
+            <button class="tab active" data-block="A">Aブロック</button>
+            <button class="tab" data-block="B">Bブロック</button>
+            <button class="tab" data-block="C">Cブロック</button>
+            <button class="tab" data-block="D">Dブロック</button>
+          </div>
+
+          <!-- 第3層：階層＋ランキング -->
+          <div class="category-frame">
+            <div class="tabs" id="categoryTabs" aria-label="階層選択">
+              <button class="tab active" data-category="total">総合</button>
+              <button class="tab" data-category="reverse">リバースバベル</button>
+              <button class="tab" data-category="another">アナザーバベル</button>
+              <button class="tab" data-category="rebuild">バベルリビルド</button>
+            </div>
+
+            <div class="ranking-panel">
+              <div class="table-wrap">
+                <table>
+                  <colgroup>
+                    <col class="rank-col">
+                    <col class="id-col">
+                    <col class="time-col">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>順位</th>
+                      <th>固有番号</th>
+                      <th>残りタイム</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rankingBody">
+                    <tr>
+                      <td colspan="3" class="empty">
+                        ランキングデータを読み込み中…
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div id="updated">データ更新時刻：確認中</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>伝承王β · 非公式大会</footer>
+
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbw1z7lljuIWST1ibBa0NZzH4__VTNh1PAhaRkS2lWKuu4iKezHOz66RH4UzVZJqNCE5Tw/exec";
+
+let rankingData = null;
+let currentStage = "main";
+let currentBlock = "A";
+let currentCategory = "total";
+
+const categoryNames = {
+  total: "総合",
+  reverse: "リバースバベル",
+  another: "アナザーバベル",
+  rebuild: "バベルリビルド"
+};
+
+let isLoading = false;
+let requestId = 0;
+
+function loadRanking() {
+  if (isLoading) return;
+
+  isLoading = true;
+  const thisRequest = ++requestId;
+
+  const script = document.createElement("script");
+  const callbackName = "receiveRankingData";
+
+  let finished = false;
+
+  const timeoutId = setTimeout(() => {
+    finishWithError();
+  }, 20000);
+
+  function cleanup() {
+    if (finished) return;
+    finished = true;
+    clearTimeout(timeoutId);
+    delete window[callbackName];
+    script.remove();
+    isLoading = false;
+  }
+
+  function finishWithError() {
+    if (finished) return;
+    cleanup();
+
+    if (currentStage === "prelim") return;
+
+    if (rankingData) {
+      document.getElementById("updated").textContent =
+        "更新に失敗しました。前回のデータを表示中です。";
+    } else {
+      document.getElementById("rankingBody").innerHTML =
+        '<tr><td colspan="3" class="empty">データの取得に失敗しました。ページを再読み込みしてください。</td></tr>';
+      document.getElementById("updated").textContent = "";
+    }
+  }
+
+  window[callbackName] = function(data) {
+    if (finished || thisRequest !== requestId) return;
+
+    if (!data || !data.blocks || data.error) {
+      finishWithError();
+      return;
+    }
+
+    rankingData = data;
+    cleanup();
+    renderRanking();
+  };
+
+  script.onerror = finishWithError;
+
+  script.src = API_URL + "?callback=" + callbackName +
+    "&_=" + Date.now();
+
+  document.head.appendChild(script);
+}
+
+function renderRanking() {
+  document.querySelectorAll("[data-stage]").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.stage === currentStage
+    );
+  });
+
+  const mainRanking = document.getElementById("mainRanking");
+  const tbody = document.getElementById("rankingBody");
+  const updated = document.getElementById("updated");
+
+  /* 予選は準備中の表示 */
+  if (currentStage === "prelim") {
+    mainRanking.hidden = true;
+    tbody.innerHTML =
+      '<tr><td colspan="3" class="empty">予選ランキングは準備中です。</td></tr>';
+    updated.textContent = "";
+    return;
+  }
+
+  mainRanking.hidden = false;
+
+  if (!rankingData || !rankingData.blocks) return;
+
+  const available = rankingData.blocks[currentBlock];
+  if (!available) return;
+
+  if (!Object.prototype.hasOwnProperty.call(available, currentCategory)) {
+    currentCategory = "total";
+  }
+
+  /* ブロックタブの状態 */
+  document.querySelectorAll("[data-block]").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.block === currentBlock
+    );
+  });
+
+  /* 階層タブの状態 */
+  document.querySelectorAll("[data-category]").forEach(button => {
+    const category = button.dataset.category;
+    const supported = Object.prototype.hasOwnProperty.call(
+      available,
+      category
+    );
+
+    button.hidden = !supported;
+    button.classList.toggle(
+      "active",
+      category === currentCategory
+    );
+  });
+
+  const entries = available[currentCategory] || [];
+
+  /* ランキングを描画 */
+  if (entries.length === 0) {
+    tbody.innerHTML =
+      '<tr><td colspan="3" class="empty">現在、記録はありません。</td></tr>';
+  } else {
+    let previousTime = null;
+    let previousRank = 0;
+
+    tbody.innerHTML = entries.map((entry, index) => {
+      const time = Number(entry.time);
+      const roundedTime = Math.round(time * 100) / 100;
+
+      /* 同タイムは同順位 */
+      const rank = index > 0 && roundedTime === previousTime
+        ? previousRank
+        : index + 1;
+
+      previousTime = roundedTime;
+      previousRank = rank;
+
+      /* 1～3位に順位別のクラスを付与 */
+      const rankClass = rank <= 3 ? ` rank-${rank}` : "";
+
+      return `<tr class="${rankClass.trim()}">
+        <td>${rank}位</td>
+        <td>${escapeHTML(String(entry.id))}</td>
+        <td>${time.toFixed(2)}秒</td>
+      </tr>`;
+    }).join("");
+  }
+
+  /* 更新時刻 */
+  const date = new Date(rankingData.updatedAt);
+
+  updated.textContent =
+    "データ更新時刻：" +
+    (Number.isNaN(date.getTime())
+      ? "不明"
+      : date.toLocaleString("ja-JP", {
+          timeZone: "Asia/Tokyo"
+        }) + "（日本時間）");
+}
+
+function escapeHTML(value) {
+  return value.replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+/* 予選・本選の切り替え */
+document.getElementById("stageTabs").addEventListener("click", event => {
+  const button = event.target.closest("[data-stage]");
+  if (!button) return;
+
+  currentStage = button.dataset.stage;
+  renderRanking();
+});
+
+/* ブロックの切り替え */
+document.getElementById("blockTabs").addEventListener("click", event => {
+  const button = event.target.closest("[data-block]");
+  if (!button) return;
+
+  currentBlock = button.dataset.block;
+  renderRanking();
+});
+
+/* 階層の切り替え */
+document.getElementById("categoryTabs").addEventListener("click", event => {
+  const button = event.target.closest("[data-category]");
+  if (!button || button.hidden) return;
+
+  currentCategory = button.dataset.category;
+  renderRanking();
+});
+
+/* 初回読み込み・5分ごとの自動更新 */
+loadRanking();
+setInterval(loadRanking, 5 * 60 * 1000);
+</script>
+
+  
+<script>
+  const menuOpen = document.getElementById("menu-open");
+  const menuClose = document.getElementById("menu-close");
+  const menuOverlay = document.getElementById("menu-overlay");
+  const siteMenu = document.getElementById("site-menu");
+
+  function openMenu() {
+    document.body.classList.add("menu-open");
+    menuOpen.setAttribute("aria-expanded", "true");
+    siteMenu.setAttribute("aria-hidden", "false");
+  }
+
+  function closeMenu() {
+    document.body.classList.remove("menu-open");
+    menuOpen.setAttribute("aria-expanded", "false");
+    siteMenu.setAttribute("aria-hidden", "true");
+  }
+
+  menuOpen.addEventListener("click", openMenu);
+  menuClose.addEventListener("click", closeMenu);
+  menuOverlay.addEventListener("click", closeMenu);
+
+  siteMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeMenu();
+  });
+</script>
+
+</body>
+</html>
