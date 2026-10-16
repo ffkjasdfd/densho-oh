@@ -31,13 +31,10 @@ html {
 body {
   margin: 0;
   background-color: var(--bg);
-  background-image: url("/beta-background.png");
-  background-size: 100% auto;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   color: var(--text);
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  position: relative;
+  isolation: isolate;
 }
 
 /* ヘッダー */
@@ -595,6 +592,16 @@ footer {
   td {
     font-size: 12px;
   }
+}
+  body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("/beta-background.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 </style>
 </head>
