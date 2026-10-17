@@ -577,6 +577,36 @@ footer {
   .header-title .subtitle { font-size: 7px; }
   .header-actions { gap: 2px; }
 }
+
+  /* パンくず */
+.breadcrumb {
+  width: min(1000px,calc(100% - 32px));
+  margin: 14px auto 0;
+  color: #7b8390;
+  font-size: 12px;
+}
+
+.breadcrumb a {
+  color: #53647f;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  margin: 0 7px;
+  color: #a0a6b0;
+}
+
+@media (max-width:600px) {
+  .breadcrumb {
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    font-size: 11px;
+  }
+}
 </style>
 </head>
 
