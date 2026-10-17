@@ -1064,10 +1064,14 @@ function loadRanking() {
 
   script.onerror = finishWithError;
 
-  script.src = API_URL + "?callback=" + callbackName +
-    "&_=" + Date.now();
+  const cacheKey = Math.floor(Date.now() / (5 * 60 * 1000));
 
-  document.head.appendChild(script);
+script.src =
+  API_URL +
+  "?callback=" + callbackName +
+  "&v=" + cacheKey;
+
+document.head.appendChild(script);
 }
 
 function renderRanking() {
