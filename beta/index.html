@@ -3,277 +3,140 @@
 
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="/beta-logo.png">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff">
 
 <title>伝承王 -β-</title>
 
-   <title>伝承王 -β-</title>
+<link rel="icon" type="image/png" href="/beta-logo.png">
+<link rel="canonical" href="https://densho-oh.pages.dev/beta/">
 
-<!-- ========================================
-     OGP / X共有
-======================================== -->
+<meta name="description" content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト">
 
-<meta
-  name="description"
-  content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト"
->
-
+<!-- OGP -->
 <meta property="og:type" content="website">
+<meta property="og:title" content="伝承王 -β-">
+<meta property="og:description" content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト">
+<meta property="og:url" content="https://densho-oh.pages.dev/beta/">
+<meta property="og:site_name" content="伝承王">
+<meta property="og:image" content="https://densho-oh.pages.dev/beta/key-visual.png">
+<meta property="og:image:alt" content="伝承王β キービジュアル">
 
-<meta
-  property="og:title"
-  content="伝承王 -β-"
->
-
-<meta
-  property="og:description"
-  content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト"
->
-
-<meta
-  property="og:url"
-  content="https://densho-oh.pages.dev/beta/"
->
-
-<meta
-  property="og:image"
-  content="https://densho-oh.pages.dev/beta/key-visual.png"
->
-
-<meta
-  property="og:site_name"
-  content="伝承王"
->
-
+<!-- X -->
 <meta name="twitter:card" content="summary_large_image">
-
-<meta
-  name="twitter:title"
-  content="伝承王 -β-"
->
-
-<meta
-  name="twitter:description"
-  content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト"
->
-
-<meta
-  name="twitter:image"
-  content="https://densho-oh.pages.dev/beta/key-visual.png"
->
+<meta name="twitter:title" content="伝承王 -β-">
+<meta name="twitter:description" content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト">
+<meta name="twitter:image" content="https://densho-oh.pages.dev/beta/key-visual.png">
 
 <style>
-
-/* ========================================
-   基本設定
-======================================== */
-
 :root {
   color-scheme: light;
-
-  --bg: #ffffff;
-  --panel: #ffffff;
+  --bg: #fff;
+  --panel: #fff;
   --panel2: #f5f7fa;
-
   --line: #e5e7eb;
-
   --text: #252a34;
   --muted: #737b89;
-
   --accent: #315dc8;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scrollbar-gutter: stable;
-}
+html { scrollbar-gutter: stable; }
 
 body {
   margin: 0;
-
-  background-color: var(--bg);
-
+  background: var(--bg);
   color: var(--text);
-
-  font-family:
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    sans-serif;
-
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   position: relative;
   isolation: isolate;
 }
 
-
-/* ========================================
-   背景
-======================================== */
-
+/* 背景 */
 body::before {
   content: "";
-
   position: fixed;
   inset: 0;
-
   z-index: -1;
-
-  background-image: url("/beta-background.png");
-
-  /*
-    縦幅を画面に合わせ、
-    横方向は中央を基準にトリミング
-  */
-  background-size: auto 100vh;
-  background-position: center top;
-  background-repeat: no-repeat;
-
+  background: url("/beta-background.png") center top / auto 100vh no-repeat;
   pointer-events: none;
 }
 
-
-/* ========================================
-   ヘッダー
-======================================== */
-
+/* ヘッダー */
 body > header {
   height: 100px;
-
   padding: 0 32px;
-
   background: #fff;
-
   border-bottom: 1px solid var(--line);
-
-  color: var(--text);
 }
 
 .header-inner {
   width: min(1200px, 100%);
   height: 100%;
-
-  margin: 0 auto;
-
+  margin: auto;
   display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr)
-    auto
-    minmax(0, 1fr);
-
+  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
   align-items: center;
 }
 
-
-/* タイトル */
-
-.header-title {
-  text-align: center;
-}
+.header-title { text-align: center; }
 
 .header-title h1 {
   margin: 0;
-
-  font-family:
-    "Noto Serif JP",
-    "Yu Mincho",
-    "Hiragino Mincho ProN",
-    serif;
-
+  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
   font-size: 36px;
   font-weight: 700;
-
   letter-spacing: .12em;
-
   line-height: 1.3;
 }
 
 .header-title .subtitle {
   margin-top: 2px;
-
   color: #737b89;
-
   font-family: Georgia, serif;
-
   font-size: 11px;
-
   letter-spacing: .12em;
 }
 
-
-/* ========================================
-   ハンバーガーメニュー
-======================================== */
-
+/* ハンバーガー */
 .menu-button {
   justify-self: start;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   gap: 5px;
-
   width: 44px;
   height: 44px;
-
   padding: 10px;
-
   border: 0;
-
   background: transparent;
-
   cursor: pointer;
 }
 
 .menu-button span {
-  display: block;
-
   width: 22px;
   height: 2px;
-
   background: #222;
 }
 
-
-/* ========================================
-   HOME・X
-======================================== */
-
+/* HOME・X */
 .header-actions {
   justify-self: end;
-
   display: flex;
-
   align-items: center;
-
   gap: 12px;
 }
 
-
-/* HOME */
-
 .header-home {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
-
   gap: 1px;
-
   width: 44px;
-
   min-height: 44px;
-
   color: #111;
-
   text-decoration: none;
 }
 
@@ -284,619 +147,359 @@ body > header {
 
 .header-home span {
   font-size: 9px;
-
   line-height: 1.2;
 }
 
-
-/* X */
-
 .header-x {
   display: flex;
-
-  flex: none;
-
   align-items: center;
   justify-content: center;
-
   width: 42px;
   height: 42px;
-
   color: #171717;
-
   text-decoration: none;
-
   border-radius: 50%;
-
   transition: background .15s;
 }
 
-.header-x:hover {
-  background: #f1f3f5;
-}
+.header-x:hover { background: #f1f3f5; }
 
 .header-x svg {
-  display: block;
-
   width: 25px;
   height: 25px;
-
   fill: currentColor;
 }
 
-
-/* ========================================
-   サイドメニュー
-======================================== */
-
+/* サイドメニュー */
 .menu-overlay {
   position: fixed;
-
   inset: 0;
-
   z-index: 1000;
-
   background: rgb(0 0 0 / 35%);
-
   opacity: 0;
-
   visibility: hidden;
-
-  transition:
-    opacity .25s,
-    visibility .25s;
+  transition: opacity .25s, visibility .25s;
 }
 
 .site-menu {
   position: fixed;
-
-  top: 0;
-  bottom: 0;
-  left: 0;
-
+  inset: 0 auto 0 0;
   z-index: 1001;
-
-  width: min(320px, 85vw);
-
+  width: min(320px,85vw);
   padding: 24px;
-
   background: #fff;
-
-  box-shadow:
-    4px 0 20px rgb(0 0 0 / 8%);
-
+  box-shadow: 4px 0 20px rgb(0 0 0 / 8%);
   transform: translateX(-105%);
-
-  transition:
-    transform .25s ease,
-    visibility .25s;
-
   visibility: hidden;
+  transition: transform .25s ease, visibility .25s;
 }
 
 .site-menu-header {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
   margin-bottom: 24px;
-
   padding-bottom: 16px;
-
   border-bottom: 1px solid var(--line);
-
   font-family: Georgia, serif;
-
   letter-spacing: .15em;
 }
 
 .site-menu-header button {
   border: 0;
-
   background: transparent;
-
   color: #222;
-
   font-size: 30px;
-
   cursor: pointer;
 }
 
 .site-menu > a {
   display: block;
-
   padding: 15px 4px;
-
   border-bottom: 1px solid var(--line);
-
   color: var(--text);
-
   text-decoration: none;
-
   font-size: 14px;
 }
 
-.site-menu > a:hover {
-  background: #f7f9fc;
-}
+.site-menu > a:hover { background: #f7f9fc; }
 
-
-/* メニュー表示中 */
-
-body.menu-open {
-  overflow: hidden;
-}
+body.menu-open { overflow: hidden; }
 
 body.menu-open .menu-overlay {
   opacity: 1;
-
   visibility: visible;
 }
 
 body.menu-open .site-menu {
   transform: translateX(0);
-
   visibility: visible;
 }
 
-
-/* ========================================
-   ページ全体
-======================================== */
-
+/* ページ */
 .wrap {
-  width: min(
-    1000px,
-    calc(100% - 32px)
-  );
-
-  margin: 0 auto;
+  width: min(1000px,calc(100% - 32px));
+  margin: auto;
 }
 
-main {
-  padding: 30px 0 56px;
-}
+main { padding: 30px 0 56px; }
 
 .card {
   min-width: 0;
-
   padding: 24px;
-
   background: var(--panel);
-
   border: 1px solid var(--line);
-
   border-radius: 12px;
 }
 
-
-/* ========================================
-   βロゴ
-======================================== */
-
+/* βロゴ */
 .beta-logo {
   display: flex;
-
   justify-content: center;
   align-items: center;
-
   width: 100%;
-
   margin: 0 auto 26px;
-
-  padding: 12px 0 0;
+  padding-top: 12px;
 }
 
 .beta-logo img {
   display: block;
-
-  width: min(520px, 85%);
-
+  width: min(520px,85%);
   height: auto;
-
   max-height: 220px;
-
   object-fit: contain;
 }
 
-
-/* ========================================
-   ロゴ下の区切り線
-======================================== */
-
 .section-divider {
   border: 0;
-
-  border-top:
-    1px solid #d8dce5;
-
+  border-top: 1px solid #d8dce5;
   margin: 0 0 28px;
 }
 
-
-/* ========================================
-   開催期間
-======================================== */
-
+/* 開催期間 */
 .event-header {
-  padding: 0 0 20px;
-
+  padding-bottom: 20px;
   text-align: center;
 }
 
 .period-label {
   margin: 0 0 6px;
-
   color: #65708a;
-
-  font-family:
-    "Noto Serif JP",
-    "Yu Mincho",
-    "Hiragino Mincho ProN",
-    serif;
-
+  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
   font-size: 25px;
-   font-weight: 500;
-
+  font-weight: 500;
   letter-spacing: .1em;
 }
 
 .period {
   margin: 0;
-
   font-size: 19px;
-
   font-weight: 500;
 }
 
-
-/* ========================================
-   各コンテンツ
-======================================== */
-
-.content-section {
-  margin-top: 36px;
-}
-
-
-/* 見出し */
+/* 共通セクション */
+.content-section { margin-top: 36px; }
 
 .content-section h2 {
   margin: 0 0 16px;
-
   padding-bottom: 10px;
-
-  border-bottom:
-    2px solid var(--accent);
-
+  border-bottom: 2px solid var(--accent);
   color: #263b70;
-
-  font-family:
-    "Noto Serif JP",
-    "Yu Mincho",
-    "Hiragino Mincho ProN",
-    serif;
-
+  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
   font-size: 21px;
-
   font-weight: 600;
-
   letter-spacing: .08em;
 }
 
-
-/* ========================================
-   キービジュアル
-======================================== */
-
+/* キービジュアル */
 .key-visual {
   overflow: hidden;
-
   border-radius: 10px;
 }
 
 .key-visual img {
   display: block;
-
   width: 100%;
   height: auto;
 }
 
-
-/* ========================================
-   大会PV
-======================================== */
-
+/* PV */
 .pv {
   overflow: hidden;
-
   border-radius: 10px;
-
   background: #000;
 }
 
 .pv video {
   display: block;
-
   width: 100%;
   height: auto;
-
   max-height: 80vh;
-
   background: #000;
 }
 
+/* 画像・PV下 */
+.media-text {
+  margin-top: 12px;
+  color: #65708a;
+  font-size: 13px;
+  line-height: 1.8;
+}
 
-/* ========================================
-   日程
-======================================== */
+.media-text a {
+  color: #315dc8;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 
+.media-text a:hover { text-decoration-thickness: 2px; }
+
+/* 日程 */
 .schedule {
   padding: 18px 20px;
-
   border: 1px solid #d8dfef;
-
   border-radius: 8px;
-
   background: #f2f5fb;
-
   font-size: 14px;
-
   line-height: 2;
 }
 
-
-/* ========================================
-   報酬一覧
-======================================== */
-
+/* 報酬 */
 .reward-box {
   padding: 22px;
-
   border: 1px solid #d8dfef;
-
   border-radius: 10px;
-
   background: #f7f9fd;
 }
 
 .reward-group + .reward-group {
   margin-top: 24px;
-
   padding-top: 24px;
-
   border-top: 1px solid #d8dfef;
 }
 
 .reward-title {
   margin-bottom: 8px;
-
   color: #263b70;
-
+  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
   font-size: 20px;
-   font-family:
-    "Noto Serif JP",
-    "Yu Mincho",
-    "Hiragino Mincho ProN",
-    serif;
-
   font-weight: 700;
 }
 
 .reward-text {
   color: var(--text);
-
   font-size: 14px;
-
   line-height: 1.8;
 }
 
-
-/* ========================================
-   集計結果・受賞者
-======================================== */
-
+/* 大会情報 */
 .page-links {
   display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
+  grid-template-columns: repeat(2,minmax(0,1fr));
   gap: 16px;
 }
 
 .page-link {
   position: relative;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 8px;
-
   min-width: 0;
-
-  padding:
-    22px 38px
-    22px 18px;
-
-  border:
-    1px solid #d8dfef;
-
+  padding: 22px 38px 22px 18px;
+  border: 1px solid #d8dfef;
   border-radius: 10px;
-
   background: #fff;
-
   color: inherit;
-
   text-decoration: none;
-
-  transition:
-    border-color .2s,
-    transform .2s;
+  transition: border-color .2s, transform .2s;
 }
 
 .page-link:hover {
-  border-color:
-    var(--accent);
-
-  transform:
-    translateY(-2px);
+  border-color: var(--accent);
+  transform: translateY(-2px);
 }
-
-
-/* リンク見出し */
 
 .page-link-title {
   color: #263b70;
-
-  font-family:
-    "Noto Serif JP",
-    "Yu Mincho",
-    "Hiragino Mincho ProN",
-    serif;
-
+  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
   font-size: 20px;
-
   font-weight: 700;
 }
 
 .page-link-description {
   padding-right: 12px;
-
   color: #65708a;
-
   font-size: 13px;
 }
 
 .page-link-arrow {
   position: absolute;
-
   right: 16px;
   bottom: 14px;
-
   color: var(--accent);
-
   font-size: 22px;
 }
 
-
-/* ========================================
-   クレジット
-======================================== */
-
+/* クレジット */
 .credits {
   padding-bottom: 12px;
-
   text-align: center;
 }
 
-.credit-group {
-  margin-top: 22px;
-}
+.credit-group { margin-top: 22px; }
 
 .credit-group h3 {
   margin: 0 0 8px;
-
   color: #65708a;
-
-  font-family:
-    "Noto Serif JP",
-    "Yu Mincho",
-    "Hiragino Mincho ProN",
-    serif;
-
+  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
   font-size: 18px;
-
   font-weight: 800;
-
   letter-spacing: .06em;
 }
 
 .credit-group p {
   margin: 0;
-
+  font-size: 16px;
   font-weight: 500;
-
   line-height: 1.8;
-
-   font-size: 16px;
 }
 
-
-/* ========================================
-   フッター
-======================================== */
-
+/* フッター */
 footer {
   padding: 22px 16px;
-
-  border-top:
-    1px solid var(--line);
-
+  border-top: 1px solid var(--line);
   background: #fff;
-
   color: #858b96;
-
   font-size: 11px;
-
   text-align: center;
 }
 
-
-/* ========================================
-   スマートフォン
-======================================== */
-
-@media (max-width: 600px) {
-
+/* スマホ */
+@media (max-width:600px) {
   body > header {
     height: 78px;
-
     padding: 0 14px;
   }
 
-
-  /* ヘッダー */
-
   .header-inner {
-    grid-template-columns:
-      36px
-      minmax(0, 1fr)
-      auto;
+    grid-template-columns: 36px minmax(0,1fr) auto;
   }
 
-  .header-title h1 {
-    font-size: 25px;
-  }
+  .header-title h1 { font-size: 25px; }
 
   .header-title .subtitle {
     font-size: 8px;
-
     letter-spacing: .04em;
   }
-
-
-  /* メニュー */
 
   .menu-button {
     width: 36px;
     height: 36px;
-
     padding: 7px;
   }
 
-
-  /* HOME・X */
-
-  .header-actions {
-    gap: 5px;
-  }
-
-  .header-home {
-    width: 36px;
-  }
+  .header-actions { gap: 5px; }
+  .header-home { width: 36px; }
 
   .header-home svg {
     width: 19px;
@@ -913,196 +516,74 @@ footer {
     height: 20px;
   }
 
-
-  /* メイン */
-
-  .wrap {
-    width:
-      calc(100% - 20px);
-  }
-
-  main {
-    padding:
-      18px 0 38px;
-  }
+  .wrap { width: calc(100% - 20px); }
+  main { padding: 18px 0 38px; }
 
   .card {
-    padding:
-      16px 10px;
-
+    padding: 16px 10px;
     border-radius: 10px;
   }
 
-
-  /* ロゴ */
-
   .beta-logo {
     margin-bottom: 22px;
-
     padding-top: 6px;
   }
 
   .beta-logo img {
     width: 90%;
-
     max-height: 160px;
   }
 
-
-  /* 区切り */
-
-  .section-divider {
-    margin-bottom: 24px;
-  }
-
-
-  /* 開催期間 */
-
-  .period {
-    font-size: 14px;
-  }
-
-
-  /* 各セクション */
-
-  .content-section {
-    margin-top: 30px;
-  }
-
-  .content-section h2 {
-    font-size: 19px;
-  }
-
-
-  /* 日程 */
+  .section-divider { margin-bottom: 24px; }
+  .period { font-size: 14px; }
+  .content-section { margin-top: 30px; }
+  .content-section h2 { font-size: 19px; }
 
   .schedule {
     padding: 15px;
-
     font-size: 13px;
-
     line-height: 1.9;
   }
 
-
-  /* 報酬 */
-
-  .reward-box {
-    padding: 16px;
-  }
-
-  .reward-title {
-    font-size: 16px;
-  }
-
-  .reward-text {
-    font-size: 13px;
-  }
-
-
-  /* 集計結果・受賞者 */
+  .reward-box { padding: 16px; }
+  .reward-title { font-size: 16px; }
+  .reward-text { font-size: 13px; }
 
   .page-links {
-    /*
-      スマホでも2分割
-    */
-
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-
+    grid-template-columns: repeat(2,minmax(0,1fr));
     gap: 8px;
   }
 
-  .page-link {
-    padding:
-      16px 12px 34px;
-  }
-
-  .page-link-title {
-    font-size: 17px;
-  }
+  .page-link { padding: 16px 12px 34px; }
+  .page-link-title { font-size: 17px; }
 
   .page-link-description {
     padding-right: 0;
-
     font-size: 11px;
   }
 
   .page-link-arrow {
     right: 12px;
-
     bottom: 8px;
   }
 }
 
-
-/* ========================================
-   小型スマートフォン
-======================================== */
-
-@media (max-width: 360px) {
-
+@media (max-width:360px) {
   .header-inner {
-    grid-template-columns:
-      30px
-      minmax(0, 1fr)
-      auto;
+    grid-template-columns: 30px minmax(0,1fr) auto;
   }
 
-  .header-title h1 {
-    font-size: 21px;
-  }
-
-  .header-title .subtitle {
-    font-size: 7px;
-  }
-
-  .header-actions {
-    gap: 2px;
-  }
+  .header-title h1 { font-size: 21px; }
+  .header-title .subtitle { font-size: 7px; }
+  .header-actions { gap: 2px; }
 }
-   /* ========================================
-   画像・PV下のテキスト
-======================================== */
-
-.media-text {
-  margin-top: 12px;
-
-  color: #65708a;
-
-  font-size: 13px;
-
-  line-height: 1.8;
-}
-
-.media-text a {
-  color: #315dc8;
-
-  text-decoration: underline;
-
-  text-underline-offset: 3px;
-}
-
-.media-text a:hover {
-  text-decoration-thickness: 2px;
-}
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- ========================================
-     ヘッダー
-======================================== -->
-
 <header>
-
   <div class="header-inner">
-
-    <!-- メニュー -->
 
     <button
       class="menu-button"
@@ -1117,34 +598,15 @@ footer {
       <span></span>
     </button>
 
-
-    <!-- タイトル -->
-
     <div class="header-title">
-
       <h1>伝承王</h1>
-
-      <div class="subtitle">
-        Legend of GARDENER
-      </div>
-
+      <div class="subtitle">Legend of GARDENER</div>
     </div>
-
-
-    <!-- HOME・X -->
 
     <div class="header-actions">
 
-      <a
-        class="header-home"
-        href="/"
-        aria-label="HOME"
-      >
-
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
+      <a class="header-home" href="/" aria-label="HOME">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
           <path
             d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"
             fill="none"
@@ -1153,11 +615,8 @@ footer {
             stroke-linejoin="round"
           />
         </svg>
-
         <span>HOME</span>
-
       </a>
-
 
       <a
         class="header-x"
@@ -1166,34 +625,16 @@ footer {
         rel="noopener noreferrer"
         aria-label="伝承王の運営アカウントをXで開く"
       >
-
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"
-          />
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"/>
         </svg>
-
       </a>
 
     </div>
-
   </div>
-
 </header>
 
-
-<!-- ========================================
-     サイドメニュー
-======================================== -->
-
-<div
-  class="menu-overlay"
-  id="menu-overlay"
-></div>
-
+<div class="menu-overlay" id="menu-overlay"></div>
 
 <nav
   class="site-menu"
@@ -1201,564 +642,231 @@ footer {
   aria-label="サイトメニュー"
   aria-hidden="true"
 >
-
   <div class="site-menu-header">
-
     <span>MENU</span>
-
-    <button
-      id="menu-close"
-      type="button"
-      aria-label="メニューを閉じる"
-    >
-      ×
-    </button>
-
+    <button id="menu-close" type="button" aria-label="メニューを閉じる">×</button>
   </div>
 
-
-  <a href="/">
-    HOME
-  </a>
-
-  <a href="/beta/">
-    開催中の大会
-  </a>
-
-  <a href="/archive/">
-    過去開催の大会
-  </a>
-
-  <a href="/#information">
-    お問い合わせ
-  </a>
-
+  <a href="/">HOME</a>
+  <a href="/beta/">開催中の大会</a>
+  <a href="/archive/">過去開催の大会</a>
+  <a href="/#information">お問い合わせ</a>
 </nav>
 
-
-<!-- ========================================
-     メイン
-======================================== -->
-
 <main class="wrap">
+<section class="card">
 
-  <section class="card">
+  <div class="beta-logo">
+    <img src="/beta-logo.png" alt="伝承王β">
+  </div>
 
+  <hr class="section-divider">
 
-    <!-- ====================================
-         大会ロゴ
-    ===================================== -->
+  <div class="event-header">
+    <p class="period-label">開催期間</p>
+    <p class="period">2026年10月2日(金) ～ 2026年10月25日(日)</p>
+  </div>
 
-    <div class="beta-logo">
+  <!-- キービジュアル -->
+  <section class="content-section">
+    <h2>キービジュアル</h2>
 
-      <img
-        src="/beta-logo.png"
-        alt="伝承王β"
-      >
-
+    <div class="key-visual">
+      <img src="/beta/key-visual.png" alt="伝承王β キービジュアル">
     </div>
 
-
-    <hr class="section-divider">
-
-
-    <!-- ====================================
-         開催期間
-    ===================================== -->
-
-    <div class="event-header">
-
-      <p class="period-label">
-        開催期間
-      </p>
-
-      <p class="period">
-        2026年10月2日(金) ～ 2026年10月25日(日)
-      </p>
-
-    </div>
-
-
-    <!-- ====================================
-         キービジュアル
-    ===================================== -->
-
-    <!-- ====================================
-     キービジュアル
-===================================== -->
-
-<section class="content-section">
-
-  <h2>
-    キービジュアル
-  </h2>
-
-  <div class="key-visual">
-
-    <img
-      src="/beta/key-visual.png"
-      alt="伝承王β キービジュアル"
-    >
-
-  </div>
-
-  <div class="media-text">
-    Illustration：
-    <a
-      href="https://x.com/hituki_ruon?s=21"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      // key visual by 日月🦋 ( @hituki_ruon ) 様
-    </a>
-  </div>
-
-</section>
-
-
-    <!-- ====================================
-         PV
-    ===================================== -->
-
-   <section class="content-section">
-
-  <h2>
-    PV
-  </h2>
-
-  <div class="pv">
-
-    <video
-      controls
-      playsinline
-      preload="metadata"
-    >
-      <source
-        src="/beta/pv.mp4"
-        type="video/mp4"
+    <div class="media-text">
+      Illustration：
+      <a
+        href="https://x.com/hituki_ruon?s=21"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-
-      お使いのブラウザでは動画を再生できません。
-    </video>
-
-  </div>
-
-  <div class="media-text">
-    Movie：
-    <a
-      href="https://x.com/akitogamesx?s=21"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      // PV by AkitoGames ( @AkitoGamesX ) 様
-    </a>
-  </div>
-
-</section>
-
-
-    <!-- ====================================
-         日程
-    ===================================== -->
-
-    <section class="content-section">
-
-      <h2>
-        日程
-      </h2>
-
-      <div class="schedule">
-
-        告知：9月19日(土)13:13<br>
-        応募：9月19日(土)13:13 ～ 9月26日(土)23:59<br>
-        予選：10月2日(金)4:00 ～ 10月8日(木)3:59<br>
-        本選：10月11日(日)4:00 ～ 10月25日(日)3:59<br>
-        結果発表：10月27日(金)13:13
-
-      </div>
-
-    </section>
-
-
-    <!-- ====================================
-         報酬一覧
-    ===================================== -->
-
-    <section class="content-section">
-
-      <h2>
-        報酬一覧
-      </h2>
-
-
-      <div class="reward-box">
-
-
-        <!-- Aブロック -->
-
-        <div class="reward-group">
-
-          <div class="reward-title">
-            Aブロック
-          </div>
-
-          <div class="reward-text">
-            １位：イラスト，Xヘッダー，Xアイコン<br>
-             ２位：イラスト，Xヘッダー，Xアイコン<br>
-             ３位：イラスト，Xヘッダー，Xアイコン
-          </div>
-
-        </div>
-
-
-        <!-- Bブロック -->
-
-        <div class="reward-group">
-
-          <div class="reward-title">
-            Bブロック
-          </div>
-
-          <div class="reward-text">
-            １位：Xヘッダー，Xアイコン
-          </div>
-
-        </div>
-
-
-        <!-- Cブロック -->
-
-        <div class="reward-group">
-
-          <div class="reward-title">
-            Cブロック
-          </div>
-
-          <div class="reward-text">
-            １位：Xヘッダー，Xアイコン
-          </div>
-
-        </div>
-
-
-        <!-- Dブロック -->
-
-        <div class="reward-group">
-
-          <div class="reward-title">
-            Dブロック
-          </div>
-
-          <div class="reward-text">
-            １位：Xヘッダー，Xアイコン
-          </div>
-
-        </div>
-
-         <div class="reward-group">
-
-          <div class="reward-title">
-            RPキャンペーン
-          </div>
-            <div class="reward-text">
-            イラスト
-          </div>
-
-         </div>
-
-            
-
-            <div class="reward-group">
-
-          <div class="reward-title">
-            ユニーク編成賞
-          </div>
-
-         <div class="reward-text">
-            イラスト
-          </div>
-
-         </div>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- ====================================
-         大会情報
-    ===================================== -->
-
-    <section class="content-section">
-
-      <h2>
-        大会情報
-      </h2>
-
-
-      <div class="page-links">
-
-
-        <!-- 集計結果 -->
-
-        <a
-          class="page-link"
-          href="/beta/result/"
-        >
-
-          <span class="page-link-title">
-            集計結果
-          </span>
-
-          <span class="page-link-description">
-            大会のランキング・記録を見る
-          </span>
-
-          <span
-            class="page-link-arrow"
-            aria-hidden="true"
-          >
-            →
-          </span>
-
-        </a>
-
-
-        <!-- 受賞者 -->
-
-        <a
-          class="page-link"
-          <!--href="/beta/awardees/"-->
-     <!--   >        -->
-
-          <span class="page-link-title">
-            受賞者
-          </span>
-
-          <span class="page-link-description">
-            入賞者・受賞結果を見る
-          </span>
-
-          <span
-            class="page-link-arrow"
-            aria-hidden="true"
-          >
-            →
-          </span>
-
-        </a>
-
-
-      </div>
-
-    </section>
-
-
-    <!-- ====================================
-         Credits
-    ===================================== -->
-
-    <section class="content-section credits">
-
-      <h2>
-        Credits
-      </h2>
-
-
-      <!-- 主催 -->
-
-      <div class="credit-group">
-
-        <h3>
-          主催
-        </h3>
-
-        <p>
-          リバ×リバ攻略wiki管理人<br>
-          まんじゅう
-        </p>
-
-      </div>
-
-
-      <!-- アドバイザー -->
-
-      <div class="credit-group">
-
-        <h3>
-          アドバイザー
-        </h3>
-
-        <p>
-          AkitoGames<br>
-          あうろら<br>
-          星空ぁっとにゃんにゃん<br>
-          bake2-バケツ<br>
-          がかみもぢ<br>
-          けいにし<br>
-          こるん<br>
-          ネフェルトリBB<br>
-          ユント<br>
-          錬_FORTRESS<br>
-          黒葉
-        </p>
-
-      </div>
-
-
-      <!-- イラストレーター -->
-
-      <div class="credit-group">
-
-        <h3>
-          イラストレーター
-        </h3>
-
-        <p>
-          掲載予定
-        </p>
-
-      </div>
-
-
-      <!-- Special Thanks -->
-
-      <div class="credit-group">
-
-        <h3>
-          Special Thanks
-        </h3>
-
-        <p>
-          ねこたろう＠アイコン化の人<br>
-          ﾙ<br>
-          あまとう<br>
-          おぱん
-        </p>
-
-      </div>
-
-
-    </section>
-
-
+        // key visual by 日月🦋 ( @hituki_ruon ) 様
+      </a>
+    </div>
   </section>
 
+  <!-- PV -->
+  <section class="content-section">
+    <h2>PV</h2>
+
+    <div class="pv">
+      <video controls playsinline preload="metadata">
+        <source src="/beta/pv.mp4" type="video/mp4">
+        お使いのブラウザでは動画を再生できません。
+      </video>
+    </div>
+
+    <div class="media-text">
+      Movie：
+      <a
+        href="https://x.com/akitogamesx?s=21"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        // PV by AkitoGames ( @AkitoGamesX ) 様
+      </a>
+    </div>
+  </section>
+
+  <!-- 日程 -->
+  <section class="content-section">
+    <h2>日程</h2>
+
+    <div class="schedule">
+      告知：9月19日(土)13:13<br>
+      応募：9月19日(土)13:13 ～ 9月26日(土)23:59<br>
+      予選：10月2日(金)4:00 ～ 10月8日(木)3:59<br>
+      本選：10月11日(日)4:00 ～ 10月25日(日)3:59<br>
+      結果発表：10月27日(金)13:13
+    </div>
+  </section>
+
+  <!-- 報酬一覧 -->
+  <section class="content-section">
+    <h2>報酬一覧</h2>
+
+    <div class="reward-box">
+
+      <div class="reward-group">
+        <div class="reward-title">Aブロック</div>
+        <div class="reward-text">
+          １位：イラスト，Xヘッダー，Xアイコン<br>
+          ２位：イラスト，Xヘッダー，Xアイコン<br>
+          ３位：イラスト，Xヘッダー，Xアイコン
+        </div>
+      </div>
+
+      <div class="reward-group">
+        <div class="reward-title">Bブロック</div>
+        <div class="reward-text">１位：Xヘッダー，Xアイコン</div>
+      </div>
+
+      <div class="reward-group">
+        <div class="reward-title">Cブロック</div>
+        <div class="reward-text">１位：Xヘッダー，Xアイコン</div>
+      </div>
+
+      <div class="reward-group">
+        <div class="reward-title">Dブロック</div>
+        <div class="reward-text">１位：Xヘッダー，Xアイコン</div>
+      </div>
+
+      <div class="reward-group">
+        <div class="reward-title">RPキャンペーン</div>
+        <div class="reward-text">イラスト</div>
+      </div>
+
+      <div class="reward-group">
+        <div class="reward-title">ユニーク編成賞</div>
+        <div class="reward-text">イラスト</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 大会情報 -->
+  <section class="content-section">
+    <h2>大会情報</h2>
+
+    <div class="page-links">
+
+      <a class="page-link" href="/beta/result/">
+        <span class="page-link-title">集計結果</span>
+        <span class="page-link-description">大会のランキング・記録を見る</span>
+        <span class="page-link-arrow" aria-hidden="true">→</span>
+      </a>
+
+      <div class="page-link">
+        <span class="page-link-title">受賞者</span>
+        <span class="page-link-description">入賞者・受賞結果を見る</span>
+        <span class="page-link-arrow" aria-hidden="true">→</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Credits -->
+  <section class="content-section credits">
+    <h2>Credits</h2>
+
+    <div class="credit-group">
+      <h3>主催</h3>
+      <p>
+        リバ×リバ攻略wiki管理人<br>
+        まんじゅう
+      </p>
+    </div>
+
+    <div class="credit-group">
+      <h3>アドバイザー</h3>
+      <p>
+        AkitoGames<br>
+        あうろら<br>
+        星空ぁっとにゃんにゃん<br>
+        bake2-バケツ<br>
+        がかみもぢ<br>
+        けいにし<br>
+        こるん<br>
+        ネフェルトリBB<br>
+        ユント<br>
+        錬_FORTRESS<br>
+        黒葉
+      </p>
+    </div>
+
+    <div class="credit-group">
+      <h3>イラストレーター</h3>
+      <p>掲載予定</p>
+    </div>
+
+    <div class="credit-group">
+      <h3>Special Thanks</h3>
+      <p>
+        ねこたろう＠アイコン化の人<br>
+        ﾙ<br>
+        あまとう<br>
+        おぱん
+      </p>
+    </div>
+  </section>
+
+</section>
 </main>
 
-
-<!-- ========================================
-     フッター
-======================================== -->
-
-<footer>
-  伝承王
-</footer>
-
-
-<!-- ========================================
-     メニュー処理
-======================================== -->
+<footer>伝承王</footer>
 
 <script>
-
-const menuOpen =
-  document.getElementById("menu-open");
-
-const menuClose =
-  document.getElementById("menu-close");
-
-const menuOverlay =
-  document.getElementById("menu-overlay");
-
-const siteMenu =
-  document.getElementById("site-menu");
-
+const menuOpen = document.getElementById("menu-open");
+const menuClose = document.getElementById("menu-close");
+const menuOverlay = document.getElementById("menu-overlay");
+const siteMenu = document.getElementById("site-menu");
 
 function openMenu() {
-
-  document.body.classList.add(
-    "menu-open"
-  );
-
-  menuOpen.setAttribute(
-    "aria-expanded",
-    "true"
-  );
-
-  siteMenu.setAttribute(
-    "aria-hidden",
-    "false"
-  );
-
+  document.body.classList.add("menu-open");
+  menuOpen.setAttribute("aria-expanded","true");
+  siteMenu.setAttribute("aria-hidden","false");
 }
-
 
 function closeMenu() {
-
-  document.body.classList.remove(
-    "menu-open"
-  );
-
-  menuOpen.setAttribute(
-    "aria-expanded",
-    "false"
-  );
-
-  siteMenu.setAttribute(
-    "aria-hidden",
-    "true"
-  );
-
+  document.body.classList.remove("menu-open");
+  menuOpen.setAttribute("aria-expanded","false");
+  siteMenu.setAttribute("aria-hidden","true");
 }
 
+menuOpen.addEventListener("click",openMenu);
+menuClose.addEventListener("click",closeMenu);
+menuOverlay.addEventListener("click",closeMenu);
 
-menuOpen.addEventListener(
-  "click",
-  openMenu
-);
+siteMenu.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click",closeMenu);
+});
 
-menuClose.addEventListener(
-  "click",
-  closeMenu
-);
-
-menuOverlay.addEventListener(
-  "click",
-  closeMenu
-);
-
-
-/* メニュー内リンクを押したら閉じる */
-
-siteMenu
-  .querySelectorAll("a")
-  .forEach(link => {
-
-    link.addEventListener(
-      "click",
-      closeMenu
-    );
-
-  });
-
-
-/* Escapeキーでも閉じる */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (event.key === "Escape") {
-      closeMenu();
-    }
-
-  }
-);
-
+document.addEventListener("keydown",e => {
+  if (e.key === "Escape") closeMenu();
+});
 </script>
-
 
 </body>
 </html>
