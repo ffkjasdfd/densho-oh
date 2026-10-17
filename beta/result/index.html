@@ -839,6 +839,35 @@ body.menu-open .site-menu {
   }
 }
 
+  /* パンくず */
+.breadcrumb {
+  width: min(1000px,calc(100% - 32px));
+  margin: 14px auto 0;
+  color: #7b8390;
+  font-size: 12px;
+}
+
+.breadcrumb a {
+  color: #53647f;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  margin: 0 7px;
+  color: #a0a6b0;
+}
+
+@media (max-width:600px) {
+  .breadcrumb {
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    font-size: 11px;
+  }
+}
 </style>
 </head>
 
@@ -913,7 +942,13 @@ body.menu-open .site-menu {
   <a href="/#information">お問い合わせ</a>
 </nav>
 
-
+<nav class="breadcrumb" aria-label="パンくずリスト">
+  <a href="/">HOME</a>
+  <span>›</span>
+  <a href="/beta/">伝承王β</a>
+  <span>›</span>
+  集計結果
+</nav>
 <main class="wrap">
   <section class="card">
     <div class="beta-logo">
