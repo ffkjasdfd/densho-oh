@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#fff">
 
 <title>伝承王 -β-</title>
+<meta name="description" content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト">
 
 <link rel="icon" type="image/png" href="/beta/logo.png">
 <link rel="canonical" href="https://densho-oh.pages.dev/beta/">
 
-<meta name="description" content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト">
-
-<!-- OGP -->
+<!-- OGP / X -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="伝承王 -β-">
 <meta property="og:description" content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト">
@@ -21,8 +19,6 @@
 <meta property="og:site_name" content="伝承王">
 <meta property="og:image" content="https://densho-oh.pages.dev/beta/key-visual.png">
 <meta property="og:image:alt" content="伝承王β キービジュアル">
-
-<!-- X -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="伝承王 -β-">
 <meta name="twitter:description" content="リバースブルー×リバースエンド 非公式大会「伝承王β」特設サイト">
@@ -30,582 +26,565 @@
 
 <style>
 :root {
-  color-scheme: light;
-  --bg: #fff;
-  --panel: #fff;
-  --panel2: #f5f7fa;
-  --line: #e5e7eb;
-  --text: #252a34;
-  --muted: #737b89;
-  --accent: #315dc8;
+  --bg:#fff;
+  --panel:#fff;
+  --line:#e5e7eb;
+  --text:#252a34;
+  --muted:#737b89;
+  --accent:#315dc8;
 }
 
-* { box-sizing: border-box; }
-
-html { scrollbar-gutter: stable; }
+* { box-sizing:border-box; }
+html { scrollbar-gutter:stable; }
 
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  position: relative;
-  isolation: isolate;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  position:relative;
+  isolation:isolate;
 }
 
-/* 背景 */
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: url("/beta/background.png") center top / auto 100vh no-repeat;
-  pointer-events: none;
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:url("/beta/background.png") center top / auto 100vh no-repeat;
+  pointer-events:none;
 }
 
 /* ヘッダー */
 body > header {
-  height: 100px;
-  padding: 0 32px;
-  background: #fff;
-  border-bottom: 1px solid var(--line);
+  height:100px;
+  padding:0 32px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
 }
 
 .header-inner {
-  width: min(1200px, 100%);
-  height: 100%;
-  margin: auto;
-  display: grid;
-  grid-template-columns: minmax(0,1fr) auto minmax(0,1fr);
-  align-items: center;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  width:min(1200px,100%);
+  height:100%;
+  margin:auto;
 }
 
-.header-title { text-align: center; }
+.header-title { text-align:center; }
 
 .header-title h1 {
-  margin: 0;
-  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  line-height: 1.3;
+  margin:0;
+  font-family:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:36px;
+  font-weight:700;
+  line-height:1.3;
+  letter-spacing:.12em;
 }
 
 .header-title .subtitle {
-  margin-top: 2px;
-  color: #737b89;
-  font-family: Georgia, serif;
-  font-size: 11px;
-  letter-spacing: .12em;
+  margin-top:2px;
+  color:var(--muted);
+  font-family:Georgia,serif;
+  font-size:11px;
+  letter-spacing:.12em;
 }
 
-/* ハンバーガー */
+/* メニューボタン */
 .menu-button {
-  justify-self: start;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  width: 44px;
-  height: 44px;
-  padding: 10px;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
+  justify-self:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:5px;
+  width:44px;
+  height:44px;
+  padding:10px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
 }
 
 .menu-button span {
-  width: 22px;
-  height: 2px;
-  background: #222;
+  width:22px;
+  height:2px;
+  background:#222;
 }
 
 /* HOME・X */
 .header-actions {
-  justify-self: end;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  justify-self:end;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.header-home,
+.header-x {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#111;
+  text-decoration:none;
 }
 
 .header-home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1px;
-  width: 44px;
-  min-height: 44px;
-  color: #111;
-  text-decoration: none;
+  flex-direction:column;
+  gap:1px;
+  width:44px;
+  min-height:44px;
 }
 
 .header-home svg {
-  width: 21px;
-  height: 21px;
+  width:21px;
+  height:21px;
 }
 
 .header-home span {
-  font-size: 9px;
-  line-height: 1.2;
+  font-size:9px;
+  line-height:1.2;
 }
 
 .header-x {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  color: #171717;
-  text-decoration: none;
-  border-radius: 50%;
-  transition: background .15s;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  transition:background .15s;
 }
 
-.header-x:hover { background: #f1f3f5; }
+.header-x:hover { background:#f1f3f5; }
 
 .header-x svg {
-  width: 25px;
-  height: 25px;
-  fill: currentColor;
+  width:25px;
+  height:25px;
+  fill:currentColor;
 }
 
 /* サイドメニュー */
 .menu-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgb(0 0 0 / 35%);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .25s, visibility .25s;
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  background:rgb(0 0 0 / 35%);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .25s,visibility .25s;
 }
 
 .site-menu {
-  position: fixed;
-  inset: 0 auto 0 0;
-  z-index: 1001;
-  width: min(320px,85vw);
-  padding: 24px;
-  background: #fff;
-  box-shadow: 4px 0 20px rgb(0 0 0 / 8%);
-  transform: translateX(-105%);
-  visibility: hidden;
-  transition: transform .25s ease, visibility .25s;
+  position:fixed;
+  inset:0 auto 0 0;
+  z-index:1001;
+  width:min(320px,85vw);
+  padding:24px;
+  background:#fff;
+  box-shadow:4px 0 20px rgb(0 0 0 / 8%);
+  transform:translateX(-105%);
+  visibility:hidden;
+  transition:transform .25s ease,visibility .25s;
 }
 
 .site-menu-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
-  font-family: Georgia, serif;
-  letter-spacing: .15em;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:24px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--line);
+  font-family:Georgia,serif;
+  letter-spacing:.15em;
 }
 
 .site-menu-header button {
-  border: 0;
-  background: transparent;
-  color: #222;
-  font-size: 30px;
-  cursor: pointer;
+  border:0;
+  background:transparent;
+  color:#222;
+  font-size:30px;
+  cursor:pointer;
 }
 
 .site-menu > a {
-  display: block;
-  padding: 15px 4px;
-  border-bottom: 1px solid var(--line);
-  color: var(--text);
-  text-decoration: none;
-  font-size: 14px;
+  display:block;
+  padding:15px 4px;
+  border-bottom:1px solid var(--line);
+  color:var(--text);
+  text-decoration:none;
+  font-size:14px;
 }
 
-.site-menu > a:hover { background: #f7f9fc; }
+.site-menu > a:hover { background:#f7f9fc; }
 
-body.menu-open { overflow: hidden; }
+body.menu-open { overflow:hidden; }
 
 body.menu-open .menu-overlay {
-  opacity: 1;
-  visibility: visible;
+  opacity:1;
+  visibility:visible;
 }
 
 body.menu-open .site-menu {
-  transform: translateX(0);
-  visibility: visible;
+  transform:translateX(0);
+  visibility:visible;
 }
 
 /* ページ */
 .wrap {
-  width: min(1000px,calc(100% - 32px));
-  margin: auto;
+  width:min(1000px,calc(100% - 32px));
+  margin:auto;
 }
 
-main { padding: 30px 0 56px; }
+main { padding:30px 0 56px; }
 
 .card {
-  min-width: 0;
-  padding: 24px;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 12px;
+  min-width:0;
+  padding:24px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+
+/* パンくず */
+.breadcrumb {
+  margin:0 0 14px;
+  color:#7b8390;
+  font-size:12px;
+}
+
+.breadcrumb a {
+  color:#53647f;
+  text-decoration:none;
+}
+
+.breadcrumb a:hover { text-decoration:underline; }
+
+.breadcrumb span {
+  margin:0 7px;
+  color:#a0a6b0;
 }
 
 /* βロゴ */
 .beta-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 0 auto 26px;
-  padding-top: 12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  margin:0 auto 26px;
+  padding-top:12px;
 }
 
 .beta-logo img {
-  display: block;
-  width: min(520px,85%);
-  height: auto;
-  max-height: 220px;
-  object-fit: contain;
+  display:block;
+  width:min(520px,85%);
+  height:auto;
+  max-height:220px;
+  object-fit:contain;
 }
 
 .section-divider {
-  border: 0;
-  border-top: 1px solid #d8dce5;
-  margin: 0 0 28px;
+  margin:0 0 28px;
+  border:0;
+  border-top:1px solid #d8dce5;
 }
 
 /* 開催期間 */
 .event-header {
-  padding-bottom: 20px;
-  text-align: center;
+  padding-bottom:20px;
+  text-align:center;
 }
 
 .period-label {
-  margin: 0 0 6px;
-  color: #65708a;
-  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size: 25px;
-  font-weight: 500;
-  letter-spacing: .1em;
+  margin:0 0 6px;
+  color:#65708a;
+  font-family:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:25px;
+  font-weight:500;
+  letter-spacing:.1em;
 }
 
 .period {
-  margin: 0;
-  font-size: 19px;
-  font-weight: 500;
+  margin:0;
+  font-size:19px;
+  font-weight:500;
 }
 
-/* 共通セクション */
-.content-section { margin-top: 36px; }
+/* セクション */
+.content-section { margin-top:36px; }
 
 .content-section h2 {
-  margin: 0 0 16px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--accent);
-  color: #263b70;
-  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size: 21px;
-  font-weight: 600;
-  letter-spacing: .08em;
+  margin:0 0 16px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--accent);
+  color:#263b70;
+  font-family:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:21px;
+  font-weight:600;
+  letter-spacing:.08em;
 }
 
-/* キービジュアル */
-.key-visual {
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-.key-visual img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* PV */
+/* キービジュアル・PV */
+.key-visual,
 .pv {
-  overflow: hidden;
-  border-radius: 10px;
-  background: #000;
+  overflow:hidden;
+  border-radius:10px;
 }
+
+.key-visual img,
+.pv video {
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.pv { background:#000; }
 
 .pv video {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 80vh;
-  background: #000;
+  max-height:80vh;
+  background:#000;
 }
 
-/* 画像・PV下 */
 .media-text {
-  margin-top: 12px;
-  color: #65708a;
-  font-size: 13px;
-  line-height: 1.8;
+  margin-top:12px;
+  color:#65708a;
+  font-size:13px;
+  line-height:1.8;
 }
 
 .media-text a {
-  color: #315dc8;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  color:var(--accent);
+  text-decoration:underline;
+  text-underline-offset:3px;
 }
 
-.media-text a:hover { text-decoration-thickness: 2px; }
+.media-text a:hover { text-decoration-thickness:2px; }
 
 /* 日程 */
 .schedule {
-  padding: 18px 20px;
-  border: 1px solid #d8dfef;
-  border-radius: 8px;
-  background: #f2f5fb;
-  font-size: 14px;
-  line-height: 2;
+  padding:18px 20px;
+  border:1px solid #d8dfef;
+  border-radius:8px;
+  background:#f2f5fb;
+  font-size:14px;
+  line-height:2;
 }
 
 /* 報酬 */
 .reward-box {
-  padding: 22px;
-  border: 1px solid #d8dfef;
-  border-radius: 10px;
-  background: #f7f9fd;
+  padding:22px;
+  border:1px solid #d8dfef;
+  border-radius:10px;
+  background:#f7f9fd;
 }
 
 .reward-group + .reward-group {
-  margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid #d8dfef;
+  margin-top:24px;
+  padding-top:24px;
+  border-top:1px solid #d8dfef;
 }
 
 .reward-title {
-  margin-bottom: 8px;
-  color: #263b70;
-  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size: 20px;
-  font-weight: 700;
+  margin-bottom:8px;
+  color:#263b70;
+  font-family:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:20px;
+  font-weight:700;
 }
 
 .reward-text {
-  color: var(--text);
-  font-size: 14px;
-  line-height: 1.8;
+  font-size:14px;
+  line-height:1.8;
 }
 
 /* 大会情報 */
 .page-links {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 16px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
 }
 
 .page-link {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-  padding: 22px 38px 22px 18px;
-  border: 1px solid #d8dfef;
-  border-radius: 10px;
-  background: #fff;
-  color: inherit;
-  text-decoration: none;
-  transition: border-color .2s, transform .2s;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  min-width:0;
+  padding:22px 38px 22px 18px;
+  border:1px solid #d8dfef;
+  border-radius:10px;
+  background:#fff;
+  color:inherit;
+  text-decoration:none;
+  transition:border-color .2s,transform .2s;
 }
 
 .page-link:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
+  border-color:var(--accent);
+  transform:translateY(-2px);
 }
 
 .page-link-title {
-  color: #263b70;
-  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size: 20px;
-  font-weight: 700;
+  color:#263b70;
+  font-family:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:20px;
+  font-weight:700;
 }
 
 .page-link-description {
-  padding-right: 12px;
-  color: #65708a;
-  font-size: 13px;
+  padding-right:12px;
+  color:#65708a;
+  font-size:13px;
 }
 
 .page-link-arrow {
-  position: absolute;
-  right: 16px;
-  bottom: 14px;
-  color: var(--accent);
-  font-size: 22px;
+  position:absolute;
+  right:16px;
+  bottom:14px;
+  color:var(--accent);
+  font-size:22px;
 }
 
-/* クレジット */
+/* Credits */
 .credits {
-  padding-bottom: 12px;
-  text-align: center;
+  padding-bottom:12px;
+  text-align:center;
 }
 
-.credit-group { margin-top: 22px; }
+.credit-group { margin-top:22px; }
 
 .credit-group h3 {
-  margin: 0 0 8px;
-  color: #65708a;
-  font-family: "Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: .06em;
+  margin:0 0 8px;
+  color:#65708a;
+  font-family:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:.06em;
 }
 
 .credit-group p {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.8;
+  margin:0;
+  font-size:16px;
+  font-weight:500;
+  line-height:1.8;
 }
 
 /* フッター */
 footer {
-  padding: 22px 16px;
-  border-top: 1px solid var(--line);
-  background: #fff;
-  color: #858b96;
-  font-size: 11px;
-  text-align: center;
+  padding:22px 16px;
+  border-top:1px solid var(--line);
+  background:#fff;
+  color:#858b96;
+  font-size:11px;
+  text-align:center;
 }
 
-/* スマホ */
+/* スマートフォン */
 @media (max-width:600px) {
   body > header {
-    height: 78px;
-    padding: 0 14px;
+    height:78px;
+    padding:0 14px;
   }
 
   .header-inner {
-    grid-template-columns: 36px minmax(0,1fr) auto;
+    grid-template-columns:36px minmax(0,1fr) auto;
   }
 
-  .header-title h1 { font-size: 25px; }
+  .header-title h1 { font-size:25px; }
 
   .header-title .subtitle {
-    font-size: 8px;
-    letter-spacing: .04em;
+    font-size:8px;
+    letter-spacing:.04em;
   }
 
   .menu-button {
-    width: 36px;
-    height: 36px;
-    padding: 7px;
+    width:36px;
+    height:36px;
+    padding:7px;
   }
 
-  .header-actions { gap: 5px; }
-  .header-home { width: 36px; }
+  .header-actions { gap:5px; }
+  .header-home { width:36px; }
 
   .header-home svg {
-    width: 19px;
-    height: 19px;
+    width:19px;
+    height:19px;
   }
 
   .header-x {
-    width: 32px;
-    height: 36px;
+    width:32px;
+    height:36px;
   }
 
   .header-x svg {
-    width: 20px;
-    height: 20px;
+    width:20px;
+    height:20px;
   }
 
-  .wrap { width: calc(100% - 20px); }
-  main { padding: 18px 0 38px; }
+  .wrap { width:calc(100% - 20px); }
+  main { padding:18px 0 38px; }
 
   .card {
-    padding: 16px 10px;
-    border-radius: 10px;
+    padding:16px 10px;
+    border-radius:10px;
+  }
+
+  .breadcrumb {
+    margin-bottom:10px;
+    font-size:11px;
   }
 
   .beta-logo {
-    margin-bottom: 22px;
-    padding-top: 6px;
+    margin-bottom:22px;
+    padding-top:6px;
   }
 
   .beta-logo img {
-    width: 90%;
-    max-height: 160px;
+    width:90%;
+    max-height:160px;
   }
 
-  .section-divider { margin-bottom: 24px; }
-  .period { font-size: 14px; }
-  .content-section { margin-top: 30px; }
-  .content-section h2 { font-size: 19px; }
+  .section-divider { margin-bottom:24px; }
+  .period { font-size:14px; }
+  .content-section { margin-top:30px; }
+  .content-section h2 { font-size:19px; }
 
   .schedule {
-    padding: 15px;
-    font-size: 13px;
-    line-height: 1.9;
+    padding:15px;
+    font-size:13px;
+    line-height:1.9;
   }
 
-  .reward-box { padding: 16px; }
-  .reward-title { font-size: 16px; }
-  .reward-text { font-size: 13px; }
+  .reward-box { padding:16px; }
+  .reward-title { font-size:16px; }
+  .reward-text { font-size:13px; }
 
   .page-links {
-    grid-template-columns: repeat(2,minmax(0,1fr));
-    gap: 8px;
+    gap:8px;
   }
 
-  .page-link { padding: 16px 12px 34px; }
-  .page-link-title { font-size: 17px; }
+  .page-link {
+    padding:16px 12px 34px;
+  }
+
+  .page-link-title { font-size:17px; }
 
   .page-link-description {
-    padding-right: 0;
-    font-size: 11px;
+    padding-right:0;
+    font-size:11px;
   }
 
   .page-link-arrow {
-    right: 12px;
-    bottom: 8px;
+    right:12px;
+    bottom:8px;
   }
 }
 
 @media (max-width:360px) {
   .header-inner {
-    grid-template-columns: 30px minmax(0,1fr) auto;
+    grid-template-columns:30px minmax(0,1fr) auto;
   }
 
-  .header-title h1 { font-size: 21px; }
-  .header-title .subtitle { font-size: 7px; }
-  .header-actions { gap: 2px; }
-}
-
-  /* パンくず */
-.breadcrumb {
-  width: min(1000px,calc(100% - 32px));
-  margin: 14px auto 0;
-  color: #7b8390;
-  font-size: 12px;
-}
-
-.breadcrumb a {
-  color: #53647f;
-  text-decoration: none;
-}
-
-.breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.breadcrumb span {
-  margin: 0 7px;
-  color: #a0a6b0;
-}
-
-@media (max-width:600px) {
-  .breadcrumb {
-    width: calc(100% - 20px);
-    margin-top: 10px;
-    font-size: 11px;
-  }
+  .header-title h1 { font-size:21px; }
+  .header-title .subtitle { font-size:7px; }
+  .header-actions { gap:2px; }
 }
 </style>
 </head>
@@ -614,18 +593,9 @@ footer {
 
 <header>
   <div class="header-inner">
-
-    <button
-      class="menu-button"
-      id="menu-open"
-      type="button"
-      aria-label="メニューを開く"
-      aria-controls="site-menu"
-      aria-expanded="false"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="menu-button" id="menu-open" type="button"
+      aria-label="メニューを開く" aria-controls="site-menu" aria-expanded="false">
+      <span></span><span></span><span></span>
     </button>
 
     <div class="header-title">
@@ -634,44 +604,28 @@ footer {
     </div>
 
     <div class="header-actions">
-
       <a class="header-home" href="/" aria-label="HOME">
         <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path
-            d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.7"
-            stroke-linejoin="round"
-          />
+          <path d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"
+            fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
         </svg>
         <span>HOME</span>
       </a>
 
-      <a
-        class="header-x"
-        href="https://x.com/rxr_legendary"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="伝承王の運営アカウントをXで開く"
-      >
+      <a class="header-x" href="https://x.com/rxr_legendary"
+        target="_blank" rel="noopener noreferrer"
+        aria-label="伝承王の運営アカウントをXで開く">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"/>
         </svg>
       </a>
-
     </div>
   </div>
 </header>
 
 <div class="menu-overlay" id="menu-overlay"></div>
 
-<nav
-  class="site-menu"
-  id="site-menu"
-  aria-label="サイトメニュー"
-  aria-hidden="true"
->
+<nav class="site-menu" id="site-menu" aria-label="サイトメニュー" aria-hidden="true">
   <div class="site-menu-header">
     <span>MENU</span>
     <button id="menu-close" type="button" aria-label="メニューを閉じる">×</button>
@@ -685,11 +639,13 @@ footer {
 
 <main class="wrap">
 <section class="card">
-<nav class="breadcrumb" aria-label="パンくずリスト">
-  <a href="/">HOME</a>
-  <span>›</span>
-  伝承王β
-</nav>
+
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <a href="/">HOME</a>
+    <span>›</span>
+    伝承王β
+  </nav>
+
   <div class="beta-logo">
     <img src="/beta/logo.png" alt="伝承王β">
   </div>
@@ -711,11 +667,8 @@ footer {
 
     <div class="media-text">
       Illustration：
-      <a
-        href="https://x.com/hituki_ruon?s=21"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href="https://x.com/hituki_ruon?s=21"
+        target="_blank" rel="noopener noreferrer">
         // key visual by 日月🦋 ( @hituki_ruon ) 様
       </a>
     </div>
@@ -734,11 +687,8 @@ footer {
 
     <div class="media-text">
       Movie：
-      <a
-        href="https://x.com/akitogamesx?s=21"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a href="https://x.com/akitogamesx?s=21"
+        target="_blank" rel="noopener noreferrer">
         // PV by AkitoGames ( @AkitoGamesX ) 様
       </a>
     </div>
@@ -747,7 +697,6 @@ footer {
   <!-- 日程 -->
   <section class="content-section">
     <h2>日程</h2>
-
     <div class="schedule">
       告知：9月19日(土)13:13<br>
       応募：9月19日(土)13:13 ～ 9月26日(土)23:59<br>
@@ -757,12 +706,11 @@ footer {
     </div>
   </section>
 
-  <!-- 報酬一覧 -->
+  <!-- 報酬 -->
   <section class="content-section">
     <h2>報酬一覧</h2>
 
     <div class="reward-box">
-
       <div class="reward-group">
         <div class="reward-title">Aブロック</div>
         <div class="reward-text">
@@ -796,7 +744,6 @@ footer {
         <div class="reward-title">ユニーク編成賞</div>
         <div class="reward-text">イラスト</div>
       </div>
-
     </div>
   </section>
 
@@ -805,7 +752,6 @@ footer {
     <h2>大会情報</h2>
 
     <div class="page-links">
-
       <a class="page-link" href="/beta/result/">
         <span class="page-link-title">集計結果</span>
         <span class="page-link-description">大会のランキング・記録を見る</span>
@@ -817,7 +763,6 @@ footer {
         <span class="page-link-description">入賞者・受賞結果を見る</span>
         <span class="page-link-arrow" aria-hidden="true">→</span>
       </div>
-
     </div>
   </section>
 
@@ -872,34 +817,20 @@ footer {
 <footer>伝承王</footer>
 
 <script>
-const menuOpen = document.getElementById("menu-open");
-const menuClose = document.getElementById("menu-close");
-const menuOverlay = document.getElementById("menu-overlay");
-const siteMenu = document.getElementById("site-menu");
+const $ = id => document.getElementById(id);
+const menuOpen = $("menu-open");
+const menu = $("site-menu");
 
-function openMenu() {
-  document.body.classList.add("menu-open");
-  menuOpen.setAttribute("aria-expanded","true");
-  siteMenu.setAttribute("aria-hidden","false");
+function toggleMenu(open) {
+  document.body.classList.toggle("menu-open",open);
+  menuOpen.setAttribute("aria-expanded",open);
+  menu.setAttribute("aria-hidden",!open);
 }
 
-function closeMenu() {
-  document.body.classList.remove("menu-open");
-  menuOpen.setAttribute("aria-expanded","false");
-  siteMenu.setAttribute("aria-hidden","true");
-}
-
-menuOpen.addEventListener("click",openMenu);
-menuClose.addEventListener("click",closeMenu);
-menuOverlay.addEventListener("click",closeMenu);
-
-siteMenu.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click",closeMenu);
-});
-
-document.addEventListener("keydown",e => {
-  if (e.key === "Escape") closeMenu();
-});
+menuOpen.onclick = () => toggleMenu(true);
+$("menu-close").onclick = $("menu-overlay").onclick = () => toggleMenu(false);
+menu.querySelectorAll("a").forEach(a => a.onclick = () => toggleMenu(false));
+document.addEventListener("keydown",e => e.key === "Escape" && toggleMenu(false));
 </script>
 
 </body>
