@@ -327,6 +327,7 @@ main { padding:30px 0 56px; }
 }
 
 .tab:hover:not(.active) { background:#edf3ff; }
+
 [hidden] { display:none !important; }
 
 /* 予選・本選 */
@@ -359,6 +360,57 @@ main { padding:30px 0 56px; }
   border:1px solid var(--accent);
   border-radius:7px;
   background:#fff;
+}
+
+/* 挑戦階層 */
+.challenge-box {
+  width:90%;
+  max-width:680px;
+  margin:20px auto 0;
+}
+
+.challenge-title {
+  margin:0 0 12px;
+  color:var(--text);
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.06em;
+}
+
+.challenge-table {
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:7px;
+  overflow:hidden;
+}
+
+.challenge-row {
+  display:grid;
+  grid-template-columns:1fr 100px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+}
+
+.challenge-row:last-child {
+  border-bottom:0;
+}
+
+.challenge-name,
+.challenge-level {
+  padding:10px 14px;
+  font-size:13px;
+}
+
+.challenge-name {
+  color:var(--text);
+}
+
+.challenge-level {
+  border-left:1px solid var(--line);
+  color:var(--text);
+  font-weight:400;
+  text-align:center;
+  font-variant-numeric:tabular-nums;
 }
 
 /* 階層 */
@@ -558,6 +610,26 @@ footer {
     font-size:12px;
   }
 
+  .challenge-box {
+    width:94%;
+    margin-top:16px;
+  }
+
+  .challenge-title {
+    margin-bottom:9px;
+    font-size:15px;
+  }
+
+  .challenge-row {
+    grid-template-columns:1fr 75px;
+  }
+
+  .challenge-name,
+  .challenge-level {
+    padding:9px 8px;
+    font-size:12px;
+  }
+
   .category-frame {
     width:94%;
     margin-top:14px;
@@ -695,10 +767,11 @@ footer {
       <button class="tab active" data-stage="main">本選</button>
     </div>
 
+    <!-- 本選 -->
     <div id="mainRanking">
-
-      <!-- ブロック -->
       <div class="block-frame">
+
+        <!-- ブロック -->
         <div class="tabs" id="blockTabs" aria-label="ブロック選択">
           <button class="tab active" data-block="A">Aブロック</button>
           <button class="tab" data-block="B">Bブロック</button>
@@ -706,7 +779,13 @@ footer {
           <button class="tab" data-block="D">Dブロック</button>
         </div>
 
-        <!-- 階層 -->
+        <!-- 挑戦階層 -->
+        <div class="challenge-box">
+          <h3 class="challenge-title">挑戦階層</h3>
+          <div class="challenge-table" id="mainChallenge"></div>
+        </div>
+
+        <!-- 階層タブ -->
         <div class="category-frame">
           <div class="tabs" id="categoryTabs" aria-label="階層選択">
             <button class="tab active" data-category="total">総合</button>
@@ -715,7 +794,6 @@ footer {
             <button class="tab" data-category="rebuild">バベルリビルド</button>
           </div>
 
-          <!-- ランキング -->
           <div class="ranking-panel">
             <div class="table-wrap">
               <table>
@@ -743,10 +821,56 @@ footer {
               </table>
             </div>
 
-            <div id="updated">データ更新時刻：確認中</div>
+            <div id="updated">大会終了時点の確定結果</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 予選 -->
+    <div id="prelimRanking" hidden>
+
+      <div class="challenge-box">
+        <h3 class="challenge-title">挑戦階層</h3>
+        <div class="challenge-table">
+          <div class="challenge-row">
+            <div class="challenge-name">リバースバベル</div>
+            <div class="challenge-level">75層</div>
           </div>
         </div>
       </div>
+
+      <div class="ranking-panel">
+        <div class="table-wrap">
+          <table>
+            <colgroup>
+              <col class="rank-col">
+              <col class="id-col">
+              <col class="time-col">
+            </colgroup>
+
+            <thead>
+              <tr>
+                <th>順位</th>
+                <th>固有番号</th>
+                <th>残りタイム</th>
+              </tr>
+            </thead>
+
+            <tbody id="prelimBody">
+              <tr>
+                <td colspan="3" class="empty">
+                  ランキングデータを読み込み中…
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="prelimUpdated">大会終了時点の確定結果</div>
+      </div>
+
     </div>
   </div>
 
@@ -756,141 +880,254 @@ footer {
 <footer>伝承王</footer>
 
 <script>
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbxOK5iDKjdWnx8Y9iabdSlj_Q8Bqjovve2V1bMMrYM2uOmDhAvqxi5YW93Nu3-rer6Q0w/exec";
+const CSV_URL = "./ranking.csv";
 
 const $ = id => document.getElementById(id);
-const rankingBody = $("rankingBody");
-const updated = $("updated");
-const mainRanking = $("mainRanking");
 
-let rankingData;
+const rankingBody = $("rankingBody");
+const prelimBody = $("prelimBody");
+const mainRanking = $("mainRanking");
+const prelimRanking = $("prelimRanking");
+const mainChallenge = $("mainChallenge");
+
+let rows = [];
 let currentStage = "main";
 let currentBlock = "A";
 let currentCategory = "total";
-let isLoading = false;
-let requestId = 0;
 
-/* ランキング取得 */
-function loadRanking() {
-  if (isLoading) return;
+/* 挑戦階層 */
+const challengeLevels = {
+  A: {
+    reverse:100,
+    another:101,
+    rebuild:103
+  },
+  B: {
+    reverse:90,
+    another:80,
+    rebuild:75
+  },
+  C: {
+    reverse:70,
+    another:55,
+    rebuild:60
+  },
+  D: {
+    reverse:50
+  }
+};
 
-  isLoading = true;
-  const id = ++requestId;
-  const script = document.createElement("script");
-  const callback = "receiveRankingData";
-  let finished = false;
+const categoryNames = {
+  reverse:"リバースバベル",
+  another:"アナザーバベル",
+  rebuild:"バベルリビルド"
+};
 
-  const cleanup = () => {
-    if (finished) return;
-    finished = true;
-    clearTimeout(timeout);
-    delete window[callback];
-    script.remove();
-    isLoading = false;
-  };
+/* CSV読み込み */
+async function loadRanking() {
+  try {
+    const response = await fetch(CSV_URL);
 
-  const error = () => {
-    if (finished) return;
-    cleanup();
-
-    if (currentStage === "prelim") return;
-
-    if (rankingData) {
-      updated.textContent = "更新に失敗しました。前回のデータを表示中です。";
-    } else {
-      rankingBody.innerHTML =
-        '<tr><td colspan="3" class="empty">データの取得に失敗しました。ページを再読み込みしてください。</td></tr>';
-      updated.textContent = "";
+    if (!response.ok) {
+      throw new Error("CSVの取得に失敗しました");
     }
-  };
 
-  const timeout = setTimeout(error,20000);
+    const text = await response.text();
+    rows = parseCSV(text);
 
-  window[callback] = data => {
-    if (finished || id !== requestId) return;
-    if (!data?.blocks || data.error) return error();
-
-    rankingData = data;
-    cleanup();
     renderRanking();
-  };
+  } catch (error) {
+    rankingBody.innerHTML =
+      '<tr><td colspan="3" class="empty">ランキングデータの取得に失敗しました。</td></tr>';
 
-  script.onerror = error;
+    prelimBody.innerHTML =
+      '<tr><td colspan="3" class="empty">ランキングデータの取得に失敗しました。</td></tr>';
 
-  const cacheKey = Math.floor(Date.now() / 300000);
-  script.src = `${API_URL}?callback=${callback}&v=${cacheKey}`;
-  document.head.appendChild(script);
+    console.error(error);
+  }
 }
 
-/* ランキング描画 */
+/* CSV解析 */
+function parseCSV(text) {
+  const lines = text
+    .replace(/^\uFEFF/,"")
+    .trim()
+    .split(/\r?\n/);
+
+  if (lines.length < 2) return [];
+
+  const headers = lines[0].split(",").map(v => v.trim());
+
+  return lines.slice(1).map(line => {
+    const values = line.split(",");
+
+    return Object.fromEntries(
+      headers.map((header,index) => [
+        header,
+        (values[index] ?? "").trim()
+      ])
+    );
+  });
+}
+
+/* 全体描画 */
 function renderRanking() {
-  document.querySelectorAll("[data-stage]").forEach(btn =>
-    btn.classList.toggle("active",btn.dataset.stage === currentStage)
-  );
+  document.querySelectorAll("[data-stage]").forEach(btn => {
+    btn.classList.toggle(
+      "active",
+      btn.dataset.stage === currentStage
+    );
+  });
 
   if (currentStage === "prelim") {
     mainRanking.hidden = true;
-    rankingBody.innerHTML =
-      '<tr><td colspan="3" class="empty">予選ランキングは準備中です。</td></tr>';
-    updated.textContent = "";
+    prelimRanking.hidden = false;
+    renderPreliminary();
     return;
   }
 
   mainRanking.hidden = false;
-  if (!rankingData?.blocks) return;
+  prelimRanking.hidden = true;
 
-  const available = rankingData.blocks[currentBlock];
-  if (!available) return;
+  renderMain();
+}
 
-  if (!(currentCategory in available)) currentCategory = "total";
+/* 予選 */
+function renderPreliminary() {
+  const entries = rows
+    .filter(row => row.preliminary !== "")
+    .map(row => ({
+      id:row.id,
+      time:Number(row.preliminary)
+    }))
+    .filter(entry => Number.isFinite(entry.time))
+    .sort((a,b) => b.time - a.time);
 
-  document.querySelectorAll("[data-block]").forEach(btn =>
-    btn.classList.toggle("active",btn.dataset.block === currentBlock)
-  );
+  renderTable(prelimBody,entries);
+}
+
+/* 本選 */
+function renderMain() {
+  document.querySelectorAll("[data-block]").forEach(btn => {
+    btn.classList.toggle(
+      "active",
+      btn.dataset.block === currentBlock
+    );
+  });
+
+  const availableCategories =
+    currentBlock === "D"
+      ? ["total","reverse"]
+      : ["total","reverse","another","rebuild"];
+
+  if (!availableCategories.includes(currentCategory)) {
+    currentCategory = "total";
+  }
 
   document.querySelectorAll("[data-category]").forEach(btn => {
     const category = btn.dataset.category;
-    btn.hidden = !(category in available);
-    btn.classList.toggle("active",category === currentCategory);
+
+    btn.hidden = !availableCategories.includes(category);
+    btn.classList.toggle(
+      "active",
+      category === currentCategory
+    );
   });
 
-  const entries = available[currentCategory] || [];
+  renderChallenge();
 
-  if (!entries.length) {
-    rankingBody.innerHTML =
-      '<tr><td colspan="3" class="empty">現在、記録はありません。</td></tr>';
+  const blockRows = rows.filter(
+    row => row.block === currentBlock
+  );
+
+  let entries;
+
+  if (currentCategory === "total") {
+    /*
+      本戦3階層のうち1つ以上を提出している人だけ総合に表示。
+      totalが0でも、3階層すべて未提出なら表示しない。
+    */
+    entries = blockRows
+      .filter(row =>
+        row.reverse !== "" ||
+        row.another !== "" ||
+        row.rebuild !== ""
+      )
+      .map(row => ({
+        id:row.id,
+        time:Number(row.total)
+      }));
   } else {
-    let previousTime = null;
-    let previousRank = 0;
-
-    rankingBody.innerHTML = entries.map((entry,index) => {
-      const time = Number(entry.time);
-      const rounded = Math.round(time * 100) / 100;
-      const rank =
-        index && rounded === previousTime ? previousRank : index + 1;
-
-      previousTime = rounded;
-      previousRank = rank;
-
-      return `
-        <tr class="${rank <= 3 ? `rank-${rank}` : ""}">
-          <td>${rank}位</td>
-          <td>${escapeHTML(String(entry.id))}</td>
-          <td>${time.toFixed(2)}秒</td>
-        </tr>`;
-    }).join("");
+    /*
+      選択中の階層を提出している人だけ表示。
+    */
+    entries = blockRows
+      .filter(row => row[currentCategory] !== "")
+      .map(row => ({
+        id:row.id,
+        time:Number(row[currentCategory])
+      }));
   }
 
-  const date = new Date(rankingData.updatedAt);
+  entries = entries
+    .filter(entry => Number.isFinite(entry.time))
+    .sort((a,b) => b.time - a.time);
 
-  updated.textContent =
-    "データ更新時刻：" +
-    (Number.isNaN(date.getTime())
-      ? "不明"
-      : date.toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"}) + "（日本時間）");
+  renderTable(rankingBody,entries);
 }
 
+/* 挑戦階層描画 */
+function renderChallenge() {
+  const levels = challengeLevels[currentBlock];
+
+  mainChallenge.innerHTML = Object.entries(levels)
+    .map(([category,level]) => `
+      <div class="challenge-row">
+        <div class="challenge-name">
+          ${categoryNames[category]}
+        </div>
+        <div class="challenge-level">
+          ${level}層
+        </div>
+      </div>
+    `)
+    .join("");
+}
+
+/* ランキング表描画 */
+function renderTable(body,entries) {
+  if (!entries.length) {
+    body.innerHTML =
+      '<tr><td colspan="3" class="empty">記録はありません。</td></tr>';
+    return;
+  }
+
+  let previousTime = null;
+  let previousRank = 0;
+
+  body.innerHTML = entries.map((entry,index) => {
+    const time = Number(entry.time);
+    const rounded = Math.round(time * 100) / 100;
+
+    const rank =
+      index > 0 && rounded === previousTime
+        ? previousRank
+        : index + 1;
+
+    previousTime = rounded;
+    previousRank = rank;
+
+    return `
+      <tr class="${rank <= 3 ? `rank-${rank}` : ""}">
+        <td>${rank}位</td>
+        <td>${escapeHTML(String(entry.id))}</td>
+        <td>${time.toFixed(2)}秒</td>
+      </tr>
+    `;
+  }).join("");
+}
+
+/* HTMLエスケープ */
 function escapeHTML(str) {
   return str.replace(/[&<>"']/g,c => ({
     "&":"&amp;",
@@ -901,24 +1138,29 @@ function escapeHTML(str) {
   })[c]);
 }
 
-/* タブ */
+/* 予選・本選タブ */
 $("stageTabs").onclick = e => {
   const btn = e.target.closest("[data-stage]");
   if (!btn) return;
+
   currentStage = btn.dataset.stage;
   renderRanking();
 };
 
+/* ブロックタブ */
 $("blockTabs").onclick = e => {
   const btn = e.target.closest("[data-block]");
   if (!btn) return;
+
   currentBlock = btn.dataset.block;
   renderRanking();
 };
 
+/* 階層タブ */
 $("categoryTabs").onclick = e => {
   const btn = e.target.closest("[data-category]");
   if (!btn || btn.hidden) return;
+
   currentCategory = btn.dataset.category;
   renderRanking();
 };
@@ -934,13 +1176,21 @@ function toggleMenu(open) {
 }
 
 menuOpen.onclick = () => toggleMenu(true);
-$("menu-close").onclick = $("menu-overlay").onclick = () => toggleMenu(false);
-menu.querySelectorAll("a").forEach(a => a.onclick = () => toggleMenu(false));
-document.addEventListener("keydown",e => e.key === "Escape" && toggleMenu(false));
 
-/* 初回取得・5分ごとに更新 */
+$("menu-close").onclick =
+$("menu-overlay").onclick =
+  () => toggleMenu(false);
+
+menu.querySelectorAll("a").forEach(a => {
+  a.onclick = () => toggleMenu(false);
+});
+
+document.addEventListener("keydown",e => {
+  if (e.key === "Escape") toggleMenu(false);
+});
+
+/* 初回読み込み */
 loadRanking();
-setInterval(loadRanking,300000);
 </script>
 
 </body>
