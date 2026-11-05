@@ -364,8 +364,7 @@ main { padding:30px 0 56px; }
 
 /* 挑戦階層 */
 .challenge-box {
-  width:90%;
-  max-width:680px;
+  width:min(360px,90%);
   margin:20px auto 0;
 }
 
@@ -386,7 +385,7 @@ main { padding:30px 0 56px; }
 
 .challenge-row {
   display:grid;
-  grid-template-columns:1fr 100px;
+  grid-template-columns:1fr 1fr;
   border-bottom:1px solid var(--line);
   background:#fff;
 }
@@ -397,19 +396,15 @@ main { padding:30px 0 56px; }
 
 .challenge-name,
 .challenge-level {
-  padding:10px 14px;
-  font-size:13px;
-}
-
-.challenge-name {
+  padding:10px 12px;
   color:var(--text);
+  font-size:13px;
+  font-weight:400;
+  text-align:center;
 }
 
 .challenge-level {
   border-left:1px solid var(--line);
-  color:var(--text);
-  font-weight:400;
-  text-align:center;
   font-variant-numeric:tabular-nums;
 }
 
@@ -506,7 +501,8 @@ tbody tr:hover { background:#f7f9fc; }
   overflow-wrap:normal;
 }
 
-#updated {
+#updated,
+#prelimUpdated {
   max-width:680px;
   margin:20px auto 0;
   color:#858b96;
@@ -611,24 +607,24 @@ footer {
   }
 
   .challenge-box {
-    width:94%;
-    margin-top:16px;
-  }
+  width:min(320px,90%);
+  margin-top:16px;
+}
 
-  .challenge-title {
-    margin-bottom:9px;
-    font-size:15px;
-  }
+.challenge-title {
+  margin-bottom:9px;
+  font-size:15px;
+}
 
-  .challenge-row {
-    grid-template-columns:1fr 75px;
-  }
+.challenge-row {
+  grid-template-columns:1fr 1fr;
+}
 
-  .challenge-name,
-  .challenge-level {
-    padding:9px 8px;
-    font-size:12px;
-  }
+.challenge-name,
+.challenge-level {
+  padding:9px 6px;
+  font-size:12px;
+}
 
   .category-frame {
     width:94%;
@@ -652,10 +648,11 @@ footer {
 
   td { font-size:13px; }
 
-  #updated {
-    margin-top:16px;
-    font-size:10px;
-  }
+  #updated,
+#prelimUpdated {
+  margin-top:16px;
+  font-size:10px;
+}
 }
 
 @media (max-width:360px) {
