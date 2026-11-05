@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ユニーク編成賞 | 伝承王β</title>
+
+  <meta
+    name="description"
+    content="リバースブルー×リバースエンド 非公式大会「伝承王β」ユニーク編成賞"
+  >
+
+  <meta property="og:title" content="ユニーク編成賞 | 伝承王β">
+  <meta
+    property="og:description"
+    content="リバースブルー×リバースエンド 非公式大会「伝承王β」ユニーク編成賞"
+  >
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/beta/OGP.png">
+
+  <style>
+    :root {
+      --text: #242933;
+      --subtext: #667085;
+      --line: #dfe3ea;
+      --blue: #3763d2;
+      --blue-light: #eef3ff;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background: #171421;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
+        "Yu Gothic",
+        "Meiryo",
+        sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        url("/beta/background.png")
+        center top / auto 100vh
+        no-repeat;
+      pointer-events: none;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================
+       ヘッダー
+    ========================= */
+
+    .site-header {
+      position: relative;
+      height: 94px;
+      background: rgba(255, 255, 255, 0.98);
+      border-bottom: 1px solid #ececf0;
+      z-index: 20;
+    }
+
+    .header-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-button {
+      position: absolute;
+      left: 76px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .menu-button span {
+      position: absolute;
+      left: 3px;
+      width: 22px;
+      height: 2px;
+      background: #111;
+      transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+    }
+
+    .menu-button span:nth-child(1) {
+      top: 7px;
+    }
+
+    .menu-button span:nth-child(2) {
+      top: 13px;
+    }
+
+    .menu-button span:nth-child(3) {
+      top: 19px;
+    }
+
+    .menu-button.open span:nth-child(1) {
+      top: 13px;
+      transform: rotate(45deg);
+    }
+
+    .menu-button.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-button.open span:nth-child(3) {
+      top: 13px;
+      transform: rotate(-45deg);
+    }
+
+    .header-logo {
+      text-align: center;
+      line-height: 1;
+      text-decoration: none;
+      color: #242933;
+    }
+
+    .header-logo-main {
+      display: block;
+      font-family:
+        "Yu Mincho",
+        "Hiragino Mincho ProN",
+        serif;
+      font-size: 38px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .header-logo-sub {
+      display: block;
+      margin-top: 8px;
+      color: #626875;
+      font-family: Georgia, serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .header-actions {
+      position: absolute;
+      right: 76px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .home-link,
+    .x-link {
+      color: #111;
+      text-decoration: none;
+    }
+
+    .home-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      line-height: 1;
+    }
+
+    .home-icon {
+      position: relative;
+      width: 18px;
+      height: 16px;
+      margin-bottom: 3px;
+    }
+
+    .home-icon::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 5px;
+      width: 10px;
+      height: 9px;
+      border: 2px solid #111;
+      border-top: 0;
+    }
+
+    .home-icon::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 1px;
+      width: 10px;
+      height: 10px;
+      border-left: 2px solid #111;
+      border-top: 2px solid #111;
+      transform: rotate(45deg);
+    }
+
+    .x-link {
+      font-family: Arial, sans-serif;
+      font-size: 29px;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    /* =========================
+       メニュー
+    ========================= */
+
+    .menu-panel {
+      position: fixed;
+      top: 94px;
+      left: 0;
+      width: 100%;
+      padding: 30px 70px;
+      background: rgba(255, 255, 255, 0.98);
+      border-top: 1px solid #eee;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s;
+      z-index: 19;
+    }
+
+    .menu-panel.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .menu-nav {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .menu-nav a {
+      padding: 15px 12px;
+      color: var(--text);
+      text-align: center;
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .menu-nav a:hover {
+      color: var(--blue);
+    }
+
+    /* =========================
+       メイン
+    ========================= */
+
+    .page-wrap {
+      width: min(1000px, calc(100% - 48px));
+      margin: 30px auto 60px;
+    }
+
+    .page-card {
+      padding: 26px 24px 60px;
+      background: rgba(255, 255, 255, 0.985);
+      border: 1px solid #e4e6eb;
+      border-radius: 13px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    }
+
+    /* =========================
+       パンくず
+    ========================= */
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      color: #68748a;
+      font-size: 12px;
+    }
+
+    .breadcrumb a {
+      color: #5d6f8e;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb-separator {
+      color: #a5abb5;
+    }
+
+    /* =========================
+       βロゴ
+    ========================= */
+
+    .beta-logo-area {
+      min-height: 265px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .beta-logo-area img {
+      display: block;
+      width: min(210px, 55%);
+      height: auto;
+    }
+
+    /* =========================
+       ページタイトル
+    ========================= */
+
+    .page-heading {
+      padding: 30px 20px 28px;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .page-heading h1 {
+      margin: 0;
+      font-family:
+        "Yu Mincho",
+        "Hiragino Mincho ProN",
+        serif;
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+    }
+
+    .page-heading-en {
+      margin-top: 8px;
+      color: #7b8290;
+      font-family: Georgia, serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+    }
+
+    /* =========================
+       受賞者
+    ========================= */
+
+    .winner-section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 46px 0 54px;
+    }
+
+    .section-label {
+      margin: 0 0 26px;
+      text-align: center;
+      font-family:
+        "Yu Mincho",
+        "Hiragino Mincho ProN",
+        serif;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+    }
+
+    .winner-person {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .winner-name {
+      margin: 0;
+      font-family:
+        "Yu Mincho",
+        "Hiragino Mincho ProN",
+        serif;
+      font-size: 29px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .winner-x {
+      display: inline-block;
+      margin-top: 9px;
+      color: #68748a;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .winner-x:hover {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
+    .winner-card {
+      overflow: hidden;
+      border: 1px solid #cfd5df;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .winner-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .winner-meta-item {
+      padding: 16px 20px;
+      text-align: center;
+    }
+
+    .winner-meta-item + .winner-meta-item {
+      border-left: 1px solid var(--line);
+    }
+
+    .winner-meta-label {
+      margin-bottom: 6px;
+      color: #7b8290;
+      font-size: 11px;
+    }
+
+    .winner-meta-value {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 400;
+    }
+
+    .winner-content {
+      padding: 22px 24px;
+    }
+
+    .winner-content + .winner-content {
+      border-top: 1px solid var(--line);
+    }
+
+    .winner-content-label {
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .winner-formation {
+      margin: 0;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.9;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    .winner-note {
+      margin: 0;
+      color: #697180;
+      font-size: 12px;
+      line-height: 1.8;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    /* =========================
+       全編成一覧
+    ========================= */
+
+    .list-section {
+      padding-top: 44px;
+      border-top: 1px solid var(--line);
+    }
+
+    .list-heading {
+      margin: 0;
+      text-align: center;
+      font-family:
+        "Yu Mincho",
+        "Hiragino Mincho ProN",
+        serif;
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+    }
+
+    .list-description {
+      margin: 10px 0 28px;
+      color: #7b8290;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .unique-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .unique-table th,
+    .unique-table td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .unique-table th:last-child,
+    .unique-table td:last-child {
+      border-right: 0;
+    }
+
+    .unique-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .unique-table th {
+      padding: 12px 10px;
+      background: #f8f9fb;
+      color: #424955;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .unique-table td {
+      padding: 14px 12px;
+      color: #343a45;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .unique-table .col-id {
+      width: 100px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .unique-table .col-floor {
+      width: 145px;
+      text-align: center;
+    }
+
+    .unique-table .col-time {
+      width: 100px;
+      text-align: center;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .unique-table .col-formation {
+      width: auto;
+    }
+
+    .formation-text {
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    .formation-note {
+      margin-top: 8px;
+      padding-top: 8px;
+      color: #7a818d;
+      font-size: 11px;
+      line-height: 1.65;
+      border-top: 1px dashed #dfe3e8;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+    }
+
+    .formation-note-label {
+      font-weight: 600;
+    }
+
+    .winner-row td {
+      background: #f5f8ff;
+    }
+
+    .winner-mark {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 2px 7px;
+      color: var(--blue);
+      background: var(--blue-light);
+      border-radius: 999px;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .loading,
+    .error {
+      padding: 30px 20px;
+      color: #777f8d;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    /* スマホ用カード一覧はPCでは非表示 */
+    .mobile-list {
+      display: none;
+    }
+
+    /* =========================
+       フッター
+    ========================= */
+
+    .site-footer {
+      padding: 0 24px 40px;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 10px;
+      text-align: center;
+    }
+
+    /* =========================
+       スマホ
+    ========================= */
+
+    @media (max-width: 700px) {
+      .site-header {
+        height: 74px;
+      }
+
+      .menu-button {
+        left: 20px;
+      }
+
+      .header-logo-main {
+        font-size: 28px;
+      }
+
+      .header-logo-sub {
+        margin-top: 6px;
+        font-size: 8px;
+      }
+
+      .header-actions {
+        right: 18px;
+        gap: 15px;
+      }
+
+      .home-link {
+        display: none;
+      }
+
+      .x-link {
+        font-size: 24px;
+      }
+
+      .menu-panel {
+        top: 74px;
+        padding: 20px;
+      }
+
+      .menu-nav {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .page-wrap {
+        width: calc(100% - 20px);
+        margin: 14px auto 30px;
+      }
+
+      .page-card {
+        padding: 18px 14px 40px;
+        border-radius: 10px;
+      }
+
+      .breadcrumb {
+        gap: 7px;
+        font-size: 10px;
+      }
+
+      .beta-logo-area {
+        min-height: 190px;
+      }
+
+      .beta-logo-area img {
+        width: min(175px, 60%);
+      }
+
+      .page-heading {
+        padding: 25px 10px 24px;
+      }
+
+      .page-heading h1 {
+        font-size: 23px;
+      }
+
+      .page-heading-en {
+        font-size: 9px;
+      }
+
+      .winner-section {
+        padding: 34px 0 40px;
+      }
+
+      .section-label {
+        margin-bottom: 22px;
+        font-size: 17px;
+      }
+
+      .winner-person {
+        margin-bottom: 22px;
+      }
+
+      .winner-name {
+        font-size: 24px;
+      }
+
+      .winner-x {
+        font-size: 12px;
+      }
+
+      .winner-meta-item {
+        padding: 13px 8px;
+      }
+
+      .winner-meta-label {
+        font-size: 10px;
+      }
+
+      .winner-meta-value {
+        font-size: 12px;
+      }
+
+      .winner-content {
+        padding: 18px 16px;
+      }
+
+      .winner-content-label {
+        font-size: 12px;
+      }
+
+      .winner-formation {
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      .winner-note {
+        font-size: 11px;
+      }
+
+      .list-section {
+        padding-top: 34px;
+      }
+
+      .list-heading {
+        font-size: 21px;
+      }
+
+      .list-description {
+        margin-bottom: 20px;
+        font-size: 10px;
+      }
+
+      /* PC表を消してカード表示 */
+      .table-wrap {
+        display: none;
+      }
+
+      .mobile-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .mobile-card {
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+      }
+
+      .mobile-card.winner-mobile {
+        border-color: #9db3ed;
+        background: #f8faff;
+      }
+
+      .mobile-card-head {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .mobile-id {
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .mobile-time {
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .mobile-floor {
+        padding: 8px 12px;
+        color: #697180;
+        font-size: 10px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .mobile-formation {
+        padding: 13px 12px;
+        font-size: 12px;
+        line-height: 1.75;
+        white-space: pre-line;
+        overflow-wrap: anywhere;
+      }
+
+      .mobile-note {
+        margin: 0 12px 13px;
+        padding: 10px;
+        color: #737b88;
+        background: #f7f8fa;
+        border-radius: 5px;
+        font-size: 10px;
+        line-height: 1.65;
+        white-space: pre-line;
+        overflow-wrap: anywhere;
+      }
+
+      .mobile-winner-mark {
+        margin-left: 6px;
+        color: var(--blue);
+        font-size: 9px;
+        font-weight: 400;
+      }
+
+      .site-footer {
+        padding-bottom: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       ヘッダー
+  ========================== -->
+  <header class="site-header">
+    <div class="header-inner">
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a class="header-logo" href="/">
+        <span class="header-logo-main">伝承王</span>
+        <span class="header-logo-sub">Legend of GARDENER</span>
+      </a>
+
+      <div class="header-actions">
+
+        <a class="home-link" href="/" aria-label="HOME">
+          <span class="home-icon" aria-hidden="true"></span>
+          <span>HOME</span>
+        </a>
+
+        <a
+          class="x-link"
+          href="https://x.com/rxr_legendary"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X"
+        >
+          𝕏
+        </a>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- メニュー -->
+  <div class="menu-panel" id="menuPanel">
+    <nav class="menu-nav">
+      <a href="/">HOME</a>
+      <a href="/beta/">開催中の大会</a>
+      <a href="/archive/">過去開催</a>
+      <a href="/#information">お問い合わせ</a>
+    </nav>
+  </div>
+
+  <!-- =========================
+       メイン
+  ========================== -->
+  <main class="page-wrap">
+    <div class="page-card">
+
+      <!-- パンくず -->
+      <nav class="breadcrumb" aria-label="パンくずリスト">
+        <a href="/">HOME</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="/beta/">伝承王β</a>
+        <span class="breadcrumb-separator">›</span>
+        <span>ユニーク編成賞</span>
+      </nav>
+
+      <!-- βロゴ -->
+      <div class="beta-logo-area">
+        <img
+          src="/beta/logo.png"
+          alt="伝承王β"
+        >
+      </div>
+
+      <!-- ページタイトル -->
+      <section class="page-heading">
+        <h1>ユニーク編成賞</h1>
+        <div class="page-heading-en">
+          Unique Formation Award
+        </div>
+      </section>
+
+      <!-- =========================
+           受賞者
+      ========================== -->
+      <section class="winner-section">
+
+        <h2 class="section-label">受賞者</h2>
+
+        <div class="winner-person">
+          <p class="winner-name">皇アガサ 🌓🐇</p>
+
+          <a
+            class="winner-x"
+            href="https://x.com/kametyoG"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @kametyoG
+          </a>
+        </div>
+
+        <div class="winner-card" id="winnerCard">
+
+          <div class="loading">
+            受賞編成を読み込んでいます...
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =========================
+           全編成一覧
+      ========================== -->
+      <section class="list-section">
+
+        <h2 class="list-heading">
+          ユニーク編成一覧
+        </h2>
+
+        <p class="list-description">
+          本大会に提出されたユニーク編成
+        </p>
+
+        <!-- PC -->
+        <div class="table-wrap">
+          <table class="unique-table">
+            <thead>
+              <tr>
+                <th class="col-id">固有番号</th>
+                <th class="col-floor">階層</th>
+                <th class="col-time">残りタイム</th>
+                <th class="col-formation">編成内容</th>
+              </tr>
+            </thead>
+
+            <tbody id="uniqueTableBody">
+              <tr>
+                <td colspan="4" class="loading">
+                  読み込んでいます...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- スマホ -->
+        <div
+          class="mobile-list"
+          id="mobileList"
+        ></div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    伝承王β
+  </footer>
+
+  <script>
+    /* =========================
+       基本設定
+    ========================== */
+
+    const CSV_URL = "./unique.csv";
+
+    const WINNER = {
+      id: "RC72H5",
+      name: "皇アガサ 🌓🐇",
+      xid: "@kametyoG"
+    };
+
+    const towerNames = {
+      "リバベル": "リバースバベル",
+      "リバース": "リバースバベル",
+      "リバースバベル": "リバースバベル",
+
+      "アナザー": "アナザーバベル",
+      "アナザーバベル": "アナザーバベル",
+
+      "リビルド": "バベルリビルド",
+      "バベルリビルド": "バベルリビルド"
+    };
+
+
+    /* =========================
+       メニュー
+    ========================== */
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const menuPanel =
+      document.getElementById("menuPanel");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen =
+        menuPanel.classList.toggle("open");
+
+      menuButton.classList.toggle(
+        "open",
+        isOpen
+      );
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+    });
+
+
+    /* =========================
+       HTMLエスケープ
+    ========================== */
+
+    function escapeHTML(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    /* =========================
+       CSVパーサー
+
+       対応：
+       ・セル内カンマ
+       ・セル内改行
+       ・""によるダブルクォート
+       ・CRLF / LF
+       ・UTF-8 BOM
+    ========================== */
+
+    function parseCSV(text) {
+
+      text = text.replace(/^\uFEFF/, "");
+
+      const table = [];
+
+      let row = [];
+      let field = "";
+      let insideQuotes = false;
+
+      for (let i = 0; i < text.length; i++) {
+
+        const char = text[i];
+
+        if (insideQuotes) {
+
+          if (char === '"') {
+
+            if (text[i + 1] === '"') {
+              field += '"';
+              i++;
+            } else {
+              insideQuotes = false;
+            }
+
+          } else {
+            field += char;
+          }
+
+          continue;
+        }
+
+
+        if (char === '"') {
+
+          insideQuotes = true;
+
+        } else if (char === ",") {
+
+          row.push(field);
+          field = "";
+
+        } else if (char === "\n") {
+
+          row.push(field);
+
+          table.push(row);
+
+          row = [];
+          field = "";
+
+        } else if (char === "\r") {
+
+          /*
+            CRLFの場合は次のLF側で
+            行を確定するので無視
+          */
+
+          if (text[i + 1] !== "\n") {
+            row.push(field);
+            table.push(row);
+
+            row = [];
+            field = "";
+          }
+
+        } else {
+
+          field += char;
+
+        }
+      }
+
+
+      /*
+        最終行
+      */
+
+      if (
+        field.length > 0 ||
+        row.length > 0
+      ) {
+        row.push(field);
+        table.push(row);
+      }
+
+
+      if (table.length === 0) {
+        return [];
+      }
+
+
+      const headers =
+        table[0].map(value =>
+          value.trim()
+        );
+
+
+      return table
+        .slice(1)
+        .filter(row =>
+          row.some(value =>
+            value.trim() !== ""
+          )
+        )
+        .map(row => {
+
+          const object = {};
+
+          headers.forEach(
+            (header, index) => {
+
+              object[header] =
+                (row[index] ?? "").trim();
+
+            }
+          );
+
+          return object;
+        });
+    }
+
+
+    /* =========================
+       表示用関数
+    ========================== */
+
+    function getTowerName(value) {
+
+      const key =
+        String(value ?? "").trim();
+
+      return towerNames[key] || key;
+    }
+
+
+    function getFloorText(row) {
+
+      const tower =
+        getTowerName(row.tower);
+
+      const floor =
+        String(row.floor ?? "").trim();
+
+
+      if (tower && floor) {
+        return `${tower} ${floor}層`;
+      }
+
+      if (tower) {
+        return tower;
+      }
+
+      if (floor) {
+        return `${floor}層`;
+      }
+
+      return "―";
+    }
+
+
+    function getTimeText(row) {
+
+      const time =
+        String(row.time ?? "").trim();
+
+      if (!time) {
+        return "―";
+      }
+
+      return `${time}秒`;
+    }
+
+
+    /* =========================
+       受賞者表示
+    ========================== */
+
+    function renderWinner(rows) {
+
+      const winnerCard =
+        document.getElementById(
+          "winnerCard"
+        );
+
+      const winner =
+        rows.find(
+          row =>
+            row.id.trim() === WINNER.id
+        );
+
+
+      if (!winner) {
+
+        winnerCard.innerHTML = `
+          <div class="error">
+            受賞編成のデータを取得できませんでした。
+          </div>
+        `;
+
+        return;
+      }
+
+
+      const formation =
+        winner.formation || "―";
+
+      const note =
+        winner.note || "";
+
+
+      winnerCard.innerHTML = `
+
+        <div class="winner-meta">
+
+          <div class="winner-meta-item">
+            <div class="winner-meta-label">
+              階層
+            </div>
+
+            <div class="winner-meta-value">
+              ${escapeHTML(
+                getFloorText(winner)
+              )}
+            </div>
+          </div>
+
+
+          <div class="winner-meta-item">
+            <div class="winner-meta-label">
+              残りタイム
+            </div>
+
+            <div class="winner-meta-value">
+              ${escapeHTML(
+                getTimeText(winner)
+              )}
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="winner-content">
+
+          <div class="winner-content-label">
+            編成内容
+          </div>
+
+          <p class="winner-formation">${escapeHTML(
+            formation
+          )}</p>
+
+        </div>
+
+
+        ${
+          note
+            ? `
+              <div class="winner-content">
+
+                <div class="winner-content-label">
+                  補足
+                </div>
+
+                <p class="winner-note">${escapeHTML(
+                  note
+                )}</p>
+
+              </div>
+            `
+            : ""
+        }
+
+      `;
+    }
+
+
+    /* =========================
+       PC一覧
+    ========================== */
+
+    function renderTable(rows) {
+
+      const tbody =
+        document.getElementById(
+          "uniqueTableBody"
+        );
+
+
+      if (rows.length === 0) {
+
+        tbody.innerHTML = `
+          <tr>
+            <td
+              colspan="4"
+              class="loading"
+            >
+              ユニーク編成データがありません。
+            </td>
+          </tr>
+        `;
+
+        return;
+      }
+
+
+      tbody.innerHTML =
+        rows.map(row => {
+
+          const isWinner =
+            row.id.trim() === WINNER.id;
+
+          const formation =
+            row.formation || "―";
+
+          const note =
+            row.note || "";
+
+
+          return `
+
+            <tr class="${
+              isWinner
+                ? "winner-row"
+                : ""
+            }">
+
+              <td class="col-id">
+
+                ${escapeHTML(row.id)}
+
+                ${
+                  isWinner
+                    ? `
+                      <br>
+                      <span class="winner-mark">
+                        受賞
+                      </span>
+                    `
+                    : ""
+                }
+
+              </td>
+
+
+              <td class="col-floor">
+                ${escapeHTML(
+                  getFloorText(row)
+                )}
+              </td>
+
+
+              <td class="col-time">
+                ${escapeHTML(
+                  getTimeText(row)
+                )}
+              </td>
+
+
+              <td class="col-formation">
+
+                <div class="formation-text">${escapeHTML(
+                  formation
+                )}</div>
+
+                ${
+                  note
+                    ? `
+                      <div class="formation-note">
+                        <span class="formation-note-label">
+                          補足：
+                        </span>${escapeHTML(note)}
+                      </div>
+                    `
+                    : ""
+                }
+
+              </td>
+
+            </tr>
+
+          `;
+
+        }).join("");
+    }
+
+
+    /* =========================
+       スマホ一覧
+    ========================== */
+
+    function renderMobileList(rows) {
+
+      const mobileList =
+        document.getElementById(
+          "mobileList"
+        );
+
+
+      mobileList.innerHTML =
+        rows.map(row => {
+
+          const isWinner =
+            row.id.trim() === WINNER.id;
+
+          const formation =
+            row.formation || "―";
+
+          const note =
+            row.note || "";
+
+
+          return `
+
+            <article
+              class="mobile-card ${
+                isWinner
+                  ? "winner-mobile"
+                  : ""
+              }"
+            >
+
+              <div class="mobile-card-head">
+
+                <div class="mobile-id">
+
+                  ${escapeHTML(row.id)}
+
+                  ${
+                    isWinner
+                      ? `
+                        <span class="mobile-winner-mark">
+                          受賞
+                        </span>
+                      `
+                      : ""
+                  }
+
+                </div>
+
+
+                <div class="mobile-time">
+                  ${escapeHTML(
+                    getTimeText(row)
+                  )}
+                </div>
+
+              </div>
+
+
+              <div class="mobile-floor">
+                ${escapeHTML(
+                  getFloorText(row)
+                )}
+              </div>
+
+
+              <div class="mobile-formation">${escapeHTML(
+                formation
+              )}</div>
+
+
+              ${
+                note
+                  ? `
+                    <div class="mobile-note">
+                      <strong>補足</strong><br>
+                      ${escapeHTML(note)}
+                    </div>
+                  `
+                  : ""
+              }
+
+            </article>
+
+          `;
+
+        }).join("");
+    }
+
+
+    /* =========================
+       CSV読込
+    ========================== */
+
+    async function loadUniqueData() {
+
+      try {
+
+        const response =
+          await fetch(
+            CSV_URL,
+            {
+              cache: "no-store"
+            }
+          );
+
+
+        if (!response.ok) {
+          throw new Error(
+            `CSV取得エラー: ${response.status}`
+          );
+        }
+
+
+        const text =
+          await response.text();
+
+
+        const rows =
+          parseCSV(text);
+
+
+        renderWinner(rows);
+        renderTable(rows);
+        renderMobileList(rows);
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        document.getElementById(
+          "winnerCard"
+        ).innerHTML = `
+          <div class="error">
+            受賞編成の読み込みに失敗しました。
+          </div>
+        `;
+
+
+        document.getElementById(
+          "uniqueTableBody"
+        ).innerHTML = `
+          <tr>
+            <td
+              colspan="4"
+              class="error"
+            >
+              ユニーク編成データの読み込みに失敗しました。
+            </td>
+          </tr>
+        `;
+
+
+        document.getElementById(
+          "mobileList"
+        ).innerHTML = `
+          <div class="error">
+            ユニーク編成データの読み込みに失敗しました。
+          </div>
+        `;
+      }
+    }
+
+
+    loadUniqueData();
+  </script>
+
+</body>
+</html>
