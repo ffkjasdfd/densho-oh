@@ -18,8 +18,13 @@
   --accent:#315dc8;
 }
 
-* { box-sizing:border-box; }
-html { scrollbar-gutter:stable; }
+* {
+  box-sizing:border-box;
+}
+
+html {
+  scrollbar-gutter:stable;
+}
 
 body {
   margin:0;
@@ -30,6 +35,11 @@ body {
   isolation:isolate;
 }
 
+
+/* ==================================================
+   背景
+================================================== */
+
 body::before {
   content:"";
   position:fixed;
@@ -39,15 +49,23 @@ body::before {
   pointer-events:none;
 }
 
-/* ヘッダー */
-header {
+
+/* ==================================================
+   ヘッダー
+================================================== */
+
+body > header {
+  position:sticky;
+  top:0;
+  z-index:20;
   height:100px;
   padding:0 32px;
-  background:#fff;
+  background:rgba(255,255,255,.98);
   border-bottom:1px solid var(--line);
 }
 
 .header-inner {
+  position:relative;
   display:grid;
   grid-template-columns:1fr auto 1fr;
   align-items:center;
@@ -56,11 +74,19 @@ header {
   margin:auto;
 }
 
-.header-title { text-align:center; }
+.header-title {
+  min-width:0;
+  text-align:center;
+}
+
+.header-title a {
+  color:inherit;
+  text-decoration:none;
+}
 
 .header-title h1 {
   margin:0;
-  font-family:"Noto Serif JP","Yu Mincho",serif;
+  font-family:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
   font-size:36px;
   font-weight:700;
   line-height:1.3;
@@ -75,28 +101,66 @@ header {
   letter-spacing:.12em;
 }
 
-/* メニューボタン */
+
+/* ==================================================
+   メニューボタン
+================================================== */
+
 .menu-button {
   justify-self:start;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:5px;
+  position:relative;
   width:44px;
   height:44px;
-  padding:10px;
+  padding:0;
   border:0;
   background:transparent;
   cursor:pointer;
 }
 
 .menu-button span {
+  position:absolute;
+  left:11px;
   width:22px;
   height:2px;
   background:#222;
+
+  transition:
+    transform .2s ease,
+    opacity .2s ease,
+    top .2s ease;
 }
 
-/* HOME・X */
+.menu-button span:nth-child(1) {
+  top:14px;
+}
+
+.menu-button span:nth-child(2) {
+  top:21px;
+}
+
+.menu-button span:nth-child(3) {
+  top:28px;
+}
+
+.menu-button.open span:nth-child(1) {
+  top:21px;
+  transform:rotate(45deg);
+}
+
+.menu-button.open span:nth-child(2) {
+  opacity:0;
+}
+
+.menu-button.open span:nth-child(3) {
+  top:21px;
+  transform:rotate(-45deg);
+}
+
+
+/* ==================================================
+   HOME・X
+================================================== */
+
 .header-actions {
   justify-self:end;
   display:flex;
@@ -104,20 +168,16 @@ header {
   gap:12px;
 }
 
-.header-home,
-.header-x {
+.header-home {
   display:flex;
+  flex-direction:column;
   align-items:center;
   justify-content:center;
-  color:#111;
-  text-decoration:none;
-}
-
-.header-home {
-  flex-direction:column;
   gap:1px;
   width:44px;
   min-height:44px;
+  color:#111;
+  text-decoration:none;
 }
 
 .header-home svg {
@@ -131,93 +191,88 @@ header {
 }
 
 .header-x {
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  transition:background .15s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:44px;
+  height:44px;
+  color:#111;
+  text-decoration:none;
 }
 
-.header-x:hover { background:#f1f3f5; }
-
 .header-x svg {
-  width:25px;
-  height:25px;
+  display:block;
+  width:24px;
+  height:24px;
   fill:currentColor;
 }
 
-/* サイドメニュー */
-.menu-overlay {
+
+/* ==================================================
+   展開メニュー
+================================================== */
+
+.menu-panel {
   position:fixed;
-  inset:0;
-  z-index:1000;
-  background:rgb(0 0 0 / 35%);
+  top:100px;
+  left:0;
+  z-index:19;
+  width:100%;
+  padding:30px 70px;
+  background:rgba(255,255,255,.98);
+  border-top:1px solid #eee;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+
   opacity:0;
   visibility:hidden;
-  transition:opacity .25s,visibility .25s;
+  transform:translateY(-10px);
+
+  transition:
+    opacity .2s ease,
+    transform .2s ease,
+    visibility .2s;
 }
 
-.site-menu {
-  position:fixed;
-  inset:0 auto 0 0;
-  z-index:1001;
-  width:min(320px,85vw);
-  padding:24px;
-  background:#fff;
-  box-shadow:4px 0 20px rgb(0 0 0 / 8%);
-  transform:translateX(-105%);
-  visibility:hidden;
-  transition:transform .25s ease,visibility .25s;
+.menu-panel.open {
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
 }
 
-.site-menu-header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:24px;
-  padding-bottom:16px;
-  border-bottom:1px solid var(--line);
-  font-family:Georgia,serif;
-  letter-spacing:.15em;
+.menu-nav {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  max-width:1180px;
+  margin:0 auto;
 }
 
-.site-menu-header button {
-  border:0;
-  background:transparent;
-  color:#222;
-  font-size:30px;
-  cursor:pointer;
-}
-
-.site-menu > a {
-  display:block;
-  padding:15px 4px;
+.menu-nav a {
+  padding:15px 12px;
   border-bottom:1px solid var(--line);
   color:var(--text);
+  text-align:center;
   text-decoration:none;
   font-size:14px;
 }
 
-.site-menu > a:hover { background:#f7f9fc; }
-
-body.menu-open { overflow:hidden; }
-
-body.menu-open .menu-overlay {
-  opacity:1;
-  visibility:visible;
+.menu-nav a:hover {
+  color:#777;
 }
 
-body.menu-open .site-menu {
-  transform:translateX(0);
-  visibility:visible;
-}
 
-/* ページ */
+/* ==================================================
+   ページ
+================================================== */
+
 .wrap {
   width:min(1000px,calc(100% - 32px));
   margin:auto;
 }
 
-main { padding:30px 0 56px; }
+main {
+  padding:30px 0 56px;
+}
 
 .card {
   min-width:0;
@@ -227,7 +282,11 @@ main { padding:30px 0 56px; }
   border-radius:12px;
 }
 
-/* パンくず */
+
+/* ==================================================
+   パンくず
+================================================== */
+
 .breadcrumb {
   margin:0 0 14px;
   color:#7b8390;
@@ -239,14 +298,20 @@ main { padding:30px 0 56px; }
   text-decoration:none;
 }
 
-.breadcrumb a:hover { text-decoration:underline; }
+.breadcrumb a:hover {
+  text-decoration:underline;
+}
 
 .breadcrumb span {
   margin:0 7px;
   color:#a0a6b0;
 }
 
-/* βロゴ */
+
+/* ==================================================
+   βロゴ
+================================================== */
+
 .beta-logo {
   display:flex;
   justify-content:center;
@@ -263,7 +328,11 @@ main { padding:30px 0 56px; }
   object-fit:contain;
 }
 
-/* 集計結果見出し */
+
+/* ==================================================
+   集計結果見出し
+================================================== */
+
 .results-heading {
   margin:0 0 26px;
   padding:24px 12px 28px;
@@ -274,7 +343,7 @@ main { padding:30px 0 56px; }
 
 .results-heading h2 {
   margin:0;
-  font-family:"Noto Serif JP","Yu Mincho",serif;
+  font-family:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
   font-size:clamp(25px,4vw,32px);
   font-weight:600;
   letter-spacing:.12em;
@@ -292,7 +361,11 @@ main { padding:30px 0 56px; }
   font-size:14px;
 }
 
-/* タブ */
+
+/* ==================================================
+   タブ
+================================================== */
+
 .tabs {
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -318,7 +391,9 @@ main { padding:30px 0 56px; }
   cursor:pointer;
 }
 
-.tab:last-child { border-right:0; }
+.tab:last-child {
+  border-right:0;
+}
 
 .tab.active {
   background:var(--accent);
@@ -326,11 +401,19 @@ main { padding:30px 0 56px; }
   font-weight:700;
 }
 
-.tab:hover:not(.active) { background:#edf3ff; }
+.tab:hover:not(.active) {
+  background:#edf3ff;
+}
 
-[hidden] { display:none !important; }
+[hidden] {
+  display:none !important;
+}
 
-/* 予選・本選 */
+
+/* ==================================================
+   予選・本選
+================================================== */
+
 .stage-frame {
   width:100%;
   padding-bottom:24px;
@@ -352,7 +435,11 @@ main { padding:30px 0 56px; }
   font-size:15px;
 }
 
-/* ブロック */
+
+/* ==================================================
+   ブロック
+================================================== */
+
 .block-frame {
   width:95%;
   margin:22px auto 0;
@@ -362,7 +449,11 @@ main { padding:30px 0 56px; }
   background:#fff;
 }
 
-/* 挑戦階層 */
+
+/* ==================================================
+   挑戦階層
+================================================== */
+
 .challenge-box {
   width:min(360px,90%);
   margin:20px auto 0;
@@ -408,7 +499,11 @@ main { padding:30px 0 56px; }
   font-variant-numeric:tabular-nums;
 }
 
-/* 階層 */
+
+/* ==================================================
+   階層
+================================================== */
+
 .category-frame {
   width:90%;
   margin:20px auto 0;
@@ -429,7 +524,11 @@ main { padding:30px 0 56px; }
   font-size:13px;
 }
 
-/* ランキング */
+
+/* ==================================================
+   ランキング
+================================================== */
+
 .ranking-panel {
   width:100%;
   padding:20px;
@@ -449,12 +548,21 @@ table {
   border-collapse:collapse;
 }
 
-.rank-col { width:20%; }
-.id-col,.time-col { width:40%; }
+.rank-col {
+  width:20%;
+}
 
-thead { background:#f5f7fa; }
+.id-col,
+.time-col {
+  width:40%;
+}
 
-th,td {
+thead {
+  background:#f5f7fa;
+}
+
+th,
+td {
   padding:15px 8px;
   border-bottom:1px solid var(--line);
   text-align:center;
@@ -473,26 +581,57 @@ td {
   font-size:14px;
 }
 
-td:first-child { font-weight:700; }
+td:first-child {
+  font-weight:700;
+}
 
 td:last-child {
   font-variant-numeric:tabular-nums;
   white-space:nowrap;
 }
 
+
 /* 上位3位 */
-tbody tr.rank-1 { background:#fff8e6; }
-tbody tr.rank-2 { background:#f4f6f8; }
-tbody tr.rank-3 { background:#fff3ec; }
 
-tbody tr.rank-1 td:first-child { color:#a97918; }
-tbody tr.rank-2 td:first-child { color:#707985; }
-tbody tr.rank-3 td:first-child { color:#a86b46; }
+tbody tr.rank-1 {
+  background:#fff8e6;
+}
 
-tbody tr.rank-1:hover { background:#fff1c9; }
-tbody tr.rank-2:hover { background:#e9edf2; }
-tbody tr.rank-3:hover { background:#ffe8d9; }
-tbody tr:hover { background:#f7f9fc; }
+tbody tr.rank-2 {
+  background:#f4f6f8;
+}
+
+tbody tr.rank-3 {
+  background:#fff3ec;
+}
+
+tbody tr.rank-1 td:first-child {
+  color:#a97918;
+}
+
+tbody tr.rank-2 td:first-child {
+  color:#707985;
+}
+
+tbody tr.rank-3 td:first-child {
+  color:#a86b46;
+}
+
+tbody tr.rank-1:hover {
+  background:#fff1c9;
+}
+
+tbody tr.rank-2:hover {
+  background:#e9edf2;
+}
+
+tbody tr.rank-3:hover {
+  background:#ffe8d9;
+}
+
+tbody tr:hover {
+  background:#f7f9fc;
+}
 
 .empty {
   padding:36px 10px;
@@ -510,41 +649,89 @@ tbody tr:hover { background:#f7f9fc; }
   text-align:right;
 }
 
-/* フッター */
+
+/* ==================================================
+   フッター
+================================================== */
+
 footer {
   padding:22px 16px;
   border-top:1px solid var(--line);
+  background:#fff;
   color:#858b96;
   font-size:11px;
   text-align:center;
 }
 
-/* スマートフォン */
+
+/* ==================================================
+   スマートフォン
+================================================== */
+
 @media (max-width:600px) {
-  header {
+
+  body > header {
     height:78px;
     padding:0 14px;
   }
 
   .header-inner {
-    grid-template-columns:36px minmax(0,1fr) auto;
+    grid-template-columns:44px minmax(0,1fr) auto;
   }
 
-  .header-title h1 { font-size:25px; }
+  .header-title h1 {
+    font-size:25px;
+    letter-spacing:.08em;
+  }
 
   .header-title .subtitle {
     font-size:8px;
     letter-spacing:.04em;
   }
 
+
+  /* メニューボタン */
+
   .menu-button {
     width:36px;
     height:36px;
-    padding:7px;
   }
 
-  .header-actions { gap:5px; }
-  .header-home { width:36px; }
+  .menu-button span {
+    left:7px;
+  }
+
+  .menu-button span:nth-child(1) {
+    top:11px;
+  }
+
+  .menu-button span:nth-child(2) {
+    top:17px;
+  }
+
+  .menu-button span:nth-child(3) {
+    top:23px;
+  }
+
+  .menu-button.open span:nth-child(1) {
+    top:17px;
+  }
+
+  .menu-button.open span:nth-child(3) {
+    top:17px;
+  }
+
+
+  /* HOME・X */
+
+  .header-actions {
+    gap:5px;
+  }
+
+  .header-home {
+    width:36px;
+    min-height:36px;
+  }
 
   .header-home svg {
     width:19px;
@@ -561,8 +748,34 @@ footer {
     height:20px;
   }
 
-  .wrap { width:calc(100% - 20px); }
-  main { padding:18px 0 38px; }
+
+  /* 展開メニュー */
+
+  .menu-panel {
+    top:78px;
+    padding:20px;
+  }
+
+  .menu-nav {
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  .menu-nav a {
+    padding:14px 8px;
+    font-size:13px;
+  }
+
+
+  /* ページ */
+
+  .wrap {
+    width:calc(100% - 20px);
+  }
+
+  main {
+    padding:18px 0 38px;
+  }
 
   .card {
     padding:16px 10px;
@@ -574,7 +787,9 @@ footer {
     font-size:11px;
   }
 
-  .beta-logo { margin-bottom:24px; }
+  .beta-logo {
+    margin-bottom:24px;
+  }
 
   .beta-logo img {
     width:90%;
@@ -586,9 +801,13 @@ footer {
     padding:20px 6px 22px;
   }
 
-  .results-period { font-size:12px; }
+  .results-period {
+    font-size:12px;
+  }
 
-  .stage-frame { padding-bottom:14px; }
+  .stage-frame {
+    padding-bottom:14px;
+  }
 
   .stage-tabs .tab {
     padding:11px 4px;
@@ -607,24 +826,24 @@ footer {
   }
 
   .challenge-box {
-  width:min(320px,90%);
-  margin-top:16px;
-}
+    width:min(320px,90%);
+    margin-top:16px;
+  }
 
-.challenge-title {
-  margin-bottom:9px;
-  font-size:15px;
-}
+  .challenge-title {
+    margin-bottom:9px;
+    font-size:15px;
+  }
 
-.challenge-row {
-  grid-template-columns:1fr 1fr;
-}
+  .challenge-row {
+    grid-template-columns:1fr 1fr;
+  }
 
-.challenge-name,
-.challenge-level {
-  padding:9px 6px;
-  font-size:12px;
-}
+  .challenge-name,
+  .challenge-level {
+    padding:9px 6px;
+    font-size:12px;
+  }
 
   .category-frame {
     width:94%;
@@ -637,163 +856,446 @@ footer {
     overflow-wrap:anywhere;
   }
 
-  .ranking-panel { padding:12px 8px; }
+  .ranking-panel {
+    padding:12px 8px;
+  }
 
-  th,td { padding:13px 3px; }
+  th,
+  td {
+    padding:13px 3px;
+  }
 
   th {
     font-size:11px;
     letter-spacing:0;
   }
 
-  td { font-size:13px; }
-
-  #updated,
-#prelimUpdated {
-  margin-top:16px;
-  font-size:10px;
-}
-}
-
-@media (max-width:360px) {
-  .header-inner {
-    grid-template-columns:30px minmax(0,1fr) auto;
+  td {
+    font-size:13px;
   }
 
-  .header-title h1 { font-size:21px; }
-  .header-title .subtitle { font-size:7px; }
-  .header-actions { gap:2px; }
+  #updated,
+  #prelimUpdated {
+    margin-top:16px;
+    font-size:10px;
+  }
+
+}
+
+
+/* ==================================================
+   小型スマートフォン
+================================================== */
+
+@media (max-width:360px) {
+
+  body > header {
+    padding:0 10px;
+  }
+
+  .header-inner {
+    grid-template-columns:34px minmax(0,1fr) auto;
+  }
+
+  .header-title h1 {
+    font-size:21px;
+  }
+
+  .header-title .subtitle {
+    font-size:7px;
+  }
+
+  .header-actions {
+    gap:2px;
+  }
+
+  .menu-button {
+    width:34px;
+  }
+
+  .menu-button span {
+    left:6px;
+  }
+
+  .header-x {
+    width:32px;
+    height:32px;
+  }
+
+  .header-x svg {
+    width:19px;
+    height:19px;
+  }
 
   .card {
     padding-right:7px;
     padding-left:7px;
   }
 
-  .block-frame { padding:5px; }
+  .block-frame {
+    padding:5px;
+  }
 
   .ranking-panel {
     padding-right:6px;
     padding-left:6px;
   }
 
-  th,td {
+  th,
+  td {
     padding-right:2px;
     padding-left:2px;
   }
 
-  td { font-size:12px; }
+  td {
+    font-size:12px;
+  }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- ==================================================
+     ヘッダー
+================================================== -->
+
 <header>
+
   <div class="header-inner">
-    <button class="menu-button" id="menu-open" type="button"
-      aria-label="メニューを開く" aria-controls="site-menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      type="button"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
+
     <div class="header-title">
-      <h1>伝承王</h1>
-      <div class="subtitle">Legend of GARDENER</div>
+
+      <a href="/">
+
+        <h1>
+          伝承王
+        </h1>
+
+        <div class="subtitle">
+          Legend of GARDENER
+        </div>
+
+      </a>
+
     </div>
+
 
     <div class="header-actions">
-      <a class="header-home" href="/" aria-label="HOME">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"
-            fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+
+      <a
+        class="header-home"
+        href="/"
+        aria-label="HOME"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linejoin="round"
+          />
         </svg>
-        <span>HOME</span>
+
+        <span>
+          HOME
+        </span>
+
       </a>
 
-      <a class="header-x" href="https://x.com/rxr_legendary"
-        target="_blank" rel="noopener noreferrer"
-        aria-label="伝承王の運営アカウントをXで開く">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"/>
+
+      <a
+        class="header-x"
+        href="https://x.com/rxr_legendary"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="伝承王の運営アカウントをXで開く"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"
+          />
         </svg>
+
       </a>
+
     </div>
+
   </div>
+
 </header>
 
-<div class="menu-overlay" id="menu-overlay"></div>
 
-<nav class="site-menu" id="site-menu" aria-label="サイトメニュー" aria-hidden="true">
-  <div class="site-menu-header">
-    <span>MENU</span>
-    <button id="menu-close" type="button" aria-label="メニューを閉じる">×</button>
-  </div>
+<!-- ==================================================
+     展開メニュー
+================================================== -->
 
-  <a href="/">HOME</a>
-  <a href="/beta/">開催中の大会</a>
-  <a href="/archive/">過去開催の大会</a>
-  <a href="/#information">お問い合わせ</a>
-</nav>
+<div
+  class="menu-panel"
+  id="menuPanel"
+>
 
-<main class="wrap">
-<section class="card">
+  <nav
+    class="menu-nav"
+    aria-label="サイトメニュー"
+  >
 
-  <nav class="breadcrumb" aria-label="パンくずリスト">
-    <a href="/">HOME</a>
-    <span>›</span>
-    <a href="/beta/">伝承王β</a>
-    <span>›</span>
-    集計結果
+    <a href="/">
+      HOME
+    </a>
+
+    <a href="/current/">
+      開催中の大会
+    </a>
+
+    <a href="/archive/">
+      過去開催の大会
+    </a>
+
+    <a href="/#information">
+      お問い合わせ
+    </a>
+
   </nav>
 
+</div>
+
+
+<!-- ==================================================
+     メイン
+================================================== -->
+
+<main class="wrap">
+
+<section class="card">
+
+
+  <!-- パンくず -->
+
+  <nav
+    class="breadcrumb"
+    aria-label="パンくずリスト"
+  >
+
+    <a href="/">
+      HOME
+    </a>
+
+    <span>
+      ›
+    </span>
+
+    <a href="/beta/">
+      伝承王β
+    </a>
+
+    <span>
+      ›
+    </span>
+
+    集計結果
+
+  </nav>
+
+
+  <!-- βロゴ -->
+
   <div class="beta-logo">
-    <img src="/beta/logo.png" alt="伝承王β">
+
+    <img
+      src="/beta/logo.png"
+      alt="伝承王β"
+    >
+
   </div>
 
+
+  <!-- 集計結果 -->
+
   <div class="results-heading">
-    <h2>集計結果</h2>
-    <p class="results-period-label">開催期間</p>
+
+    <h2>
+      集計結果
+    </h2>
+
+    <p class="results-period-label">
+      開催期間
+    </p>
+
     <p class="results-period">
       2026年10月11日(日) ～ 2026年10月25日(日)
     </p>
+
   </div>
 
-  <!-- 予選・本選 -->
+
+  <!-- ==================================================
+       予選・本選
+  ================================================== -->
+
   <div class="stage-frame">
-    <div class="tabs stage-tabs" id="stageTabs" aria-label="大会日程選択">
-      <button class="tab" data-stage="prelim">予選</button>
-      <button class="tab active" data-stage="main">本選</button>
+
+
+    <div
+      class="tabs stage-tabs"
+      id="stageTabs"
+      aria-label="大会日程選択"
+    >
+
+      <button
+        class="tab"
+        data-stage="prelim"
+      >
+        予選
+      </button>
+
+      <button
+        class="tab active"
+        data-stage="main"
+      >
+        本選
+      </button>
+
     </div>
 
-    <!-- 本選 -->
+
+    <!-- ==================================================
+         本選
+    ================================================== -->
+
     <div id="mainRanking">
+
       <div class="block-frame">
 
+
         <!-- ブロック -->
-        <div class="tabs" id="blockTabs" aria-label="ブロック選択">
-          <button class="tab active" data-block="A">Aブロック</button>
-          <button class="tab" data-block="B">Bブロック</button>
-          <button class="tab" data-block="C">Cブロック</button>
-          <button class="tab" data-block="D">Dブロック</button>
+
+        <div
+          class="tabs"
+          id="blockTabs"
+          aria-label="ブロック選択"
+        >
+
+          <button
+            class="tab active"
+            data-block="A"
+          >
+            Aブロック
+          </button>
+
+          <button
+            class="tab"
+            data-block="B"
+          >
+            Bブロック
+          </button>
+
+          <button
+            class="tab"
+            data-block="C"
+          >
+            Cブロック
+          </button>
+
+          <button
+            class="tab"
+            data-block="D"
+          >
+            Dブロック
+          </button>
+
         </div>
+
 
         <!-- 挑戦階層 -->
+
         <div class="challenge-box">
-          <h3 class="challenge-title">挑戦階層</h3>
-          <div class="challenge-table" id="mainChallenge"></div>
+
+          <h3 class="challenge-title">
+            挑戦階層
+          </h3>
+
+          <div
+            class="challenge-table"
+            id="mainChallenge"
+          ></div>
+
         </div>
 
+
         <!-- 階層タブ -->
+
         <div class="category-frame">
-          <div class="tabs" id="categoryTabs" aria-label="階層選択">
-            <button class="tab active" data-category="total">総合</button>
-            <button class="tab" data-category="reverse">リバースバベル</button>
-            <button class="tab" data-category="another">アナザーバベル</button>
-            <button class="tab" data-category="rebuild">バベルリビルド</button>
+
+          <div
+            class="tabs"
+            id="categoryTabs"
+            aria-label="階層選択"
+          >
+
+            <button
+              class="tab active"
+              data-category="total"
+            >
+              総合
+            </button>
+
+            <button
+              class="tab"
+              data-category="reverse"
+            >
+              リバースバベル
+            </button>
+
+            <button
+              class="tab"
+              data-category="another"
+            >
+              アナザーバベル
+            </button>
+
+            <button
+              class="tab"
+              data-category="rebuild"
+            >
+              バベルリビルド
+            </button>
+
           </div>
 
+
           <div class="ranking-panel">
+
             <div class="table-wrap">
+
               <table>
+
                 <colgroup>
                   <col class="rank-col">
                   <col class="id-col">
@@ -801,46 +1303,87 @@ footer {
                 </colgroup>
 
                 <thead>
+
                   <tr>
                     <th>順位</th>
                     <th>固有番号</th>
                     <th>残りタイム</th>
                   </tr>
+
                 </thead>
 
                 <tbody id="rankingBody">
+
                   <tr>
-                    <td colspan="3" class="empty">
+                    <td
+                      colspan="3"
+                      class="empty"
+                    >
                       ランキングデータを読み込み中…
                     </td>
                   </tr>
+
                 </tbody>
+
               </table>
+
             </div>
 
-            <div id="updated">大会終了時点の確定結果</div>
+
+            <div id="updated">
+              大会終了時点の確定結果
+            </div>
+
           </div>
+
         </div>
 
       </div>
+
     </div>
 
-    <!-- 予選 -->
-    <div id="prelimRanking" hidden>
+
+    <!-- ==================================================
+         予選
+    ================================================== -->
+
+    <div
+      id="prelimRanking"
+      hidden
+    >
+
 
       <div class="challenge-box">
-        <h3 class="challenge-title">挑戦階層</h3>
+
+        <h3 class="challenge-title">
+          挑戦階層
+        </h3>
+
         <div class="challenge-table">
+
           <div class="challenge-row">
-            <div class="challenge-name">リバースバベル</div>
-            <div class="challenge-level">75層</div>
+
+            <div class="challenge-name">
+              リバースバベル
+            </div>
+
+            <div class="challenge-level">
+              75層
+            </div>
+
           </div>
+
         </div>
+
       </div>
 
+
       <div class="ranking-panel">
+
         <div class="table-wrap">
+
           <table>
+
             <colgroup>
               <col class="rank-col">
               <col class="id-col">
@@ -848,347 +1391,815 @@ footer {
             </colgroup>
 
             <thead>
+
               <tr>
                 <th>順位</th>
                 <th>固有番号</th>
                 <th>残りタイム</th>
               </tr>
+
             </thead>
 
             <tbody id="prelimBody">
+
               <tr>
-                <td colspan="3" class="empty">
+                <td
+                  colspan="3"
+                  class="empty"
+                >
                   ランキングデータを読み込み中…
                 </td>
               </tr>
+
             </tbody>
+
           </table>
+
         </div>
 
-        <div id="prelimUpdated">大会終了時点の確定結果</div>
+
+        <div id="prelimUpdated">
+          大会終了時点の確定結果
+        </div>
+
       </div>
 
     </div>
+
+
   </div>
 
 </section>
+
 </main>
 
-<footer>伝承王</footer>
+
+<!-- ==================================================
+     フッター
+================================================== -->
+
+<footer>
+  伝承王
+</footer>
+
+
+<!-- ==================================================
+     JavaScript
+================================================== -->
 
 <script>
+
 const CSV_URL = "./ranking.csv";
 
-const $ = id => document.getElementById(id);
+const $ = id =>
+  document.getElementById(id);
 
-const rankingBody = $("rankingBody");
-const prelimBody = $("prelimBody");
-const mainRanking = $("mainRanking");
-const prelimRanking = $("prelimRanking");
-const mainChallenge = $("mainChallenge");
+const rankingBody =
+  $("rankingBody");
+
+const prelimBody =
+  $("prelimBody");
+
+const mainRanking =
+  $("mainRanking");
+
+const prelimRanking =
+  $("prelimRanking");
+
+const mainChallenge =
+  $("mainChallenge");
+
 
 let rows = [];
-let currentStage = "main";
-let currentBlock = "A";
-let currentCategory = "total";
 
-/* 挑戦階層 */
+let currentStage =
+  "main";
+
+let currentBlock =
+  "A";
+
+let currentCategory =
+  "total";
+
+
+/* ==================================================
+   挑戦階層
+================================================== */
+
 const challengeLevels = {
-  A: {
+
+  A:{
     reverse:100,
     another:101,
     rebuild:103
   },
-  B: {
+
+  B:{
     reverse:90,
     another:80,
     rebuild:75
   },
-  C: {
+
+  C:{
     reverse:70,
     another:55,
     rebuild:60
   },
-  D: {
+
+  D:{
     reverse:50
   }
+
 };
+
 
 const categoryNames = {
+
   reverse:"リバースバベル",
+
   another:"アナザーバベル",
+
   rebuild:"バベルリビルド"
+
 };
 
-/* CSV読み込み */
+
+/* ==================================================
+   CSV読み込み
+================================================== */
+
 async function loadRanking() {
+
   try {
-    const response = await fetch(CSV_URL);
+
+    const response =
+      await fetch(CSV_URL);
+
 
     if (!response.ok) {
-      throw new Error("CSVの取得に失敗しました");
+
+      throw new Error(
+        "CSVの取得に失敗しました"
+      );
+
     }
 
-    const text = await response.text();
-    rows = parseCSV(text);
+
+    const text =
+      await response.text();
+
+
+    rows =
+      parseCSV(text);
+
 
     renderRanking();
+
   } catch (error) {
+
     rankingBody.innerHTML =
       '<tr><td colspan="3" class="empty">ランキングデータの取得に失敗しました。</td></tr>';
+
 
     prelimBody.innerHTML =
       '<tr><td colspan="3" class="empty">ランキングデータの取得に失敗しました。</td></tr>';
 
+
     console.error(error);
+
   }
+
 }
 
-/* CSV解析 */
+
+/* ==================================================
+   CSV解析
+================================================== */
+
 function parseCSV(text) {
-  const lines = text
-    .replace(/^\uFEFF/,"")
-    .trim()
-    .split(/\r?\n/);
 
-  if (lines.length < 2) return [];
+  const lines =
+    text
+      .replace(/^\uFEFF/,"")
+      .trim()
+      .split(/\r?\n/);
 
-  const headers = lines[0].split(",").map(v => v.trim());
 
-  return lines.slice(1).map(line => {
-    const values = line.split(",");
+  if (lines.length < 2) {
 
-    return Object.fromEntries(
-      headers.map((header,index) => [
-        header,
-        (values[index] ?? "").trim()
-      ])
-    );
-  });
+    return [];
+
+  }
+
+
+  const headers =
+    lines[0]
+      .split(",")
+      .map(v => v.trim());
+
+
+  return lines
+    .slice(1)
+    .map(line => {
+
+      const values =
+        line.split(",");
+
+
+      return Object.fromEntries(
+
+        headers.map(
+          (header,index) => [
+
+            header,
+
+            (values[index] ?? "")
+              .trim()
+
+          ]
+        )
+
+      );
+
+    });
+
 }
 
-/* 全体描画 */
+
+/* ==================================================
+   全体描画
+================================================== */
+
 function renderRanking() {
-  document.querySelectorAll("[data-stage]").forEach(btn => {
-    btn.classList.toggle(
-      "active",
-      btn.dataset.stage === currentStage
-    );
-  });
+
+  document
+    .querySelectorAll("[data-stage]")
+    .forEach(btn => {
+
+      btn.classList.toggle(
+        "active",
+        btn.dataset.stage === currentStage
+      );
+
+    });
+
 
   if (currentStage === "prelim") {
-    mainRanking.hidden = true;
-    prelimRanking.hidden = false;
+
+    mainRanking.hidden =
+      true;
+
+    prelimRanking.hidden =
+      false;
+
     renderPreliminary();
+
     return;
+
   }
 
-  mainRanking.hidden = false;
-  prelimRanking.hidden = true;
+
+  mainRanking.hidden =
+    false;
+
+  prelimRanking.hidden =
+    true;
+
 
   renderMain();
+
 }
 
-/* 予選 */
+
+/* ==================================================
+   予選
+================================================== */
+
 function renderPreliminary() {
-  const entries = rows
-    .filter(row => row.preliminary !== "")
-    .map(row => ({
-      id:row.id,
-      time:Number(row.preliminary)
-    }))
-    .filter(entry => Number.isFinite(entry.time))
-    .sort((a,b) => b.time - a.time);
 
-  renderTable(prelimBody,entries);
+  const entries =
+    rows
+      .filter(
+        row =>
+          row.preliminary !== ""
+      )
+      .map(row => ({
+
+        id:row.id,
+
+        time:Number(
+          row.preliminary
+        )
+
+      }))
+      .filter(
+        entry =>
+          Number.isFinite(entry.time)
+      )
+      .sort(
+        (a,b) =>
+          b.time - a.time
+      );
+
+
+  renderTable(
+    prelimBody,
+    entries
+  );
+
 }
 
-/* 本選 */
+
+/* ==================================================
+   本選
+================================================== */
+
 function renderMain() {
-  document.querySelectorAll("[data-block]").forEach(btn => {
-    btn.classList.toggle(
-      "active",
-      btn.dataset.block === currentBlock
-    );
-  });
+
+  document
+    .querySelectorAll("[data-block]")
+    .forEach(btn => {
+
+      btn.classList.toggle(
+        "active",
+        btn.dataset.block === currentBlock
+      );
+
+    });
+
 
   const availableCategories =
     currentBlock === "D"
-      ? ["total","reverse"]
-      : ["total","reverse","another","rebuild"];
 
-  if (!availableCategories.includes(currentCategory)) {
-    currentCategory = "total";
+      ? [
+          "total",
+          "reverse"
+        ]
+
+      : [
+          "total",
+          "reverse",
+          "another",
+          "rebuild"
+        ];
+
+
+  if (
+    !availableCategories
+      .includes(currentCategory)
+  ) {
+
+    currentCategory =
+      "total";
+
   }
 
-  document.querySelectorAll("[data-category]").forEach(btn => {
-    const category = btn.dataset.category;
 
-    btn.hidden = !availableCategories.includes(category);
-    btn.classList.toggle(
-      "active",
-      category === currentCategory
-    );
-  });
+  document
+    .querySelectorAll("[data-category]")
+    .forEach(btn => {
+
+      const category =
+        btn.dataset.category;
+
+
+      btn.hidden =
+        !availableCategories
+          .includes(category);
+
+
+      btn.classList.toggle(
+        "active",
+        category === currentCategory
+      );
+
+    });
+
 
   renderChallenge();
 
-  const blockRows = rows.filter(
-    row => row.block === currentBlock
-  );
+
+  const blockRows =
+    rows.filter(
+      row =>
+        row.block === currentBlock
+    );
+
 
   let entries;
 
-  if (currentCategory === "total") {
+
+  if (
+    currentCategory === "total"
+  ) {
+
     /*
-      本戦3階層のうち1つ以上を提出している人だけ総合に表示。
-      totalが0でも、3階層すべて未提出なら表示しない。
+      本選の階層を1つ以上提出している人だけ
+      総合ランキングへ表示する。
     */
-    entries = blockRows
-      .filter(row =>
-        row.reverse !== "" ||
-        row.another !== "" ||
-        row.rebuild !== ""
-      )
-      .map(row => ({
-        id:row.id,
-        time:Number(row.total)
-      }));
+
+    entries =
+      blockRows
+        .filter(row =>
+
+          row.reverse !== "" ||
+
+          row.another !== "" ||
+
+          row.rebuild !== ""
+
+        )
+        .map(row => ({
+
+          id:row.id,
+
+          time:Number(
+            row.total
+          )
+
+        }));
+
+
   } else {
+
     /*
       選択中の階層を提出している人だけ表示。
     */
-    entries = blockRows
-      .filter(row => row[currentCategory] !== "")
-      .map(row => ({
-        id:row.id,
-        time:Number(row[currentCategory])
-      }));
+
+    entries =
+      blockRows
+        .filter(
+          row =>
+            row[currentCategory] !== ""
+        )
+        .map(row => ({
+
+          id:row.id,
+
+          time:Number(
+            row[currentCategory]
+          )
+
+        }));
+
   }
 
-  entries = entries
-    .filter(entry => Number.isFinite(entry.time))
-    .sort((a,b) => b.time - a.time);
 
-  renderTable(rankingBody,entries);
+  entries =
+    entries
+      .filter(
+        entry =>
+          Number.isFinite(entry.time)
+      )
+      .sort(
+        (a,b) =>
+          b.time - a.time
+      );
+
+
+  renderTable(
+    rankingBody,
+    entries
+  );
+
 }
 
-/* 挑戦階層描画 */
+
+/* ==================================================
+   挑戦階層描画
+================================================== */
+
 function renderChallenge() {
-  const levels = challengeLevels[currentBlock];
 
-  mainChallenge.innerHTML = Object.entries(levels)
-    .map(([category,level]) => `
-      <div class="challenge-row">
-        <div class="challenge-name">
-          ${categoryNames[category]}
-        </div>
-        <div class="challenge-level">
-          ${level}層
-        </div>
-      </div>
-    `)
-    .join("");
+  const levels =
+    challengeLevels[
+      currentBlock
+    ];
+
+
+  mainChallenge.innerHTML =
+    Object.entries(levels)
+
+      .map(
+        ([category,level]) => `
+
+          <div class="challenge-row">
+
+            <div class="challenge-name">
+              ${categoryNames[category]}
+            </div>
+
+            <div class="challenge-level">
+              ${level}層
+            </div>
+
+          </div>
+
+        `
+      )
+
+      .join("");
+
 }
 
-/* ランキング表描画 */
-function renderTable(body,entries) {
+
+/* ==================================================
+   ランキング表描画
+================================================== */
+
+function renderTable(
+  body,
+  entries
+) {
+
   if (!entries.length) {
+
     body.innerHTML =
       '<tr><td colspan="3" class="empty">記録はありません。</td></tr>';
+
     return;
+
   }
 
-  let previousTime = null;
-  let previousRank = 0;
 
-  body.innerHTML = entries.map((entry,index) => {
-    const time = Number(entry.time);
-    const rounded = Math.round(time * 100) / 100;
+  let previousTime =
+    null;
 
-    const rank =
-      index > 0 && rounded === previousTime
-        ? previousRank
-        : index + 1;
+  let previousRank =
+    0;
 
-    previousTime = rounded;
-    previousRank = rank;
 
-    return `
-      <tr class="${rank <= 3 ? `rank-${rank}` : ""}">
-        <td>${rank}位</td>
-        <td>${escapeHTML(String(entry.id))}</td>
-        <td>${time.toFixed(2)}秒</td>
-      </tr>
-    `;
-  }).join("");
+  body.innerHTML =
+    entries
+      .map(
+        (entry,index) => {
+
+          const time =
+            Number(entry.time);
+
+
+          const rounded =
+            Math.round(
+              time * 100
+            ) / 100;
+
+
+          const rank =
+
+            index > 0 &&
+            rounded === previousTime
+
+              ? previousRank
+
+              : index + 1;
+
+
+          previousTime =
+            rounded;
+
+          previousRank =
+            rank;
+
+
+          return `
+
+            <tr class="${
+              rank <= 3
+                ? `rank-${rank}`
+                : ""
+            }">
+
+              <td>
+                ${rank}位
+              </td>
+
+              <td>
+                ${escapeHTML(
+                  String(entry.id)
+                )}
+              </td>
+
+              <td>
+                ${time.toFixed(2)}秒
+              </td>
+
+            </tr>
+
+          `;
+
+        }
+      )
+      .join("");
+
 }
 
-/* HTMLエスケープ */
+
+/* ==================================================
+   HTMLエスケープ
+================================================== */
+
 function escapeHTML(str) {
-  return str.replace(/[&<>"']/g,c => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  })[c]);
+
+  return str.replace(
+    /[&<>"']/g,
+    c => ({
+
+      "&":"&amp;",
+
+      "<":"&lt;",
+
+      ">":"&gt;",
+
+      '"':"&quot;",
+
+      "'":"&#39;"
+
+    })[c]
+  );
+
 }
 
-/* 予選・本選タブ */
-$("stageTabs").onclick = e => {
-  const btn = e.target.closest("[data-stage]");
-  if (!btn) return;
 
-  currentStage = btn.dataset.stage;
-  renderRanking();
-};
+/* ==================================================
+   予選・本選タブ
+================================================== */
 
-/* ブロックタブ */
-$("blockTabs").onclick = e => {
-  const btn = e.target.closest("[data-block]");
-  if (!btn) return;
+$("stageTabs").onclick =
+  event => {
 
-  currentBlock = btn.dataset.block;
-  renderRanking();
-};
+    const btn =
+      event.target.closest(
+        "[data-stage]"
+      );
 
-/* 階層タブ */
-$("categoryTabs").onclick = e => {
-  const btn = e.target.closest("[data-category]");
-  if (!btn || btn.hidden) return;
 
-  currentCategory = btn.dataset.category;
-  renderRanking();
-};
+    if (!btn) {
+      return;
+    }
 
-/* メニュー */
-const menuOpen = $("menu-open");
-const menu = $("site-menu");
 
-function toggleMenu(open) {
-  document.body.classList.toggle("menu-open",open);
-  menuOpen.setAttribute("aria-expanded",open);
-  menu.setAttribute("aria-hidden",!open);
+    currentStage =
+      btn.dataset.stage;
+
+
+    renderRanking();
+
+  };
+
+
+/* ==================================================
+   ブロックタブ
+================================================== */
+
+$("blockTabs").onclick =
+  event => {
+
+    const btn =
+      event.target.closest(
+        "[data-block]"
+      );
+
+
+    if (!btn) {
+      return;
+    }
+
+
+    currentBlock =
+      btn.dataset.block;
+
+
+    renderRanking();
+
+  };
+
+
+/* ==================================================
+   階層タブ
+================================================== */
+
+$("categoryTabs").onclick =
+  event => {
+
+    const btn =
+      event.target.closest(
+        "[data-category]"
+      );
+
+
+    if (
+      !btn ||
+      btn.hidden
+    ) {
+
+      return;
+
+    }
+
+
+    currentCategory =
+      btn.dataset.category;
+
+
+    renderRanking();
+
+  };
+
+
+/* ==================================================
+   メニュー
+================================================== */
+
+const menuButton =
+  $("menuButton");
+
+const menuPanel =
+  $("menuPanel");
+
+
+function closeMenu() {
+
+  menuPanel
+    .classList
+    .remove("open");
+
+
+  menuButton
+    .classList
+    .remove("open");
+
+
+  menuButton.setAttribute(
+    "aria-expanded",
+    "false"
+  );
+
 }
 
-menuOpen.onclick = () => toggleMenu(true);
 
-$("menu-close").onclick =
-$("menu-overlay").onclick =
-  () => toggleMenu(false);
+menuButton.addEventListener(
+  "click",
+  () => {
 
-menu.querySelectorAll("a").forEach(a => {
-  a.onclick = () => toggleMenu(false);
-});
+    const isOpen =
+      menuPanel
+        .classList
+        .toggle("open");
 
-document.addEventListener("keydown",e => {
-  if (e.key === "Escape") toggleMenu(false);
-});
 
-/* 初回読み込み */
+    menuButton
+      .classList
+      .toggle(
+        "open",
+        isOpen
+      );
+
+
+    menuButton.setAttribute(
+      "aria-expanded",
+      String(isOpen)
+    );
+
+  }
+);
+
+
+menuPanel
+  .querySelectorAll("a")
+  .forEach(link => {
+
+    link.addEventListener(
+      "click",
+      closeMenu
+    );
+
+  });
+
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closeMenu();
+
+    }
+
+  }
+);
+
+
+/* ==================================================
+   初回読み込み
+================================================== */
+
 loadRanking();
+
 </script>
+
 
 </body>
 </html>
