@@ -18,7 +18,9 @@
   --soft:#f8f8f8;
 }
 
-* { box-sizing:border-box; }
+* {
+  box-sizing:border-box;
+}
 
 html {
   scroll-behavior:smooth;
@@ -33,8 +35,14 @@ body {
   line-height:1.9;
 }
 
-/* ヘッダー */
+
+/* ==================================================
+   ヘッダー
+================================================== */
+
 header {
+  position:relative;
+  z-index:20;
   height:100px;
   padding:0 32px;
   background:#fff;
@@ -42,6 +50,7 @@ header {
 }
 
 .header-inner {
+  position:relative;
   display:grid;
   grid-template-columns:1fr auto 1fr;
   align-items:center;
@@ -71,29 +80,65 @@ header {
   letter-spacing:.12em;
 }
 
-/* メニューボタン */
+
+/* ==================================================
+   メニューボタン
+================================================== */
+
 .menu-button {
   justify-self:start;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:5px;
+  position:relative;
   width:44px;
   height:44px;
-  padding:10px;
+  padding:0;
   border:0;
   background:transparent;
   cursor:pointer;
 }
 
 .menu-button span {
-  display:block;
+  position:absolute;
+  left:11px;
   width:22px;
   height:2px;
   background:#222;
+  transition:
+    transform .2s ease,
+    opacity .2s ease,
+    top .2s ease;
 }
 
-/* HOME・X */
+.menu-button span:nth-child(1) {
+  top:14px;
+}
+
+.menu-button span:nth-child(2) {
+  top:21px;
+}
+
+.menu-button span:nth-child(3) {
+  top:28px;
+}
+
+.menu-button.open span:nth-child(1) {
+  top:21px;
+  transform:rotate(45deg);
+}
+
+.menu-button.open span:nth-child(2) {
+  opacity:0;
+}
+
+.menu-button.open span:nth-child(3) {
+  top:21px;
+  transform:rotate(-45deg);
+}
+
+
+/* ==================================================
+   HOME・X
+================================================== */
+
 .header-actions {
   justify-self:end;
   display:flex;
@@ -140,73 +185,64 @@ header {
   fill:currentColor;
 }
 
-/* サイドメニュー */
-.menu-overlay {
+
+/* ==================================================
+   展開メニュー
+================================================== */
+
+.menu-panel {
   position:fixed;
-  inset:0;
-  z-index:1000;
-  background:rgb(0 0 0 / 35%);
+  top:100px;
+  left:0;
+  z-index:19;
+  width:100%;
+  padding:30px 70px;
+  background:rgba(255,255,255,.98);
+  border-top:1px solid #eee;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+
   opacity:0;
   visibility:hidden;
-  transition:opacity .25s,visibility .25s;
+  transform:translateY(-10px);
+
+  transition:
+    opacity .2s ease,
+    transform .2s ease,
+    visibility .2s;
 }
 
-.site-menu {
-  position:fixed;
-  inset:0 auto 0 0;
-  z-index:1001;
-  width:min(320px,85vw);
-  padding:24px;
-  background:#fff;
-  box-shadow:4px 0 20px rgb(0 0 0 / 8%);
-  transform:translateX(-105%);
-  visibility:hidden;
-  transition:transform .25s ease,visibility .25s;
+.menu-panel.open {
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
 }
 
-.site-menu-header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:24px;
-  padding-bottom:16px;
-  border-bottom:1px solid var(--line);
-  font-family:Georgia,serif;
-  letter-spacing:.15em;
+.menu-nav {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  max-width:1180px;
+  margin:0 auto;
 }
 
-.site-menu-header button {
-  border:0;
-  background:transparent;
-  color:#222;
-  font-size:30px;
-  cursor:pointer;
-}
-
-.site-menu > a {
-  display:block;
-  padding:15px 4px;
+.menu-nav a {
+  padding:15px 12px;
   border-bottom:1px solid var(--line);
   color:var(--text);
+  text-align:center;
   text-decoration:none;
   font-size:14px;
 }
 
-.site-menu > a:hover { color:#777; }
-
-body.menu-open { overflow:hidden; }
-
-body.menu-open .menu-overlay {
-  opacity:1;
-  visibility:visible;
+.menu-nav a:hover {
+  color:#777;
 }
 
-body.menu-open .site-menu {
-  transform:translateX(0);
-  visibility:visible;
-}
 
-/* メインタイトル */
+/* ==================================================
+   メインタイトル
+================================================== */
+
 .hero {
   display:flex;
   flex-direction:column;
@@ -256,7 +292,11 @@ body.menu-open .site-menu {
   font-size:14px;
 }
 
-/* 共通セクション */
+
+/* ==================================================
+   共通セクション
+================================================== */
+
 .section {
   width:min(880px,calc(100% - 40px));
   margin:auto;
@@ -264,7 +304,9 @@ body.menu-open .site-menu {
   text-align:center;
 }
 
-.section + .section { border-top:1px solid var(--line); }
+.section + .section {
+  border-top:1px solid var(--line);
+}
 
 .section-label {
   margin:0 0 5px;
@@ -289,7 +331,11 @@ body.menu-open .site-menu {
   font-size:14px;
 }
 
-/* 大会一覧 */
+
+/* ==================================================
+   大会一覧
+================================================== */
+
 .tournament-list {
   margin-top:36px;
   text-align:left;
@@ -305,7 +351,10 @@ body.menu-open .site-menu {
   background:#fff;
   color:var(--text);
   text-decoration:none;
-  transition:border-color .2s,background .2s;
+
+  transition:
+    border-color .2s,
+    background .2s;
 }
 
 .tournament-card:hover {
@@ -378,7 +427,110 @@ body.menu-open .site-menu {
   transform:translateX(4px);
 }
 
-/* フッター */
+
+/* ==================================================
+   お問い合わせ
+================================================== */
+
+.contact-account {
+  margin:30px auto 0;
+}
+
+.contact-name {
+  margin:0;
+  color:var(--text);
+  font-size:16px;
+  font-weight:600;
+}
+
+.contact-x {
+  display:inline-block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:13px;
+  text-decoration:none;
+}
+
+.contact-x:hover {
+  color:var(--text);
+  text-decoration:underline;
+}
+
+.contact-description {
+  max-width:620px;
+  margin:20px auto 0;
+  color:#666;
+  font-size:14px;
+}
+
+.contact-button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:190px;
+  margin-top:26px;
+  padding:11px 22px;
+  border:1px solid #555;
+  background:#fff;
+  color:var(--text);
+  font-size:12px;
+  text-decoration:none;
+
+  transition:
+    background .2s,
+    color .2s;
+}
+
+.contact-button:hover {
+  background:#222;
+  color:#fff;
+}
+
+
+/* ==================================================
+   NOTICE
+================================================== */
+
+.notice-box {
+  max-width:720px;
+  margin:34px auto 0;
+  padding:28px 32px;
+  border:1px solid var(--line);
+  background:#fafafa;
+  text-align:left;
+}
+
+.notice-list {
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.notice-list li {
+  position:relative;
+  margin:0;
+  padding-left:1.2em;
+  color:#555;
+  font-size:13px;
+  line-height:2;
+}
+
+.notice-list li + li {
+  margin-top:16px;
+}
+
+.notice-list li::before {
+  content:"・";
+  position:absolute;
+  left:0;
+  top:0;
+}
+
+
+/* ==================================================
+   フッター
+================================================== */
+
 footer {
   padding:30px 20px;
   border-top:1px solid var(--line);
@@ -387,33 +539,52 @@ footer {
   font-size:11px;
 }
 
-footer p { margin:4px 0; }
+footer p {
+  margin:4px 0;
+}
 
 footer a {
   color:inherit;
   text-decoration:none;
 }
 
-footer a:hover { color:var(--text); }
+footer a:hover {
+  color:var(--text);
+}
 
-/* タブレット */
+
+/* ==================================================
+   タブレット
+================================================== */
+
 @media (max-width:900px) {
-  header { padding:0 24px; }
+
+  header {
+    padding:0 24px;
+  }
 
   .tournament-card {
     grid-template-columns:minmax(90px,22%) minmax(0,1fr);
   }
 
-  .tournament-logo { padding-right:8px; }
+  .tournament-logo {
+    padding-right:8px;
+  }
 
   .tournament-logo img {
     max-width:120px;
     max-height:110px;
   }
+
 }
 
-/* スマートフォン */
+
+/* ==================================================
+   スマートフォン
+================================================== */
+
 @media (max-width:600px) {
+
   header {
     height:78px;
     padding:0 14px;
@@ -436,10 +607,35 @@ footer a:hover { color:var(--text); }
   .menu-button {
     width:36px;
     height:36px;
-    padding:7px;
   }
 
-  .header-actions { gap:5px; }
+  .menu-button span {
+    left:7px;
+  }
+
+  .menu-button span:nth-child(1) {
+    top:11px;
+  }
+
+  .menu-button span:nth-child(2) {
+    top:17px;
+  }
+
+  .menu-button span:nth-child(3) {
+    top:23px;
+  }
+
+  .menu-button.open span:nth-child(1) {
+    top:17px;
+  }
+
+  .menu-button.open span:nth-child(3) {
+    top:17px;
+  }
+
+  .header-actions {
+    gap:5px;
+  }
 
   .header-home {
     width:36px;
@@ -461,31 +657,72 @@ footer a:hover { color:var(--text); }
     height:20px;
   }
 
+
+  /* スマホメニュー */
+
+  .menu-panel {
+    top:78px;
+    padding:20px;
+  }
+
+  .menu-nav {
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  .menu-nav a {
+    padding:14px 8px;
+    font-size:13px;
+  }
+
+
+  /* メイン */
+
   .hero {
     min-height:330px;
     padding:72px 22px;
   }
 
-  .hero h2 { letter-spacing:.12em; }
+  .hero h2 {
+    letter-spacing:.12em;
+  }
 
-  .section { padding:60px 0; }
-  .section-description { font-size:13px; }
-  .tournament-list { margin-top:28px; }
+  .section {
+    padding:60px 0;
+  }
+
+  .section-description {
+    font-size:13px;
+  }
+
+
+  /* 大会 */
+
+  .tournament-list {
+    margin-top:28px;
+  }
 
   .tournament-card {
     grid-template-columns:minmax(68px,24%) minmax(0,1fr);
     padding:18px 8px;
   }
 
-  .tournament-logo { padding:0 6px 0 0; }
+  .tournament-logo {
+    padding:0 6px 0 0;
+  }
 
   .tournament-logo img {
     max-width:100%;
     max-height:90px;
   }
 
-  .tournament-info { padding-left:10px; }
-  .tournament-info h3 { font-size:19px; }
+  .tournament-info {
+    padding-left:10px;
+  }
+
+  .tournament-info h3 {
+    font-size:19px;
+  }
 
   .tournament-description {
     font-size:12px;
@@ -496,19 +733,77 @@ footer a:hover { color:var(--text); }
     margin-top:8px;
     font-size:11px;
   }
+
+
+  /* お問い合わせ */
+
+  .contact-name {
+    font-size:15px;
+  }
+
+  .contact-description {
+    font-size:13px;
+  }
+
+  .contact-button {
+    min-width:175px;
+    margin-top:22px;
+    padding:10px 18px;
+  }
+
+
+  /* NOTICE */
+
+  .notice-box {
+    margin-top:28px;
+    padding:22px 18px;
+  }
+
+  .notice-list li {
+    font-size:12px;
+    line-height:1.9;
+  }
+
+  .notice-list li + li {
+    margin-top:14px;
+  }
+
 }
 
-/* 小型スマートフォン */
+
+/* ==================================================
+   小型スマートフォン
+================================================== */
+
 @media (max-width:360px) {
-  header { padding:0 10px; }
+
+  header {
+    padding:0 10px;
+  }
 
   .header-inner {
     grid-template-columns:34px minmax(0,1fr) auto;
   }
 
-  .header-title h1 { font-size:21px; }
-  .header-title .subtitle { font-size:7px; }
-  .header-actions { gap:2px; }
+  .header-title h1 {
+    font-size:21px;
+  }
+
+  .header-title .subtitle {
+    font-size:7px;
+  }
+
+  .header-actions {
+    gap:2px;
+  }
+
+  .menu-button {
+    width:34px;
+  }
+
+  .menu-button span {
+    left:6px;
+  }
 
   .header-x {
     width:32px;
@@ -525,147 +820,500 @@ footer a:hover { color:var(--text); }
     padding-left:16px;
   }
 
-  .section { width:calc(100% - 28px); }
+  .section {
+    width:calc(100% - 28px);
+  }
 
   .tournament-card {
     grid-template-columns:minmax(60px,24%) minmax(0,1fr);
     padding:16px 6px;
   }
 
-  .tournament-info { padding-left:8px; }
-  .tournament-info h3 { font-size:17px; }
-  .tournament-description { font-size:11px; }
+  .tournament-info {
+    padding-left:8px;
+  }
+
+  .tournament-info h3 {
+    font-size:17px;
+  }
+
+  .tournament-description {
+    font-size:11px;
+  }
+
 }
 </style>
 </head>
 
+
 <body>
 
+
+<!-- ==================================================
+     ヘッダー
+================================================== -->
+
 <header>
+
   <div class="header-inner">
-    <button class="menu-button" id="menu-open" type="button"
-      aria-label="メニューを開く" aria-controls="site-menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+
+    <button
+      class="menu-button"
+      id="menuButton"
+      type="button"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
+
 
     <div class="header-title">
       <h1>伝承王</h1>
-      <div class="subtitle">Legend of GARDENER</div>
+      <div class="subtitle">
+        Legend of GARDENER
+      </div>
     </div>
+
 
     <div class="header-actions">
-      <a class="header-home" href="/" aria-label="HOME">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"
-            fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+
+      <a
+        class="header-home"
+        href="/"
+        aria-label="HOME"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linejoin="round"
+          />
         </svg>
+
         <span>HOME</span>
+
       </a>
 
-      <a class="header-x" href="https://x.com/rxr_legendary"
-        target="_blank" rel="noopener noreferrer" aria-label="伝承王のXアカウント">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"/>
+
+      <a
+        class="header-x"
+        href="https://x.com/rxr_legendary"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="伝承王のXアカウント"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.97 6.817H1.676l7.73-8.835L1.25 2.25h6.826l4.713 6.231zm-1.161 17.52h1.833L7.01 4.126H5.044z"
+          />
         </svg>
+
       </a>
+
     </div>
+
   </div>
+
 </header>
 
-<div class="menu-overlay" id="menu-overlay"></div>
 
-<nav class="site-menu" id="site-menu" aria-label="サイトメニュー" aria-hidden="true">
-  <div class="site-menu-header">
-    <span>MENU</span>
-    <button id="menu-close" type="button" aria-label="メニューを閉じる">×</button>
-  </div>
+<!-- ==================================================
+     展開メニュー
+================================================== -->
 
-  <a href="/">HOME</a>
-  <a href="/beta/">開催中の大会</a>
-  <a href="/archive/">過去開催の大会</a>
-  <a href="/#information">お問い合わせ</a>
-</nav>
+<div
+  class="menu-panel"
+  id="menuPanel"
+>
+
+  <nav
+    class="menu-nav"
+    aria-label="サイトメニュー"
+  >
+
+    <a href="/">
+      HOME
+    </a>
+
+    <a href="/beta/">
+      開催中の大会
+    </a>
+
+    <a href="/archive/">
+      過去開催の大会
+    </a>
+
+    <a href="/#information">
+      お問い合わせ
+    </a>
+
+  </nav>
+
+</div>
+
+
+<!-- ==================================================
+     メイン
+================================================== -->
 
 <main>
+
+
+  <!-- メインタイトル -->
+
   <section class="hero">
-    <h2>伝承王</h2>
-    <p class="hero-label">Legend of GARDENER</p>
+
+    <h2>
+      伝承王
+    </h2>
+
+    <p class="hero-label">
+      Legend of GARDENER
+    </p>
+
     <div class="hero-rule"></div>
-    <p class="hero-description">その伝承を、極め貫け</p>
+
+    <p class="hero-description">
+      その伝承を、極め貫け
+    </p>
+
   </section>
 
-  <section class="section" id="about">
-    <p class="section-label">― ABOUT ―</p>
-    <h2>伝承王について</h2>
+
+  <!-- ==================================================
+       ABOUT
+  ================================================== -->
+
+  <section
+    class="section"
+    id="about"
+  >
+
+    <p class="section-label">
+      ― ABOUT ―
+    </p>
+
+    <h2>
+      伝承王について
+    </h2>
+
     <p class="section-description">
+
       「伝承王」は、伝承戦のタイムアタックを通じてプレイヤー同士の実力を競う、<br>
       ユーザー主催の大規模非公式競技イベントです。<br><br>
+
       本企画では、リバ×リバにおける“編成力・育成力・攻略力・試行錯誤”を含めた<br>
       総合的な実力を競います。<br>
-      また、近い実力のユーザーと競い合うことで、リバ×リバ自体へのモチベーションの向上を目指します。
+
+      また、近い実力のユーザーと競い合うことで、
+      リバ×リバ自体へのモチベーションの向上を目指します。
+
     </p>
+
   </section>
 
-  <section class="section" id="tournaments">
-    <p class="section-label">― TOURNAMENTS ―</p>
-    <h2>大会一覧</h2>
+
+  <!-- ==================================================
+       TOURNAMENTS
+  ================================================== -->
+
+  <section
+    class="section"
+    id="tournaments"
+  >
+
+    <p class="section-label">
+      ― TOURNAMENTS ―
+    </p>
+
+    <h2>
+      大会一覧
+    </h2>
+
 
     <div class="tournament-list">
-      <a class="tournament-card" href="/beta/">
+
+      <a
+        class="tournament-card"
+        href="/beta/"
+      >
+
         <div class="tournament-logo">
-          <img src="/beta/logo.png" alt="伝承王β ロゴ">
+
+          <img
+            src="/beta/logo.png"
+            alt="伝承王β ロゴ"
+          >
+
         </div>
+
 
         <div class="tournament-info">
-          <p class="tournament-number">TOURNAMENT 01</p>
-          <h3>伝承王 -β-</h3>
+
+          <p class="tournament-number">
+            TOURNAMENT 01
+          </p>
+
+          <h3>
+            伝承王 -β-
+          </h3>
+
           <p class="tournament-description">
+
             予選　2026年10月2日(金) ～ 2026年10月8日(木)<br>
             本選　2026年10月11日(日) ～ 2026年10月25日(日)
+
           </p>
+
+
           <span class="tournament-link">
-            大会ページへ <span class="card-arrow" aria-hidden="true">→</span>
+
+            大会ページへ
+
+            <span
+              class="card-arrow"
+              aria-hidden="true"
+            >
+              →
+            </span>
+
           </span>
+
         </div>
+
       </a>
+
     </div>
+
   </section>
 
-  <section class="section" id="information">
-    <p class="section-label">― INFORMATION ―</p>
-    <h2>運営・お問い合わせ</h2>
-    <p class="section-description">
-      運営情報やお問い合わせ方法を掲載する予定です。
+
+  <!-- ==================================================
+       INFORMATION
+  ================================================== -->
+
+  <section
+    class="section"
+    id="information"
+  >
+
+    <p class="section-label">
+      ― INFORMATION ―
     </p>
+
+    <h2>
+      運営・お問い合わせ
+    </h2>
+
+
+    <div class="contact-account">
+
+      <p class="contact-name">
+        伝承王大会運営
+      </p>
+
+      <a
+        class="contact-x"
+        href="https://x.com/rxr_legendary"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        @rxr_legendary
+      </a>
+
+    </div>
+
+
+    <p class="contact-description">
+
+      大会に関するご質問・ご要望等は、<br>
+      伝承王大会運営XアカウントのDMまでお寄せください。
+
+    </p>
+
+
+    <a
+      class="contact-button"
+      href="https://x.com/rxr_legendary"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Xアカウントを開く →
+    </a>
+
   </section>
+
+
+  <!-- ==================================================
+       NOTICE
+  ================================================== -->
+
+  <section
+    class="section"
+    id="notice"
+  >
+
+    <p class="section-label">
+      ― NOTICE ―
+    </p>
+
+    <h2>
+      本サイト・大会について
+    </h2>
+
+
+    <div class="notice-box">
+
+      <ul class="notice-list">
+
+        <li>
+          「伝承王」はユーザー主催の非公式大会です。
+          「リバースブルー×リバースエンド」公式および関係各社とは関係ございません。
+        </li>
+
+        <li>
+          大会における報酬イラスト等の著作権は、
+          各クリエイターおよび原作の権利者に帰属します。
+        </li>
+
+        <li>
+          本大会は営利を目的としたものではありません。
+          リバ×リバ界隈に新たな楽しみ方・交流・競争の場を生み出すことを目的として運営しています。
+        </li>
+
+      </ul>
+
+    </div>
+
+  </section>
+
+
 </main>
 
+
+<!-- ==================================================
+     フッター
+================================================== -->
+
 <footer>
-  <p>伝承王 · Legend of GARDENER</p>
+
   <p>
-    <a href="https://x.com/rxr_legendary"
-      target="_blank" rel="noopener noreferrer">
+    伝承王 · Legend of GARDENER
+  </p>
+
+  <p>
+
+    <a
+      href="https://x.com/rxr_legendary"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       運営Xアカウント
     </a>
+
   </p>
+
 </footer>
 
+
+<!-- ==================================================
+     JavaScript
+================================================== -->
+
 <script>
-const $ = id => document.getElementById(id);
-const menuOpen = $("menu-open");
-const menu = $("site-menu");
 
-function toggleMenu(open) {
-  document.body.classList.toggle("menu-open",open);
-  menuOpen.setAttribute("aria-expanded",open);
-  menu.setAttribute("aria-hidden",!open);
-}
+const menuButton =
+  document.getElementById("menuButton");
 
-menuOpen.onclick = () => toggleMenu(true);
-$("menu-close").onclick = $("menu-overlay").onclick = () => toggleMenu(false);
-menu.querySelectorAll("a").forEach(a => a.onclick = () => toggleMenu(false));
-document.addEventListener("keydown",e => e.key === "Escape" && toggleMenu(false));
+const menuPanel =
+  document.getElementById("menuPanel");
+
+
+menuButton.addEventListener(
+  "click",
+  () => {
+
+    const isOpen =
+      menuPanel.classList.toggle("open");
+
+    menuButton.classList.toggle(
+      "open",
+      isOpen
+    );
+
+    menuButton.setAttribute(
+      "aria-expanded",
+      String(isOpen)
+    );
+
+  }
+);
+
+
+/*
+  メニュー内リンクを押したら閉じる
+*/
+
+menuPanel
+  .querySelectorAll("a")
+  .forEach(link => {
+
+    link.addEventListener(
+      "click",
+      () => {
+
+        menuPanel.classList.remove("open");
+        menuButton.classList.remove("open");
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+    );
+
+  });
+
+
+/*
+  Escキーでも閉じる
+*/
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (event.key !== "Escape") {
+      return;
+    }
+
+    menuPanel.classList.remove("open");
+    menuButton.classList.remove("open");
+
+    menuButton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+  }
+);
+
 </script>
+
 
 </body>
 </html>
